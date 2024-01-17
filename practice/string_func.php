@@ -67,4 +67,4 @@ $a_tag_string = '<a href="https://www.google.com">Go to Google.com</a>';
 // echo strpbrk($x,"r");
 
 
-echo strstr($x, "Wo");
+// echo strstr($x, "Wo");
