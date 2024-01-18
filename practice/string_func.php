@@ -6,6 +6,7 @@ $html_string = "This is some <b>bold</b> text";
 $a_tag_string = '<a href="https://www.google.com">Go to Google.com</a>';
 
 // echo strlen($x);
+// echo strlen("    @#45    ");
 
 // echo str_replace("l","b",$x);
 
