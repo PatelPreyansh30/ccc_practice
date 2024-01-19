@@ -68,6 +68,7 @@ $a_tag_string = '<a href="https://www.google.com">Go to Google.com</a>';
 // echo stristr($x,"world");
 // echo stristr("Hello world hello! hello world", "WORLD");
 // echo stristr("Hello world hello! hello world", "ll");
+// echo stristr("Hello world hello! hello world", "lw");
 
 // echo strpbrk($x,"ll");
 // echo strpbrk($x,"ab");

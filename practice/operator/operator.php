@@ -138,3 +138,60 @@
 
 // echo $result;
 // var_dump($result);
+
+
+// Increment / Decrement Operator
+/* 
+++$x -> Pre-increment -> First increment then return
+$x++ -> Post-increment -> First return then increment
+--$x -> Pre-decrement -> First decrement then return
+$x-- -> Post-decrement -> First return then decrement
+*/
+
+// $a = 10;
+// echo $a; // 10
+// echo ++$a; // 11
+// echo $a; // 11
+
+// $b = 10;
+// echo $b; // 10
+// echo $b++; // 10
+// echo $b; // 11
+
+// $c = 10;
+// echo $c; // 10
+// echo --$c; // 9
+// echo $c; // 9
+
+// $d = 10;
+// echo $d; // 10
+// echo $d--; // 10
+// echo $d; // 9
+
+
+// String operator
+// $a = "Hello";
+// $b = "World";
+
+// echo $a.$b; // HelloWorld
+
+// echo "$a\n$b\n"; 
+// $a .= $b;
+// echo $a; // HelloWorld
+
+
+// Conditional(Ternary) operator
+/* 
+(expression ? statement1 : statement2 )
+--> if exp. true then return statement1 otherwise statement2 
+*/
+
+// $result = true ? "This condition is true" : "This condition is false";
+// $result = false ? "This condition is true" : "This condition is false";
+// $result = 1 ? "This condition is true" : "This condition is false";
+// $result = 0 ? "This condition is true" : "This condition is false";
+// $result = "" ? "This condition is true" : "This condition is false";
+// $result = "Something" ? "This condition is true" : "This condition is false";
+// $result = null ? "This condition is true" : "This condition is false";
+// $result = 10.25 ? "This condition is true" : "This condition is false";
+// var_dump($result);
