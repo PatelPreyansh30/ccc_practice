@@ -63,5 +63,5 @@ $input = 125.65; // Arrayarray(1)
 $input = "25%"; // Arrayarray(1)
 $input = "hello"; // Arrayarray(1)
 $output = (array)$input;
-echo $output;
+print_r($output);
 var_dump($output);
