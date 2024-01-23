@@ -70,10 +70,4 @@ function odd_pattern($n1)
     };
 };
 
-if ($number % 2 == 0) {
-    even_pattern((int)$number / 2);
-} elseif ($number % 2 != 0) {
-    odd_pattern((int)ceil($number / 2));
-} else {
-    echo "Please enter valid number";
-};
+$number <= 0 ? print("Invalid number") : ($number % 2 == 0 ? even_pattern((int)$number / 2) : odd_pattern((int)ceil($number / 2)));
