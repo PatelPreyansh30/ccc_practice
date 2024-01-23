@@ -7,7 +7,7 @@
 </style>
 
 <body>
-    <form action="" method="post">
+    <form action="db.php" method="post">
         <div>
             <label for="product_name">Product Name: </label>
             <input type="text" name="product_name" id="product_name">
