@@ -10,13 +10,15 @@ $results = select('ccc_product', [], 10);
 <head>
     <title>Document</title>
     <style>
-        h1{
+        h1 {
             margin: 0;
         }
+
         table,
         th,
         td {
             border: 1px solid black;
+            border-collapse: collapse;
         }
 
         th,
@@ -64,7 +66,7 @@ $results = select('ccc_product', [], 10);
                         <td>{$row['product_status']}</td>
                         <td>{$row['product_created_at']}</td>
                         <td>{$row['product_updated_at']}</td>
-                        <td>Delete | Update</td>
+                        <td><a href=''>Delete</a> | <a href=''>Update</a></td>
                     </tr>
                     ";
                 }
