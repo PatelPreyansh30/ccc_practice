@@ -56,3 +56,10 @@ function delete(string $tablename, array $where)
     $where_cond = implode(" AND ", $where_cond);
     echo "DELETE FROM {$tablename} WHERE {$where_cond};";
 };
+
+function select(string $table_name, array $columns, int $limit)
+{
+    global $connection;
+    $query = "SELECT * FROM `{$table_name}` LIMIT {$limit};";
+    return $connection->query($query);
+};

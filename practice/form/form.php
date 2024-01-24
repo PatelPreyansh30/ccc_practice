@@ -4,6 +4,11 @@
     div {
         margin: 1rem 0;
     }
+
+    .link {
+        display: block;
+        margin-top: 10px;
+    }
 </style>
 
 <body>
@@ -70,8 +75,9 @@
             <label for="product_updated_at">Updated At: </label>
             <input type="date" name="ccc_product[product_updated_at]" id="product_updated_at">
         </div>
-        <input type="submit" value="Submit" id="submit">
+        <input type="submit" name="submit" value="Submit" id="submit">
     </form>
+    <a href="list.php" class="link">View Products</a>
 </body>
 
 </html>
