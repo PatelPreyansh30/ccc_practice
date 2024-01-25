@@ -58,7 +58,7 @@ $products = select('ccc_product', 'product_id', ['*']);
                         <td>{$row['product_sku']}</td>
                         <td>{$categories[$row['cat_id']]}</td>
                         <td><a href='product.php?action=delete&product_id={$row['product_id']}'>Delete</a></td>
-                        <td><a href='product.php'>Update</a></td>
+                        <td><a href='product.php?action=update&product_id={$row['product_id']}'>Update</a></td>
                     </tr>
                     ";
                 }

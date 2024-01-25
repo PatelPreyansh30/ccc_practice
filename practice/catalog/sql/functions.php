@@ -12,6 +12,17 @@ function getParams(string $key)
     };
 };
 
+function getKeysFromPostRequest()
+{
+    $keys = [];
+    foreach ($_POST as $key => $val) {
+        if (is_array($val)) {
+            $keys[] = $key;
+        };
+    };
+    return $keys;
+};
+
 function insert(string $table_name, array $data)
 {
     global $connection;
@@ -30,6 +41,7 @@ function insert(string $table_name, array $data)
 
 function update(string $tablename, array $where, array $data)
 {
+    global $connection;
     $columns = $where_cond = [];
     foreach ($data as $col => $val) {
         $columns[] = "`$col` = '$val'";
@@ -40,7 +52,7 @@ function update(string $tablename, array $where, array $data)
     $columns = implode(", ", $columns);
     $where_cond = implode(" AND ", $where_cond);
     $query = "UPDATE {$tablename} SET {$columns} WHERE {$where_cond};";
-    return $query;
+    return $connection->query($query);
 };
 
 function delete(string $tablename, array $where)
@@ -60,5 +72,17 @@ function select(string $table_name, string $pk, array $columns)
     global $connection;
     $columns = join(", ", $columns);
     $query = "SELECT {$columns} FROM `{$table_name}` ORDER BY `{$pk}`";
+    return $connection->query($query);
+};
+
+function whereBasedSelect(string $table_name, array $where)
+{
+    global $connection;
+    $where_cond = [];
+    foreach ($where as $col => $val) {
+        $where_cond[] = "$col = $val";
+    };
+    $where_cond = implode(" AND ", $where_cond);
+    $query = "SELECT * FROM `{$table_name}` WHERE {$where_cond}";
     return $connection->query($query);
 };

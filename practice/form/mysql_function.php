@@ -22,15 +22,17 @@ function insert(string $table_name, array $data)
     }
     $columns = implode(", ", $columns);
     $values = implode(", ", $values);
+
     $query = "INSERT INTO {$table_name} ({$columns}) VALUES ({$values})";
-    echo $query;
-    // global $connection;
-    // $execute = mysqli_query($connection, $query);
-    // if ($execute) {
-    //     echo "alert(Data added successfully)";
-    // } else {
-    //     echo "Insert operation failed";
-    // };
+
+    global $connection;
+    $execute = mysqli_query($connection, $query);
+    if ($execute) {
+        echo $query;
+        echo "<script>alert('Data added successfully');</script>";
+    } else {
+        echo "Insert operation failed";
+    };
 }
 
 function update(string $tablename, array $where, array $data)
@@ -60,6 +62,6 @@ function delete(string $tablename, array $where)
 function select(string $table_name, array $columns, int $limit)
 {
     global $connection;
-    $query = "SELECT * FROM `{$table_name}` LIMIT {$limit};";
+    $query = "SELECT * FROM `{$table_name}` ORDER BY `index` DESC LIMIT {$limit};";
     return $connection->query($query);
 };
