@@ -4,7 +4,7 @@ include 'sql/functions.php';
 $category = select('ccc_category', 'cat_id', ['*']);
 $categories = [];
 while ($row = $category->fetch_array()) {
-    $categories[$row['cat_id']] = $row['name'];
+    $categories[$row['cat_id']] = $row['cat_name'];
 };
 
 $products = select('ccc_product', 'product_id', ['*']);

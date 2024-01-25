@@ -26,7 +26,7 @@ if (getParams('action') == 'delete' && getParams('product_id')) {
     };
 };
 
-// 
+// Updating products
 if (getParams('action') == 'update' && getParams('product_id')) {
     $single_product = whereBasedSelect('ccc_product', ['product_id' => getParams('product_id')]);
     if ($single_product) {
