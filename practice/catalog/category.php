@@ -47,13 +47,13 @@ if (getParams('submit')) {
 if (getParams('update')) {
     $keys = getKeysFromPostRequest();
     for ($i = 0; $i < count($keys); $i++) {
-        $update_query = update($keys[$i], ['product_id' => getParams('product_id')], getParams($keys[$i]));
+        $update_query = update($keys[$i], ['cat_id' => getParams('cat_id')], getParams($keys[$i]));
         if ($update_query) {
             echo "<script>alert('Data updated successfully')</script>";
-            echo "<script>location. href='product_list.php'</script>";
+            echo "<script>location. href='category_list.php'</script>";
         } else {
             echo "<script>alert('Data not updated')</script>";
-            echo "<script>location. href='product_list.php'</script>";
+            echo "<script>location. href='category_list.php'</script>";
         }
     };
 };

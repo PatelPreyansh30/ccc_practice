@@ -35,27 +35,27 @@ $category = select('ccc_category', 'cat_id', ['*']);
         <thead>
             <th>Id</th>
             <th>Name</th>
-            <!-- <th>Delete</th> -->
-            <!-- <th>Update</th> -->
+            <th>Delete</th>
+            <th>Update</th>
         </thead>
         <tbody>
             <?php
             if ($category->num_rows > 0) {
                 while ($row = $category->fetch_assoc()) {
-                    echo "
-                    <tr>
-                        <td>{$row['cat_id']}</td>
-                        <td>{$row['cat_name']}</td>
-                    </tr>
-                    ";
                     // echo "
                     // <tr>
                     //     <td>{$row['cat_id']}</td>
                     //     <td>{$row['cat_name']}</td>
-                    //     <td><a href='category.php?action=delete&cat_id={$row['cat_id']}'>Delete</a></td>
-                    //     <td><a href='category.php?action=update&cat_id={$row['cat_id']}'>Update</a></td>
                     // </tr>
                     // ";
+                    echo "
+                    <tr>
+                        <td>{$row['cat_id']}</td>
+                        <td>{$row['cat_name']}</td>
+                        <td><a href='category.php?action=delete&cat_id={$row['cat_id']}'>Delete</a></td>
+                        <td><a href='category.php?action=update&cat_id={$row['cat_id']}'>Update</a></td>
+                    </tr>
+                    ";
                 }
             }
             ?>

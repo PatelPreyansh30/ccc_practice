@@ -29,7 +29,7 @@ if (getParams('action') == 'delete' && getParams('product_id')) {
 // Updating products
 if (getParams('action') == 'update' && getParams('product_id')) {
     $single_product = whereBasedSelect('ccc_product', ['product_id' => getParams('product_id')]);
-    if ($single_product) {
+    if ($single_product && $single_product->num_rows > 0) {
         $single_product = $single_product->fetch_assoc();
         $product_name = $single_product['product_name'];
         $product_sku = $single_product['product_sku'];
@@ -118,7 +118,7 @@ if (getParams('update')) {
                 if ($category->num_rows > 0) {
                     while ($row = $category->fetch_assoc()) {
                         $selected = $row['cat_id'] == $product_category ? 'selected' : '';
-                        echo "<option {$selected} value='{$row['cat_id']}'>{$row['name']}</option>";
+                        echo "<option {$selected} value='{$row['cat_id']}'>{$row['cat_name']}</option>";
                     }
                 }
                 ?>
