@@ -5,15 +5,17 @@ $connection = mysqlConnection();
 
 function getParams(string $key)
 {
-    if ($_POST[$key]) {
+    if (isset($_POST[$key])) {
         return $_POST[$key];
-    } else {
+    } elseif (isset($_GET[$key])) {
         return $_GET[$key];
     };
 };
 
 function insert(string $table_name, array $data)
 {
+    global $connection;
+
     $columns = $values = [];
     foreach ($data as $col => $val) {
         $columns[] = "`$col`";
@@ -21,18 +23,9 @@ function insert(string $table_name, array $data)
     }
     $columns = implode(", ", $columns);
     $values = implode(", ", $values);
-
     $query = "INSERT INTO {$table_name} ({$columns}) VALUES ({$values})";
 
-    // global $connection;
-    // $execute = mysqli_query($connection, $query);
-    // if ($execute) {
-    // echo $query;
-    // echo "<script>alert('Data added successfully');</script>";
-    // } else {
-    // echo "Insert operation failed";
-    // };
-    return $query;
+    return $connection->query($query);
 }
 
 function update(string $tablename, array $where, array $data)
@@ -52,21 +45,20 @@ function update(string $tablename, array $where, array $data)
 
 function delete(string $tablename, array $where)
 {
+    global $connection;
     $where_cond = [];
     foreach ($where as $col => $val) {
         $where_cond[] = "`$col` = '$val'";
     };
     $where_cond = implode(" AND ", $where_cond);
-    echo "DELETE FROM {$tablename} WHERE {$where_cond};";
+    $query = "DELETE FROM {$tablename} WHERE {$where_cond};";
+    return $connection->query($query);
 };
 
 function select(string $table_name, string $pk, array $columns)
 {
     global $connection;
     $columns = join(", ", $columns);
-    $query = "SELECT {$columns} FROM `{$table_name}` ORDER BY `{$pk}` DESC";
-    // $result = mysqli_query($connection, $query);
-    // print_r(mysqli_fetch_array($result));
-    // return mysqli_fetch_array($result);
+    $query = "SELECT {$columns} FROM `{$table_name}` ORDER BY `{$pk}`";
     return $connection->query($query);
 };
