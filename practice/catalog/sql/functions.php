@@ -55,7 +55,7 @@ function update(string $tablename, array $where, array $data)
     return $connection->query($query);
 };
 
-function delete(string $tablename, array $where)
+function deleteQuery(string $tablename, array $where)
 {
     global $connection;
     $where_cond = [];
@@ -66,6 +66,17 @@ function delete(string $tablename, array $where)
     $query = "DELETE FROM {$tablename} WHERE {$where_cond};";
     return $connection->query($query);
 };
+
+function selectQuery(string $table_name, array $columns, array $condition=[]){
+    $otherParameter = [];
+    foreach($condition as $key => $value){
+        $otherParameter[] = "{$key} {$value}";
+    }
+    $otherParameter = join(" ",$otherParameter);
+    $columns = join(", ",$columns);
+    $query = "SELECT {$columns} FROM {$table_name} {$otherParameter};";
+    echo $query;
+}
 
 function select(string $table_name, string $pk, array $columns)
 {

@@ -6,8 +6,8 @@ $button_text = "submit";
 
 // Deleting for product
 if (getParams('action') == 'delete' && getParams('cat_id')) {
-    $status = delete('ccc_category', ['cat_id' => getParams('cat_id')]);
-    if ($status) {
+    $status = deleteQuery('ccc_category', ['cat_id' => getParams('cat_id')]);
+    if ($status->num_rows > 0) {
         echo "<script>alert('Data deleted successfully')</script>";
         echo "<script>location. href='category_list.php'</script>";
     } else {
@@ -19,7 +19,7 @@ if (getParams('action') == 'delete' && getParams('cat_id')) {
 // Updating category
 if (getParams('action') == 'update' && getParams('cat_id')) {
     $single_category = whereBasedSelect('ccc_category', ['cat_id' => getParams('cat_id')]);
-    if ($single_category) {
+    if ($single_category->num_rows > 0) {
         $single_category = $single_category->fetch_assoc();
         $cat_name = $single_category['cat_name'];
         $button_text = 'update';

@@ -16,12 +16,12 @@ $button_text = "submit";
 
 // Deleting for product
 if (getParams('action') == 'delete' && getParams('product_id')) {
-    $status = delete('ccc_product', ['product_id' => getParams('product_id')]);
-    if ($status) {
+    $status = deleteQuery('ccc_product', ['product_id' => getParams('product_id')]);
+    if ($status->num_rows > 0) {
         echo "<script>alert('Data deleted successfully')</script>";
         echo "<script>location. href='product_list.php'</script>";
     } else {
-        echo "<script>alert('Data not deleted')</script>";
+        echo "<script>alert('Data not found')</script>";
         echo "<script>location. href='product_list.php'</script>";
     };
 };
