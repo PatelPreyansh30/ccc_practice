@@ -1,13 +1,15 @@
 <?php
 include 'sql/functions.php';
 
-$category = select('ccc_category', 'cat_id', ['*']);
+$query = selectQuery('ccc_category', ['*']);
+$category = queryExecutor($query);
 $categories = [];
 while ($row = $category->fetch_array()) {
     $categories[$row['cat_id']] = $row['cat_name'];
 };
 
-$products = select('ccc_product', 'product_id', ['*']);
+$query = selectQuery('ccc_product', ['*'], ['LIMIT ' => 20]);
+$products = queryExecutor($query);
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +38,6 @@ $products = select('ccc_product', 'product_id', ['*']);
 </head>
 
 <body>
-    <pre>
     <h1>Product Records</h1>
     <table>
         <thead>
@@ -66,6 +67,7 @@ $products = select('ccc_product', 'product_id', ['*']);
             ?>
         </tbody>
     </table>
+    <a href="product.php" class="link">Add Product</a>
 </body>
 
 </html>

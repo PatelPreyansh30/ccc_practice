@@ -1,23 +1,11 @@
 <?php
 include "sql/functions.php";
 
-$product_name = "";
-$product_sku = "";
-$product_type = "";
-$product_category = "";
-$manufacturer_cost = "";
-$shipping_cost = "";
-$total_cost = "";
-$product_price = "";
-$product_status = "";
-$product_created_at = "";
-$product_updated_at = "";
-$button_text = "submit";
-
 // Deleting for product
 if (getParams('action') == 'delete' && getParams('product_id')) {
-    $status = deleteQuery('ccc_product', ['product_id' => getParams('product_id')]);
-    if ($status->num_rows > 0) {
+    $query = deleteQuery('ccc_product', ['product_id' => getParams('product_id')]);
+    $status = queryExecutor($query);
+    if ($status) {
         echo "<script>alert('Data deleted successfully')</script>";
         echo "<script>location. href='product_list.php'</script>";
     } else {
@@ -26,36 +14,16 @@ if (getParams('action') == 'delete' && getParams('product_id')) {
     };
 };
 
-// Updating products
-if (getParams('action') == 'update' && getParams('product_id')) {
-    $single_product = whereBasedSelect('ccc_product', ['product_id' => getParams('product_id')]);
-    if ($single_product && $single_product->num_rows > 0) {
-        $single_product = $single_product->fetch_assoc();
-        $product_name = $single_product['product_name'];
-        $product_sku = $single_product['product_sku'];
-        $product_type = $single_product['product_type'];
-        $product_category = $single_product['cat_id'];
-        $manufacturer_cost = $single_product['manufacturer_cost'];
-        $shipping_cost = $single_product['shipping_cost'];
-        $total_cost = $single_product['total_cost'];
-        $product_price = $single_product['product_price'];
-        $product_status = $single_product['product_status'];
-        $product_created_at = $single_product['product_created_at'];
-        $product_updated_at = $single_product['product_updated_at'];
-        $button_text = 'update';
-    } else {
-        echo "<script>alert('Data not found')</script>";
-    };
-};
-
-$category = select('ccc_category', 'cat_id', ['*']);
+$query = selectQuery('ccc_category', ['*']);
+$category = queryExecutor($query);
 
 // Inserting data
 if (getParams('submit')) {
     $keys = getKeysFromPostRequest();
     for ($i = 0; $i < count($keys); $i++) {
-        $insert_query = insert($keys[$i], getParams($keys[$i]));
-        if ($insert_query) {
+        $query = insertQuery($keys[$i], getParams($keys[$i]));
+        $status = queryExecutor($query);
+        if ($status) {
             echo "<script>alert('Data submitted successfully')</script>";
         } else {
             echo "<script>alert('Data not submitted')</script>";
@@ -67,8 +35,9 @@ if (getParams('submit')) {
 if (getParams('update')) {
     $keys = getKeysFromPostRequest();
     for ($i = 0; $i < count($keys); $i++) {
-        $update_query = update($keys[$i], ['product_id' => getParams('product_id')], getParams($keys[$i]));
-        if ($update_query) {
+        $query = updateQuery($keys[$i], ['product_id' => getParams('product_id')], getParams($keys[$i]));
+        $status = queryExecutor($query);
+        if ($status) {
             echo "<script>alert('Data updated successfully')</script>";
             echo "<script>location. href='product_list.php'</script>";
         } else {
@@ -96,11 +65,11 @@ if (getParams('update')) {
     <form action="" method="post">
         <div>
             <label for="product_name">Product Name: </label>
-            <input type="text" value="<?php echo $product_name ?>" name="ccc_product[product_name]" id="product_name">
+            <input type="text" name="ccc_product[product_name]" id="product_name">
         </div>
         <div>
             <label for="product_sku">Product SKU: </label>
-            <input type="text" value="<?php echo $product_sku ?>" name="ccc_product[product_sku]" id="product_sku">
+            <input type="text" name="ccc_product[product_sku]" id="product_sku">
         </div>
         <div>
             <label>Product Type: </label>
@@ -119,8 +88,6 @@ if (getParams('update')) {
                 <?php
                 if ($category->num_rows > 0) {
                     while ($row = $category->fetch_assoc()) {
-                        // $selected = $row['cat_id'] == $product_category ? 'selected' : '';
-                        // echo "<option {$selected} class='product_category' value='{$row['cat_id']}'>{$row['cat_name']}</option>";
                         echo "<option class='product_category' value='{$row['cat_id']}'>{$row['cat_name']}</option>";
                     }
                 }
@@ -129,60 +96,77 @@ if (getParams('update')) {
         </div>
         <div>
             <label for="manufacturer_cost">Manufacturer Cost: </label>
-            <input type="text" value="<?php echo $manufacturer_cost ?>" name="ccc_product[manufacturer_cost]" id="manufacturer_cost">
+            <input type="text" name="ccc_product[manufacturer_cost]" id="manufacturer_cost">
         </div>
         <div>
             <label for="shipping_cost">Shipping Cost: </label>
-            <input type="text" value="<?php echo $shipping_cost ?>" name="ccc_product[shipping_cost]" id="shipping_cost">
+            <input type="text" name="ccc_product[shipping_cost]" id="shipping_cost">
         </div>
         <div>
             <label for="total_cost">Total Cost: </label>
-            <input type="text" value="<?php echo $total_cost ?>" name="ccc_product[total_cost]" id="total_cost">
+            <input type="text" name="ccc_product[total_cost]" id="total_cost">
         </div>
         <div>
             <label for="product_price">Price: </label>
-            <input type="text" value="<?php echo $product_price ?>" name="ccc_product[product_price]" id="product_price">
+            <input type="text" name="ccc_product[product_price]" id="product_price">
         </div>
         <div>
             <label for="product_status">Status:</label>
             <select name="ccc_product[product_status]" id="product_status">
-                <option <?php echo $product_status == 'enabled' ? 'selected' : false; ?> value='enabled'>Enabled</option>;
-                <option <?php echo $product_status == 'disabled' ? 'selected' : false; ?> value='disabled'>Disabled</option>;
+                <option value='enabled' class="product_status">Enabled</option>;
+                <option value='disabled' class="product_status">Disabled</option>;
             </select>
         </div>
         <div>
             <label for="product_created_at">Created At: </label>
-            <input type="date" value="<?php echo $product_created_at ?>" name="ccc_product[product_created_at]" id="product_created_at">
+            <input type="date" name="ccc_product[product_created_at]" id="product_created_at">
         </div>
         <div>
             <label for="product_updated_at">Updated At: </label>
-            <input type="date" value="<?php echo $product_updated_at ?>" name="ccc_product[product_updated_at]" id="product_updated_at">
+            <input type="date" name="ccc_product[product_updated_at]" id="product_updated_at">
         </div>
-        <?php
-        $uppercase = ucwords($button_text);
-        echo "<input type='submit' name='$button_text' value='$uppercase' id='submit'>";
-        ?>
+        <input type='submit' name='submit' value='Submit' id='submit'>
     </form>
     <a href="product_list.php" class="link">View Products</a>
 
     <script>
         var product = <?php
-                        $single_product = whereBasedSelect('ccc_product', ['product_id' => getParams('product_id')]);
+                        $product_id = getParams('product_id');
+                        $query = selectQuery('ccc_product', ['*'], ['WHERE ' => "product_id = {$product_id}"]);
+                        $single_product = queryExecutor($query);
                         echo json_encode($single_product->fetch_assoc());
                         ?>;
-        console.log(product)
-        
-        var input_product_type = document.getElementsByClassName("product_type")
-        for (let i = 0; i < input_product_type.length; i++) {
-            if (product.product_type == input_product_type[i].value) {
-                input_product_type[i].checked = 'checked';
+        // console.log(product)
+
+        document.getElementById("product_name").value = product.product_name
+        document.getElementById("product_sku").value = product.product_sku
+        document.getElementById("manufacturer_cost").value = product.manufacturer_cost
+        document.getElementById("shipping_cost").value = product.shipping_cost
+        document.getElementById("total_cost").value = product.total_cost
+        document.getElementById("product_price").value = product.product_price
+        document.getElementById("product_created_at").value = product.product_created_at
+        document.getElementById("product_updated_at").value = product.product_updated_at
+        document.getElementById("submit").value = "Update"
+        document.getElementById("submit").name = "update"
+
+        var product_type = document.getElementsByClassName("product_type")
+        for (let i = 0; i < product_type.length; i++) {
+            if (product.product_type == product_type[i].value) {
+                product_type[i].checked = 'checked';
             }
         }
 
-        var input_product_category = document.getElementsByClassName("product_category")
-        for (let i = 0; i < input_product_category.length; i++) {
-            if (product.cat_id == input_product_category[i].value) {
-                input_product_category[i].selected = 'selected';
+        var product_category = document.getElementsByClassName("product_category")
+        for (let i = 0; i < product_category.length; i++) {
+            if (product.cat_id == product_category[i].value) {
+                product_category[i].selected = 'selected';
+            }
+        }
+
+        var product_status = document.getElementsByClassName("product_status")
+        for (let i = 0; i < product_status.length; i++) {
+            if (product.product_status == product_status[i].value) {
+                product_status[i].selected = 'selected';
             }
         }
     </script>
