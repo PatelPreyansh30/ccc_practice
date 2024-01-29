@@ -105,10 +105,12 @@ if (getParams('update')) {
         <div>
             <label>Product Type: </label>
             <div>
-                <input type="radio" <?php echo $product_type == 'simple' ? 'checked' : '' ?> name="ccc_product[product_type]" id="product_type_simple" value="simple">
+                <input type="radio" name="ccc_product[product_type]" id="product_type_simple" value="simple" class="product_type">
                 <label for="product_type_simple">Simple</label>
-                <input type="radio" <?php echo $product_type == 'bundle' ? 'checked' : ''  ?> name="ccc_product[product_type]" id="product_type_Bundle" value="bundle">
+                <input type="radio" name="ccc_product[product_type]" id="product_type_Bundle" value="bundle" class="product_type">
                 <label for="product_type_Bundle">Bundle</label>
+                <!-- <input type="radio" <?php echo $product_type == 'simple' ? 'checked' : '' ?> name="ccc_product[product_type]" id="product_type_simple" value="simple"> -->
+                <!-- <input type="radio" <?php echo $product_type == 'bundle' ? 'checked' : ''  ?> name="ccc_product[product_type]" id="product_type_Bundle" value="bundle"> -->
             </div>
         </div>
         <div>
@@ -117,8 +119,9 @@ if (getParams('update')) {
                 <?php
                 if ($category->num_rows > 0) {
                     while ($row = $category->fetch_assoc()) {
-                        $selected = $row['cat_id'] == $product_category ? 'selected' : '';
-                        echo "<option {$selected} value='{$row['cat_id']}'>{$row['cat_name']}</option>";
+                        // $selected = $row['cat_id'] == $product_category ? 'selected' : '';
+                        // echo "<option {$selected} class='product_category' value='{$row['cat_id']}'>{$row['cat_name']}</option>";
+                        echo "<option class='product_category' value='{$row['cat_id']}'>{$row['cat_name']}</option>";
                     }
                 }
                 ?>
@@ -161,6 +164,28 @@ if (getParams('update')) {
         ?>
     </form>
     <a href="product_list.php" class="link">View Products</a>
+
+    <script>
+        var product = <?php
+                        $single_product = whereBasedSelect('ccc_product', ['product_id' => getParams('product_id')]);
+                        echo json_encode($single_product->fetch_assoc());
+                        ?>;
+        console.log(product)
+        
+        var input_product_type = document.getElementsByClassName("product_type")
+        for (let i = 0; i < input_product_type.length; i++) {
+            if (product.product_type == input_product_type[i].value) {
+                input_product_type[i].checked = 'checked';
+            }
+        }
+
+        var input_product_category = document.getElementsByClassName("product_category")
+        for (let i = 0; i < input_product_category.length; i++) {
+            if (product.cat_id == input_product_category[i].value) {
+                input_product_category[i].selected = 'selected';
+            }
+        }
+    </script>
 </body>
 
 </html>
