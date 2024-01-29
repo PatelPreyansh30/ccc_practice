@@ -128,6 +128,8 @@ if (getParams('update')) {
         <input type='submit' name='submit' value='Submit' id='submit'>
     </form>
     <a href="product_list.php" class="link">View Products</a>
+    <a href="category_list.php" class="link">View Categories</a>
+    <a href="category.php" class="link">Add Categories</a>
 
     <script>
         var product = <?php

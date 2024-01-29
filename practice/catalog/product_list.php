@@ -34,6 +34,11 @@ $products = queryExecutor($query);
             padding: 10px;
             text-align: center;
         }
+
+        .link {
+            display: block;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -68,6 +73,8 @@ $products = queryExecutor($query);
         </tbody>
     </table>
     <a href="product.php" class="link">Add Product</a>
+    <a href="category.php" class="link">Add Category</a>
+    <a href="category_list.php" class="link">View Category</a>
 </body>
 
 </html>

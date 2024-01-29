@@ -1,6 +1,7 @@
 <?php
 include 'sql/functions.php';
-$category = select('ccc_category', 'cat_id', ['*']);
+$query = selectQuery('ccc_category', ['*']);
+$category = queryExecutor($query);
 ?>
 
 <!DOCTYPE html>
@@ -25,11 +26,15 @@ $category = select('ccc_category', 'cat_id', ['*']);
             padding: 10px;
             text-align: center;
         }
+
+        .link {
+            display: block;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
 <body>
-    <pre>
     <h1>Category Records</h1>
     <table>
         <thead>
@@ -42,12 +47,6 @@ $category = select('ccc_category', 'cat_id', ['*']);
             <?php
             if ($category->num_rows > 0) {
                 while ($row = $category->fetch_assoc()) {
-                    // echo "
-                    // <tr>
-                    //     <td>{$row['cat_id']}</td>
-                    //     <td>{$row['cat_name']}</td>
-                    // </tr>
-                    // ";
                     echo "
                     <tr>
                         <td>{$row['cat_id']}</td>
@@ -61,6 +60,9 @@ $category = select('ccc_category', 'cat_id', ['*']);
             ?>
         </tbody>
     </table>
+    <a href="category.php" class="link">Add Category</a>
+    <a href="product.php" class="link">Add Product</a>
+    <a href="product_list.php" class="link">View Product</a>
 </body>
 
 </html>
