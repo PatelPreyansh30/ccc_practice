@@ -75,66 +75,66 @@ echo "<pre>";
 // $obj1->inc();
 // print_r($obj2);
 
-class A
-{
-    private $array = [];
+// class A
+// {
+// private $array = [];
 
-    public function __set($name, $value)
-    {
-        // Run when access not accessible properties.
-        $this->array[$name] = $value;
-    }
+// public function __set($name, $value)
+// {
+// // Run when access not accessible properties.
+// $this->array[$name] = $value;
+// }
 
-    // public function __get($name)
-    // {
-    //     // Run when access not accessible properties.
-    //     return $this->array[$name];
-    // }
+// public function __get($name)
+// {
+//     // Run when access not accessible properties.
+//     return $this->array[$name];
+// }
 
-    // public function __call($name, $arguments)
-    // {
-    //     // Runs when methods that do not exist or are not accessible in the class
-    //     echo "Method: {$name}";
-    //     echo "<br>";
-    //     echo "Arguments: " . implode(', ', $arguments);
-    //     echo "<br>";
-    // }
+// public function __call($name, $arguments)
+// {
+//     // Runs when methods that do not exist or are not accessible in the class
+//     echo "Method: {$name}";
+//     echo "<br>";
+//     echo "Arguments: " . implode(', ', $arguments);
+//     echo "<br>";
+// }
 
-    // public function __toString()
-    // {
-    //     // How an object of the class should be represented as a string
-    //     return "This is string representation of class";
-    // }
+// public function __toString()
+// {
+//     // How an object of the class should be represented as a string
+//     return "This is string representation of class";
+// }
 
-    // public function __unset($name)
-    // {
-    //     // Unset an inaccessible or non-existent property of an object
-    //     unset($this->array[$name]);
-    // }
+// public function __unset($name)
+// {
+//     // Unset an inaccessible or non-existent property of an object
+//     unset($this->array[$name]);
+// }
 
-    // public function __isset($name)
-    // {
-    //     // Check if an inaccessible or non-existent property of an object is set
-    //     return isset($this->array[$name]);
-    // }
+// public function __isset($name)
+// {
+//     // Check if an inaccessible or non-existent property of an object is set
+//     return isset($this->array[$name]);
+// }
 
-    // public static function __callStatic($name, $arguments)
-    // {
-    //     // Runs when methods that do not exist or are not accessible in the class
-    //     echo "Method: {$name}";
-    //     echo "<br>";
-    //     echo "Arguments: " . implode(', ', $arguments);
-    //     echo "<br>";
-    // }
+// public static function __callStatic($name, $arguments)
+// {
+//     // Runs when methods that do not exist or are not accessible in the class
+//     echo "Method: {$name}";
+//     echo "<br>";
+//     echo "Arguments: " . implode(', ', $arguments);
+//     echo "<br>";
+// }
 
-        public function __serialize(): array
-        {
-            return $this->array;
-        }
-}
+// public function __serialize(): array
+// {
+//     return $this->array;
+// }
+// }
 
-$obj = new A();
-print_r($obj);
+// $obj = new A();
+// print_r($obj);
 
 // echo $obj;
 
@@ -153,3 +153,47 @@ print_r($obj);
 
 // unset($obj->name);
 // print_r($obj);
+
+class A
+{
+    public $a = 3;
+    protected $b = 4;
+    private $c = 5;
+
+    public function accessProtected()
+    {
+        return $this->b;
+    }
+
+    public function accessPrivate()
+    {
+        return $this->c;
+    }
+}
+
+class B extends A
+{
+    public function accessProtectedFromChild()
+    {
+        return $this->b;
+    }
+
+    // public function accessPrivateFromChild()
+    // {
+    //     return $this->c;
+    // }
+}
+
+$obj1 = new A();
+
+$obj2 = new B();
+
+// echo $obj1->a; // 3
+// echo $obj1->b; // can't access
+// echo $obj1->c; // can't access
+
+// echo $obj2->a; // 3
+// echo $obj2->b; // can't access
+// echo $obj2->c; // can't access
+// echo $obj2->accessProtectedFromChild(); // 4
+// echo $obj2->accessPrivateFromChild(); // can't access
