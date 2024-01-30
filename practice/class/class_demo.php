@@ -5,7 +5,7 @@ echo "<pre>";
 // class Fruit
 // {
 //     public $name;
-    // public $color;
+// public $color;
 //     protected $color;
 //     private $weigth;
 
@@ -16,21 +16,21 @@ echo "<pre>";
 //         $this->weigth = $weigth;
 //     }
 
-    // function __destruct()
-    // {
-    //     echo "The fruit is {$this->name} and the color is {$this->color}";
-    // }
+// function __destruct()
+// {
+//     echo "The fruit is {$this->name} and the color is {$this->color}";
+// }
 
-    // function set_name($name, $color)
-    // {
-    //     $this->name = $name;
-    //     $this->color = $color;
-    // }
+// function set_name($name, $color)
+// {
+//     $this->name = $name;
+//     $this->color = $color;
+// }
 
-    // function get_name()
-    // {
-    //     return $this->name;
-    // }
+// function get_name()
+// {
+//     return $this->name;
+// }
 // }
 
 // $mango = new Fruit("Mango", "Yellow", 8);
@@ -74,3 +74,82 @@ echo "<pre>";
 // print_r($obj1);
 // $obj1->inc();
 // print_r($obj2);
+
+class A
+{
+    private $array = [];
+
+    public function __set($name, $value)
+    {
+        // Run when access not accessible properties.
+        $this->array[$name] = $value;
+    }
+
+    // public function __get($name)
+    // {
+    //     // Run when access not accessible properties.
+    //     return $this->array[$name];
+    // }
+
+    // public function __call($name, $arguments)
+    // {
+    //     // Runs when methods that do not exist or are not accessible in the class
+    //     echo "Method: {$name}";
+    //     echo "<br>";
+    //     echo "Arguments: " . implode(', ', $arguments);
+    //     echo "<br>";
+    // }
+
+    // public function __toString()
+    // {
+    //     // How an object of the class should be represented as a string
+    //     return "This is string representation of class";
+    // }
+
+    // public function __unset($name)
+    // {
+    //     // Unset an inaccessible or non-existent property of an object
+    //     unset($this->array[$name]);
+    // }
+
+    // public function __isset($name)
+    // {
+    //     // Check if an inaccessible or non-existent property of an object is set
+    //     return isset($this->array[$name]);
+    // }
+
+    // public static function __callStatic($name, $arguments)
+    // {
+    //     // Runs when methods that do not exist or are not accessible in the class
+    //     echo "Method: {$name}";
+    //     echo "<br>";
+    //     echo "Arguments: " . implode(', ', $arguments);
+    //     echo "<br>";
+    // }
+
+        public function __serialize(): array
+        {
+            return $this->array;
+        }
+}
+
+$obj = new A();
+print_r($obj);
+
+// echo $obj;
+
+// var_dump(isset($obj->name));
+
+// $obj->name = "XYZ";
+
+// $obj->name("xyz");
+// A::name("xyz");
+
+// print_r($obj);
+
+// $obj->myFunction('arg 1', 'arg 2');
+
+// var_dump(isset($obj->name));
+
+// unset($obj->name);
+// print_r($obj);
