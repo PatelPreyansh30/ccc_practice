@@ -171,6 +171,7 @@ class A
     }
 }
 
+// class B
 class B extends A
 {
     public function accessProtectedFromChild()
@@ -187,10 +188,14 @@ class B extends A
 $obj1 = new A();
 
 $obj2 = new B();
+// print_r($obj2->accessProtectedFromChild());
+// print_r($obj2);
 
 // echo $obj1->a; // 3
 // echo $obj1->b; // can't access
 // echo $obj1->c; // can't access
+// echo $obj1->accessProtected(); // 4
+// echo $obj1->accessPrivate(); // 5
 
 // echo $obj2->a; // 3
 // echo $obj2->b; // can't access
