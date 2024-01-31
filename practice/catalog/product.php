@@ -137,7 +137,7 @@ if (getParams('update')) {
                         $product_id = getParams('product_id');
                         $query = $ccc_product_object->selectQuery(['*'], ['WHERE ' => "product_id = {$product_id}"]);
                         $single_product = $query_executor_object->selectQueryExecutor($query);
-                        echo json_encode($single_product);
+                        echo json_encode($single_product[0]);
                         ?>;
         document.getElementById("product_name").value = product.product_name
         document.getElementById("product_sku").value = product.product_sku

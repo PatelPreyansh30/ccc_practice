@@ -1,7 +1,10 @@
 <?php
-include 'sql/functions.php';
-$query = selectQuery('ccc_category', ['*']);
-$category = queryExecutor($query);
+include 'sql/builder_and_executor.php';
+
+$ccc_category_object = new QueryBuilder("ccc_category");
+$query_executor_object = new QueryExecutor();
+$category_query = $ccc_category_object->selectQuery(['*']);
+$category_list = $query_executor_object->selectQueryExecutor($category_query);
 ?>
 
 <!DOCTYPE html>
@@ -37,28 +40,28 @@ $category = queryExecutor($query);
 <body>
     <h1>Category Records</h1>
     <table>
-        <thead>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Delete</th>
-            <th>Update</th>
-        </thead>
-        <tbody>
-            <?php
-            if ($category->num_rows > 0) {
-                while ($row = $category->fetch_assoc()) {
-                    echo "
-                    <tr>
-                        <td>{$row['cat_id']}</td>
-                        <td>{$row['cat_name']}</td>
-                        <td><a href='category.php?action=delete&cat_id={$row['cat_id']}'>Delete</a></td>
-                        <td><a href='category.php?action=update&cat_id={$row['cat_id']}'>Update</a></td>
+        <?php
+        $table_heading = ['Id', 'Name', 'Delete', 'Update'];
+        echo "<thead>";
+        foreach ($table_heading as $key => $val) {
+            echo "<th>{$val}</th>";
+        }
+        echo "</thead><tbody>";
+
+        if ($category_list != null) {
+            for ($i = 0; $i < count($category_list); $i++) {
+                echo "
+                <tr>
+                    <td>{$category_list[$i]['cat_id']}</td>
+                    <td>{$category_list[$i]['cat_name']}</td>
+                    <td><a href='category.php?action=delete&cat_id={$category_list[$i]['cat_id']}'>Delete</a></td>
+                    <td><a href='category.php?action=update&cat_id={$category_list[$i]['cat_id']}'>Update</a></td>
                     </tr>
                     ";
-                }
             }
-            ?>
-        </tbody>
+        }
+        echo "</tbody>";
+        ?>
     </table>
     <a href="category.php" class="link">Add Category</a>
     <a href="product.php" class="link">Add Product</a>

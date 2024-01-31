@@ -61,7 +61,7 @@ class QueryBuilder
 class QueryExecutor
 {
     private $connection, $status;
-    private $result, $values = [];
+    private $values = [];
 
     public function __construct()
     {
@@ -71,7 +71,6 @@ class QueryExecutor
     public function __destruct()
     {
         $this->connection->close();
-        $this->result = [];
         $this->status;
     }
 
@@ -85,28 +84,22 @@ class QueryExecutor
         }
     }
 
-    private function fetchAssoc(mysqli_result | bool $result)
+    private function fetchAssoc(mysqli_result | bool $data)
     {
-        if ($result->num_rows > 1) {
-            while ($row = $result->fetch_assoc()) {
-                $this->result[] = $row;
-            }
-        } else {
-            $this->result = $result->fetch_assoc();
+        $result = [];
+        while ($row = $data->fetch_assoc()) {
+            $result[] = $row;
         }
-        return $this->result;
+        return $result;
     }
 
-    private function fetchArray(mysqli_result | bool $result)
+    private function fetchArray(mysqli_result | bool $data)
     {
-        if ($result->num_rows > 1) {
-            while ($row = $result->fetch_array()) {
-                $this->result[] = $row;
-            }
-        } else {
-            $this->result = $result->fetch_array();
+        $result = [];
+        while ($row = $data->fetch_array()) {
+            $result[] = $row;
         }
-        return $this->result;
+        return $result;
     }
 
     public function fetchValues(array | null $result, array $parameter)

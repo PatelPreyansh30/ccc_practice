@@ -1,6 +1,5 @@
 <?php
 include 'sql/builder_and_executor.php';
-include 'sql/functions.php';
 
 $ccc_category_object = new QueryBuilder("ccc_category");
 $query_executor_object = new QueryExecutor();
