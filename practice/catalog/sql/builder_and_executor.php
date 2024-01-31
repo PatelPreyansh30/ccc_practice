@@ -1,4 +1,3 @@
-<pre>
 <?php
 include 'connection.php';
 
@@ -62,7 +61,7 @@ class QueryBuilder
 class QueryExecutor
 {
     private $connection, $status;
-    private $result = [];
+    private $result, $values = [];
 
     public function __construct()
     {
@@ -72,6 +71,8 @@ class QueryExecutor
     public function __destruct()
     {
         $this->connection->close();
+        $this->result = [];
+        $this->status;
     }
 
     public function selectQueryExecutor(string $query, string $methodType = 'fetch_assoc'): array | null
@@ -106,6 +107,15 @@ class QueryExecutor
             $this->result = $result->fetch_array();
         }
         return $this->result;
+    }
+
+    public function fetchValues(array | null $result, array $parameter)
+    {
+        if ($result == null) return null;
+        for ($i = 0; $i < count($result); $i++) {
+            $this->values[$result[$i][$parameter[0]]] = $result[$i][$parameter[1]];
+        };
+        return $this->values;
     }
 
     public function otherQueryExecutor(string $query): bool

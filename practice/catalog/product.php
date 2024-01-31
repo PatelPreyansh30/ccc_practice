@@ -1,10 +1,20 @@
 <?php
+include "sql/builder_and_executor.php";
 include "sql/functions.php";
+
+$ccc_category_object = new QueryBuilder("ccc_category");
+$query_executor_object = new QueryExecutor();
+
+$query = $ccc_category_object->selectQuery(['*']);
+$category = $query_executor_object->selectQueryExecutor($query);
+
+$ccc_product_object = new QueryBuilder("ccc_product");
+$query_executor_object = new QueryExecutor();
 
 // Deleting for product
 if (getParams('action') == 'delete' && getParams('product_id')) {
-    $query = deleteQuery('ccc_product', ['product_id' => getParams('product_id')]);
-    $status = queryExecutor($query);
+    $query = $ccc_product_object->deleteQuery(['product_id' => getParams('product_id')]);
+    $status = $query_executor_object->otherQueryExecutor($query);
     if ($status) {
         echo "<script>alert('Data deleted successfully')</script>";
         echo "<script>location. href='product_list.php'</script>";
@@ -14,37 +24,28 @@ if (getParams('action') == 'delete' && getParams('product_id')) {
     };
 };
 
-$query = selectQuery('ccc_category', ['*']);
-$category = queryExecutor($query);
-
 // Inserting data
 if (getParams('submit')) {
-    $keys = getKeysFromPostRequest();
-    for ($i = 0; $i < count($keys); $i++) {
-        $query = insertQuery($keys[$i], getParams($keys[$i]));
-        $status = queryExecutor($query);
-        if ($status) {
-            echo "<script>alert('Data submitted successfully')</script>";
-        } else {
-            echo "<script>alert('Data not submitted')</script>";
-        }
-    };
+    $query = $ccc_product_object->insertQuery(getParams('ccc_product'));
+    $status = $query_executor_object->otherQueryExecutor($query);
+    if ($status) {
+        echo "<script>alert('Data submitted successfully')</script>";
+    } else {
+        echo "<script>alert('Data not submitted')</script>";
+    }
 };
 
 // Updating data
 if (getParams('update')) {
-    $keys = getKeysFromPostRequest();
-    for ($i = 0; $i < count($keys); $i++) {
-        $query = updateQuery($keys[$i], ['product_id' => getParams('product_id')], getParams($keys[$i]));
-        $status = queryExecutor($query);
-        if ($status) {
-            echo "<script>alert('Data updated successfully')</script>";
-            echo "<script>location. href='product_list.php'</script>";
-        } else {
-            echo "<script>alert('Data not updated')</script>";
-            echo "<script>location. href='product_list.php'</script>";
-        }
-    };
+    $query = $ccc_product_object->updateQuery(getParams('ccc_product'), ['product_id' => getParams('product_id')]);
+    $status = $query_executor_object->otherQueryExecutor($query);
+    if ($status) {
+        echo "<script>alert('Data updated successfully')</script>";
+        echo "<script>location. href='product_list.php'</script>";
+    } else {
+        echo "<script>alert('Data not updated')</script>";
+        echo "<script>location. href='product_list.php'</script>";
+    }
 };
 ?>
 
@@ -86,9 +87,9 @@ if (getParams('update')) {
             <label for="product_category">Category:</label>
             <select name="ccc_product[cat_id]" id="product_category">
                 <?php
-                if ($category->num_rows > 0) {
-                    while ($row = $category->fetch_assoc()) {
-                        echo "<option class='product_category' value='{$row['cat_id']}'>{$row['cat_name']}</option>";
+                if ($category != null) {
+                    for ($i = 0; $i < count($category); $i++) {
+                        echo "<option class='product_category' value='{$category[$i]['cat_id']}'>{$category[$i]['cat_name']}</option>";
                     }
                 }
                 ?>
@@ -134,12 +135,10 @@ if (getParams('update')) {
     <script>
         var product = <?php
                         $product_id = getParams('product_id');
-                        $query = selectQuery('ccc_product', ['*'], ['WHERE ' => "product_id = {$product_id}"]);
-                        $single_product = queryExecutor($query);
-                        echo json_encode($single_product->fetch_assoc());
+                        $query = $ccc_product_object->selectQuery(['*'], ['WHERE ' => "product_id = {$product_id}"]);
+                        $single_product = $query_executor_object->selectQueryExecutor($query);
+                        echo json_encode($single_product);
                         ?>;
-        // console.log(product)
-
         document.getElementById("product_name").value = product.product_name
         document.getElementById("product_sku").value = product.product_sku
         document.getElementById("manufacturer_cost").value = product.manufacturer_cost

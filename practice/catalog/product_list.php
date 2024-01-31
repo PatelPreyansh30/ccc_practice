@@ -1,22 +1,24 @@
 <?php
+include 'sql/builder_and_executor.php';
 include 'sql/functions.php';
 
-$query = selectQuery('ccc_category', ['*']);
-$category = queryExecutor($query);
-$categories = [];
-while ($row = $category->fetch_array()) {
-    $categories[$row['cat_id']] = $row['cat_name'];
-};
+$ccc_category_object = new QueryBuilder("ccc_category");
+$query_executor_object = new QueryExecutor();
+$category_query = $ccc_category_object->selectQuery(['*']);
+$category_list = $query_executor_object->selectQueryExecutor($category_query);
+$category_list = $query_executor_object->fetchValues($category_list, ['cat_id', 'cat_name']);
 
-$query = selectQuery('ccc_product', ['*'], ['LIMIT ' => 20]);
-$products = queryExecutor($query);
+$ccc_product_object = new QueryBuilder("ccc_product");
+$query_executor_object = new QueryExecutor();
+$product_query = $ccc_product_object->selectQuery(['*'], ['LIMIT ' => 20]);
+$product_list = $query_executor_object->selectQueryExecutor($product_query);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Document</title>
+    <title>Product List</title>
     <style>
         h1 {
             margin: 0;
@@ -45,32 +47,31 @@ $products = queryExecutor($query);
 <body>
     <h1>Product Records</h1>
     <table>
-        <thead>
-            <th>Id</th>
-            <th>Name</th>
-            <th>SKU</th>
-            <th>Category</th>
-            <th>Delete</th>
-            <th>Update</th>
-        </thead>
-        <tbody>
-            <?php
-            if ($products->num_rows > 0) {
-                while ($row = $products->fetch_assoc()) {
-                    echo "
-                    <tr>
-                        <td>{$row['product_id']}</td>
-                        <td>{$row['product_name']}</td>
-                        <td>{$row['product_sku']}</td>
-                        <td>{$categories[$row['cat_id']]}</td>
-                        <td><a href='product.php?action=delete&product_id={$row['product_id']}'>Delete</a></td>
-                        <td><a href='product.php?action=update&product_id={$row['product_id']}'>Update</a></td>
+        <?php
+        $table_heading = ['Id', 'Name', 'SKU', 'Category', 'Price', 'Delete', 'Update'];
+        echo "<thead>";
+        foreach ($table_heading as $key => $val) {
+            echo "<th>{$val}</th>";
+        }
+        echo "</thead><tbody>";
+
+        if ($product_list != null) {
+            for ($i = 0; $i < count($product_list); $i++) {
+                echo "
+                <tr>
+                    <td>{$product_list[$i]['product_id']}</td>
+                    <td>{$product_list[$i]['product_name']}</td>
+                    <td>{$product_list[$i]['product_sku']}</td>
+                    <td>{$category_list[$product_list[$i]['cat_id']]}</td>
+                    <td>{$product_list[$i]['product_price']}</td>
+                    <td><a href='product.php?action=delete&product_id={$product_list[$i]['product_id']}'>Delete</a></td>
+                    <td><a href='product.php?action=update&product_id={$product_list[$i]['product_id']}'>Update</a></td>
                     </tr>
                     ";
-                }
             }
-            ?>
-        </tbody>
+        }
+        echo "</tbody>";
+        ?>
     </table>
     <a href="product.php" class="link">Add Product</a>
     <a href="category.php" class="link">Add Category</a>
