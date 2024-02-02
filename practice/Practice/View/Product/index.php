@@ -14,6 +14,20 @@ class View_Product
 {
     public function __construct()
     {
+        $product_model = new Model_Product();
+        $request = new Model_Request();
+        $action = $request->getQueryData("action");
+        $product_id = $request->getQueryData("product_id");
+
+        if ($action == 'delete') {
+            $status = $product_model->delete(['product_id' => $product_id]);
+            if($status){
+                echo "<script>alert('Data deleted successfully')</script>";
+                echo "<script>location. href='?product_list=true'</script>";
+            };
+        }
+        if ($action == 'update') {
+        }
     }
 
     private function renderForm()
