@@ -1,5 +1,24 @@
-<?php
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
 
+    th,
+    td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .link {
+        display: block;
+        margin-top: 10px;
+    }
+</style>
+
+<?php
 class View_Product_List
 {
     public function __construct()
@@ -8,7 +27,7 @@ class View_Product_List
 
     public function renderTable($data)
     {
-        $table = "<table style='border: 1px solid black; border-collapse: collapse;'>";
+        $table = "<table>";
         $table .= $this->renderTableHead();
         $table .= $this->renderTableBody($data);
         return $table;

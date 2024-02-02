@@ -11,7 +11,7 @@ class Model_Product extends Model_Abstract
     public function save($data)
     {
         $query = $this->getQueryBuilder()->insert($this->__table_name, $data);
-        $this->getQueryBuilder()->execute($query);
+        return $this->getQueryBuilder()->execute($query);
     }
 
     public function fetch(array $columns, array $condition = [])

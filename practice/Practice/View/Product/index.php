@@ -1,5 +1,15 @@
-<?php
+<style>
+    div {
+        margin-bottom: 10px;
+    }
 
+    .link {
+        display: block;
+        margin-top: 10px;
+    }
+</style>
+
+<?php
 class View_Product
 {
     public function __construct()
@@ -34,6 +44,7 @@ class View_Product
         $form .= $this->renderDateField("ccc_product[product_created_at]", "Created At: ");
         $form .= $this->renderDateField("ccc_product[product_updated_at]", "Updated At: ");
         $form .= $this->renderSubmitButton();
+        $form .= "<a href='?product_list=true' class='link'>Product List</a>";
         return $form;
     }
 
@@ -86,10 +97,10 @@ class View_Product
         foreach ($radioBtnFields as $key => $value) {
             $capital_field = ucfirst($value);
             $fields[] = "
-            <div>
+            <span>
                 <input type='radio' name={$name} id={$value} value={$value} class={$class}>
                 <label for={$value}>{$capital_field}</label>
-            </div>
+            </span>
         ";
         }
         $fields = join(" ", $fields);
