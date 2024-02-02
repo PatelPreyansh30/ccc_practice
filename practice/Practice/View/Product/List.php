@@ -43,7 +43,7 @@ class View_Product_List
             $table_body .= "<td>{$value['cat_id']}</td>";
             $table_body .= "<td>Delete</td>";
             $table_body .= "<td>Update</td>";
-            $table_body .= "<tr>";
+            $table_body .= "</tr>";
         }
         $table_body .= "</tbody>";
         return $table_body;
