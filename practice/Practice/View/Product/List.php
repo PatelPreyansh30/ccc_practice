@@ -1,46 +1,26 @@
-<style>
-    table,
-    th,
-    td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        padding: 10px;
-        text-align: center;
-    }
-
-    .link {
-        display: block;
-        margin-top: 10px;
-    }
-</style>
-
 <?php
 class View_Product_List
 {
     public function __construct()
     {
     }
-
-    public function renderTable($data)
+    public function renderTable($product, $category)
     {
         $table = "<table>";
         $table .= $this->renderTableHead();
-        $table .= $this->renderTableBody($data);
+        $table .= $this->renderTableBody($product, $category);
+        $table .= "</table>";
+        $table .= "<a href='?form=product' class='link'>Add Product</a>";
         return $table;
     }
-
-    public function renderTableBody($data)
+    public function renderTableBody($product, $category)
     {
         $table_body = '<tbody>';
-        foreach ($data as $value) {
+        foreach ($product as $value) {
             $table_body .= "<tr>";
             $table_body .= "<td>{$value['product_id']}</td>";
             $table_body .= "<td>{$value['product_name']}</td>";
-            $table_body .= "<td>{$value['cat_id']}</td>";
+            $table_body .= "<td>{$category[$value['cat_id']]}</td>";
             $table_body .= "<td><a href='?action=delete&product_id={$value['product_id']}'>Delete</a></td>";
             $table_body .= "<td><a href='?action=update&product_id={$value['product_id']}'>Update</a></td>";
             $table_body .= "</tr>";
@@ -58,10 +38,8 @@ class View_Product_List
         $table_head .= "</tr></thead>";
         return $table_head;
     }
-
-    public function toHTML($data)
+    public function toHTML($product, $category)
     {
-        return $this->renderTable($data);
+        return $this->renderTable($product, $category);
     }
-
 }
