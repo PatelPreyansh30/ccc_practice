@@ -23,7 +23,9 @@ class View_Product
         $form .= $this->renderDateField("ccc_product[product_created_at]", "Created At: ");
         $form .= $this->renderDateField("ccc_product[product_updated_at]", "Updated At: ");
         $form .= $this->renderSubmitButton();
-        $form .= "<a href='?list=product' class='link'>Product List</a>";
+        $form .= "<a href='?list=product' class='link'>View Product</a>";
+        $form .= "<a href='?list=category' class='link'>View Category</a>";
+        $form .= "<a href='?form=category' class='link'>Add Category</a>";
         return $form;
     }
 

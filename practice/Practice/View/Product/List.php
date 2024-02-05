@@ -11,6 +11,8 @@ class View_Product_List
         $table .= $this->renderTableBody($product, $category);
         $table .= "</table>";
         $table .= "<a href='?form=product' class='link'>Add Product</a>";
+        $table .= "<a href='?form=category' class='link'>Add Category</a>";
+        $table .= "<a href='?list=category' class='link'>View Category</a>";
         return $table;
     }
     public function renderTableBody($product, $category)
