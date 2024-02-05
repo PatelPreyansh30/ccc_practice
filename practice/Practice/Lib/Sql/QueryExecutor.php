@@ -15,7 +15,7 @@ class Lib_Sql_QueryExecutor extends Lib_Connection
         }
         // print_r($data_collection->getData());
         // return $result;
-        return $data_collection->getData();
+        return count($data_collection->getData()) > 1 ? $data_collection->getData() : $data_collection->getData()[0];
     }
 
     public function fetchArray(mysqli_result|bool $data)

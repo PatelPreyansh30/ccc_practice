@@ -25,6 +25,12 @@ class Model_Product extends Model_Abstract
         $query = $this->getQueryBuilder()->update($this->__table_name, $data, $where_condition);
         return $this->getQueryBuilder()->execute($query);
     }
+    public function fetchOne(array $data, array $where_condition)
+    {
+        $query = $this->getQueryBuilder()->select($this->__table_name, $data, $where_condition);
+        $result = $this->getQueryBuilder()->execute($query);
+        return $this->getQueryExecutor()->fetchAssoc($result);
+    }
 
     public function fetch(array $columns, array $condition = [])
     {

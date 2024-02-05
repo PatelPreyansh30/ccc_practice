@@ -5,46 +5,46 @@ class View_Product
     {
     }
 
-    private function renderForm($categories)
+    private function renderForm($categories, $product)
     {
         $form = "<form action='' method='POST'>";
-        $form .= $this->renderTextField("ccc_product[product_name]", "Product Name: ");
-        $form .= $this->renderTextField("ccc_product[product_sku]", "Product SKU: ");
-        $form .= $this->renderRadioButton("ccc_product[product_type]", "Product Type: ", ['simple', 'bundle'], 'product_type');
-        $form .= $this->renderDropdown('ccc_product[cat_id]', "Category: ", $categories, '', 'product_category');
-        $form .= $this->renderTextField("ccc_product[manufacturer_cost]", "Manufacturer Cost: ");
-        $form .= $this->renderTextField("ccc_product[shipping_cost]", "Shipping Cost: ");
-        $form .= $this->renderTextField("ccc_product[total_cost]", "Total Cost: ");
-        $form .= $this->renderTextField("ccc_product[product_price]", "Price: ");
+        $form .= $this->renderTextField("ccc_product[product_name]", "Product Name: ", $product->getProduct_name());
+        $form .= $this->renderTextField("ccc_product[product_sku]", "Product SKU: ", $product->getProduct_sku());
+        $form .= $this->renderRadioButton("ccc_product[product_type]", "Product Type: ", ['simple', 'bundle'], 'product_type', $product->getProduct_type());
+        $form .= $this->renderDropdown('ccc_product[cat_id]', "Category: ", $categories, $product->getCat_id(), 'product_category');
+        $form .= $this->renderTextField("ccc_product[manufacturer_cost]", "Manufacturer Cost: ", $product->getManufacturer_cost());
+        $form .= $this->renderTextField("ccc_product[shipping_cost]", "Shipping Cost: ", $product->getShipping_cost());
+        $form .= $this->renderTextField("ccc_product[total_cost]", "Total Cost: ", $product->getTotal_cost());
+        $form .= $this->renderTextField("ccc_product[product_price]", "Price: ", $product->getProduct_price());
         $form .= $this->renderDropdown('ccc_product[product_status]', "Status: ", [
             "enabled" => 'Enabled',
             "disabled" => 'Disabled',
-        ], '', 'product_status');
-        $form .= $this->renderDateField("ccc_product[product_created_at]", "Created At: ");
-        $form .= $this->renderDateField("ccc_product[product_updated_at]", "Updated At: ");
-        $form .= $this->renderSubmitButton();
+        ], $product->getProduct_status(), 'product_status');
+        $form .= $this->renderDateField("ccc_product[product_created_at]", "Created At: ", $product->getProduct_created_at());
+        $form .= $this->renderDateField("ccc_product[product_updated_at]", "Updated At: ", $product->getProduct_updated_at());
+        !$product ? $form .= $this->renderSubmitButton() : $form .= $this->renderUpdateButton();
         $form .= "<a href='?list=product' class='link'>View Product</a>";
         $form .= "<a href='?list=category' class='link'>View Category</a>";
         $form .= "<a href='?form=category' class='link'>Add Category</a>";
         return $form;
     }
 
-    private function renderTextField($name, $label)
+    private function renderTextField($name, $label, $value = '')
     {
         $textfield = "
         <div>
             <label for={$name}>{$label}</label>
-            <input type='text' name={$name} id={$name}>
+            <input type='text' name={$name} id={$name} value='{$value}'>
         </div>
         ";
         return $textfield;
     }
-    private function renderDateField($name, $label)
+    private function renderDateField($name, $label, $value = '')
     {
         $datefield = "
         <div>
             <label for={$name}>{$label}</label>
-            <input type='date' name={$name} id={$name}>
+            <input type='date' name={$name} id={$name} value='{$value}'>
         </div>
         ";
         return $datefield;
@@ -55,6 +55,15 @@ class View_Product
         $textfield = "
         <div>
             <input type='submit' name='submit' value='Submit' id='submit'>
+        </div>
+        ";
+        return $textfield;
+    }
+    private function renderUpdateButton()
+    {
+        $textfield = "
+        <div>
+            <input type='submit' name='update' value='Update' id='update'>
         </div>
         ";
         return $textfield;
@@ -72,14 +81,15 @@ class View_Product
         return $dropdown;
     }
 
-    private function renderRadioButton(string $name, string $label, array $radioBtnFields, string $class)
+    private function renderRadioButton(string $name, string $label, array $radioBtnFields, string $class, $checked = '')
     {
         $fields = [];
         foreach ($radioBtnFields as $key => $value) {
+            $checkedAttr = ($value == $checked) ? "checked" : '';
             $capital_field = ucfirst($value);
             $fields[] = "
             <span>
-                <input type='radio' name={$name} id={$value} value={$value} class={$class}>
+                <input type='radio' name={$name} id={$value} value={$value} {$checkedAttr} class={$class}>
                 <label for={$value}>{$capital_field}</label>
             </span>
         ";
@@ -94,8 +104,8 @@ class View_Product
         return $radiofield;
     }
 
-    public function toHTML($categories)
+    public function toHTML($categories, $product = null)
     {
-        return $this->renderForm($categories);
+        return $this->renderForm($categories, $product);
     }
 }
