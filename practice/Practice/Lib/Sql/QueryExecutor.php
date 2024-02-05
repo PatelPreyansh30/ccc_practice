@@ -8,11 +8,14 @@ class Lib_Sql_QueryExecutor extends Lib_Connection
 
     public function fetchAssoc(mysqli_result|bool $data)
     {
-        $result = [];
+        // $result = [];
+        $data_collection = new Model_DataCollectionObject();
         while ($row = $data->fetch_assoc()) {
-            $result[] = $row;
+            $data_collection->addData($row);
         }
-        return $result;
+        // print_r($data_collection->getData());
+        // return $result;
+        return $data_collection->getData();
     }
 
     public function fetchArray(mysqli_result|bool $data)

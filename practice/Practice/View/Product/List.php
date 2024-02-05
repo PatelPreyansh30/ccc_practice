@@ -18,13 +18,13 @@ class View_Product_List
     public function renderTableBody($product, $category)
     {
         $table_body = '<tbody>';
-        foreach ($product as $value) {
+        foreach ($product as $data_object) {
             $table_body .= "<tr>";
-            $table_body .= "<td>{$value['product_id']}</td>";
-            $table_body .= "<td>{$value['product_name']}</td>";
-            $table_body .= "<td>{$category[$value['cat_id']]}</td>";
-            $table_body .= "<td><a href='?action=delete&product_id={$value['product_id']}'>Delete</a></td>";
-            $table_body .= "<td><a href='?action=update&product_id={$value['product_id']}'>Update</a></td>";
+            $table_body .= "<td>{$data_object->getProduct_id()}</td>";
+            $table_body .= "<td>{$data_object->getProduct_name()}</td>";
+            $table_body .= "<td>{$category[$data_object->getCat_id()]}</td>";
+            $table_body .= "<td><a href='?action=delete&product_id={$data_object->getProduct_id()}'>Delete</a></td>";
+            $table_body .= "<td><a href='?action=update&product_id={$data_object->getProduct_id()}'>Update</a></td>";
             $table_body .= "</tr>";
         }
         $table_body .= "</tbody>";

@@ -19,12 +19,12 @@ class View_Category_List
     public function renderTableBody($category)
     {
         $table_body = '<tbody>';
-        foreach ($category as $value) {
+        foreach ($category as $data_object) {
             $table_body .= "<tr>";
-            $table_body .= "<td>{$value['cat_id']}</td>";
-            $table_body .= "<td>{$value['cat_name']}</td>";
-            $table_body .= "<td><a href='?action=delete&cat_id={$value['cat_id']}'>Delete</a></td>";
-            $table_body .= "<td><a href='?action=update&cat_id={$value['cat_id']}'>Update</a></td>";
+            $table_body .= "<td>{$data_object->getCat_id()}</td>";
+            $table_body .= "<td>{$data_object->getCat_name()}</td>";
+            $table_body .= "<td><a href='?action=delete&cat_id={$data_object->getCat_id()}'>Delete</a></td>";
+            $table_body .= "<td><a href='?action=update&cat_id={$data_object->getCat_id()}'>Update</a></td>";
             $table_body .= "</tr>";
         }
         $table_body .= "</tbody>";
