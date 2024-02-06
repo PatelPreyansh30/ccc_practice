@@ -49,8 +49,10 @@ class View_Product_List
         $table_head .= "</tr></thead>";
         return $table_head;
     }
-    public function toHTML($product, $category)
+    // public function toHtml($product, $category)
+    public function toHtml()
     {
-        return $this->renderTable($product, $category);
+        // return $this->renderTable($product, $category);
+        echo "Product List";
     }
 }

@@ -6,6 +6,11 @@ class Model_Request
     {
     }
 
+    public function getRequestURI()
+    {
+        $request_uri = $_SERVER['REQUEST_URI'];
+        return $request_uri;
+    }
     public function getParams(string $key = '')
     {
         return $key == '' ? $_REQUEST : (isset($_REQUEST[$key]) ? $_REQUEST[$key] : '');

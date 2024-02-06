@@ -45,7 +45,9 @@ $a_tag_string = '<a href="https://www.google.com">Go to Google.com</a>';
 // print_r(str_split($x,3));
 
 // echo str_word_count($x);
-// echo str_word_count($html_string);
+// print_r(str_word_count($html_string,0));
+// print_r(str_word_count($html_string,1));
+// print_r(str_word_count($html_string,2));
 
 // echo substr_replace($x,"Byy",0,7);
 
@@ -74,8 +76,11 @@ $a_tag_string = '<a href="https://www.google.com">Go to Google.com</a>';
 // echo strpbrk($x,"ab");
 
 // echo strstr($x, "ll");
+// echo strstr($x, "ll", true);
 
 // echo strtr($x, 'l','.');
+// echo strtr($x, 'Hello', 'Hi');
+// echo strtr($x, ['Hello' => 'Hi']);
 
 // echo ucfirst("abcd");
 

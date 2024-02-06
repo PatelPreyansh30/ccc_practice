@@ -52,9 +52,13 @@
 
 // Array Search
 
+// $associative_array = ["b" => "banana", "a" => "apple", "c" => "cherry"];
 // var_dump(in_array("xyz", $array2));
+// var_dump(in_array("xyz", $associative_array));
+// var_dump(in_array("apple", $associative_array));
 
-// var_dump(array_search("string",$array2));
+// var_dump(array_search("string", $array2));
+// var_dump(array_search("apple", $associative_array));
 
 // var_dump(array_reverse($array2));
 
