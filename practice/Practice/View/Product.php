@@ -5,49 +5,39 @@ class View_Product
     {
     }
 
-    private function renderForm($categories, $product)
+    private function renderForm()
     {
-        if ($product) {
-            $form = "<form action='' method='POST'>";
-            $form .= $this->renderTextField("ccc_product[product_name]", "Product Name: ", $product->getProduct_name());
-            $form .= $this->renderTextField("ccc_product[product_sku]", "Product SKU: ", $product->getProduct_sku());
-            $form .= $this->renderRadioButton("ccc_product[product_type]", "Product Type: ", ['simple', 'bundle'], 'product_type', $product->getProduct_type());
-            $form .= $this->renderDropdown('ccc_product[cat_id]', "Category: ", $categories, $product->getCat_id(), 'product_category');
-            $form .= $this->renderTextField("ccc_product[manufacturer_cost]", "Manufacturer Cost: ", $product->getManufacturer_cost());
-            $form .= $this->renderTextField("ccc_product[shipping_cost]", "Shipping Cost: ", $product->getShipping_cost());
-            $form .= $this->renderTextField("ccc_product[total_cost]", "Total Cost: ", $product->getTotal_cost());
-            $form .= $this->renderTextField("ccc_product[product_price]", "Price: ", $product->getProduct_price());
-            $form .= $this->renderDropdown('ccc_product[product_status]', "Status: ", [
-                "enabled" => 'Enabled',
-                "disabled" => 'Disabled',
-            ], $product->getProduct_status(), 'product_status');
-            $form .= $this->renderDateField("ccc_product[product_created_at]", "Created At: ", $product->getProduct_created_at());
-            $form .= $this->renderDateField("ccc_product[product_updated_at]", "Updated At: ", $product->getProduct_updated_at());
-            $form .= $this->renderUpdateButton();
-            $form .= "<a href='?list=product' class='link'>View Product</a>";
-            $form .= "<a href='?list=category' class='link'>View Category</a>";
-            $form .= "<a href='?form=category' class='link'>Add Category</a>";
-        } else {
-            $form = "<form action='' method='POST'>";
-            $form .= $this->renderTextField("ccc_product[product_name]", "Product Name: ", '');
-            $form .= $this->renderTextField("ccc_product[product_sku]", "Product SKU: ", '');
-            $form .= $this->renderRadioButton("ccc_product[product_type]", "Product Type: ", ['simple', 'bundle'], 'product_type', '');
-            $form .= $this->renderDropdown('ccc_product[cat_id]', "Category: ", $categories, '', 'product_category');
-            $form .= $this->renderTextField("ccc_product[manufacturer_cost]", "Manufacturer Cost: ", '');
-            $form .= $this->renderTextField("ccc_product[shipping_cost]", "Shipping Cost: ", '');
-            $form .= $this->renderTextField("ccc_product[total_cost]", "Total Cost: ", '');
-            $form .= $this->renderTextField("ccc_product[product_price]", "Price: ", '');
-            $form .= $this->renderDropdown('ccc_product[product_status]', "Status: ", [
-                "enabled" => 'Enabled',
-                "disabled" => 'Disabled',
-            ], '', 'product_status');
-            $form .= $this->renderDateField("ccc_product[product_created_at]", "Created At: ", '');
-            $form .= $this->renderDateField("ccc_product[product_updated_at]", "Updated At: ", '');
-            $form .= $this->renderSubmitButton();
-            $form .= "<a href='?list=product' class='link'>View Product</a>";
-            $form .= "<a href='?list=category' class='link'>View Category</a>";
-            $form .= "<a href='?form=category' class='link'>Add Category</a>";
-        }
+
+        $form = "<form action='' method='POST'>";
+        $form .= $this->renderTextField("ccc_product[product_name]", "Product Name: ", '');
+        $form .= $this->renderTextField("ccc_product[product_sku]", "Product SKU: ", '');
+        $form .= $this->renderRadioButton("ccc_product[product_type]", "Product Type: ", ['simple', 'bundle'], 'product_type', '');
+        $form .= $this->renderDropdown('ccc_product[cat_id]', "Category: ", array(
+            '1' => 'Bar & Game Room',
+            '2' => 'Bedroom',
+            '3' => 'Decor',
+            '4' => 'Dining & Kitchen',
+            '5' => 'Lighting',
+            '6' => 'Living Room',
+            '7' => 'Mattresses',
+            '8' => 'Office',
+            '9' => 'Outdoor',
+        ), '', 'product_category');
+        $form .= $this->renderTextField("ccc_product[manufacturer_cost]", "Manufacturer Cost: ", '');
+        $form .= $this->renderTextField("ccc_product[shipping_cost]", "Shipping Cost: ", '');
+        $form .= $this->renderTextField("ccc_product[total_cost]", "Total Cost: ", '');
+        $form .= $this->renderTextField("ccc_product[product_price]", "Price: ", '');
+        $form .= $this->renderDropdown('ccc_product[product_status]', "Status: ", [
+            "enabled" => 'Enabled',
+            "disabled" => 'Disabled',
+        ], '', 'product_status');
+        $form .= $this->renderDateField("ccc_product[product_created_at]", "Created At: ", '');
+        $form .= $this->renderDateField("ccc_product[product_updated_at]", "Updated At: ", '');
+        $form .= $this->renderSubmitButton();
+        $form .= "<a href='?list=product' class='link'>View Product</a>";
+        $form .= "<a href='?list=category' class='link'>View Category</a>";
+        $form .= "<a href='?form=category' class='link'>Add Category</a>";
+
         return $form;
     }
 
@@ -126,10 +116,9 @@ class View_Product
         return $radiofield;
     }
 
-    // public function toHtml($categories, $product = null)
     public function toHtml()
     {
-        // return $this->renderForm($categories, $product);
-        return "Product page";
+        return $this->renderForm();
+        // return "Product page";
     }
 }
