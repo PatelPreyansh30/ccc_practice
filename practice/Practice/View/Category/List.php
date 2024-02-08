@@ -40,7 +40,8 @@ class View_Category_List
         $tableHead .= "</tr></thead>";
         return $tableHead;
     }
-    public function toHTML($category)
+    // public function toHTML($category)
+    public function toHTML()
     {
         // return $this->renderTable($category);
         return "Category list";

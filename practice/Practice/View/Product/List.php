@@ -53,6 +53,6 @@ class View_Product_List
     public function toHtml()
     {
         // return $this->renderTable($product, $category);
-        echo "Product List";
+        return "Product List";
     }
 }

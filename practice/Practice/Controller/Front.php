@@ -9,6 +9,6 @@ class Controller_Front
         $requset_uri = str_replace('/php/practice/Practice/', '', $requset_uri);
         $className = str_replace("/", "_", 'View/' . ucwords($requset_uri, "/"));
         $layout = new $className();
-        $layout->toHtml();
+        echo $layout->toHtml();
     }
 }

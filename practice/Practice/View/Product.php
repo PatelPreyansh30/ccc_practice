@@ -126,7 +126,8 @@ class View_Product
         return $radiofield;
     }
 
-    public function toHtml($categories, $product = null)
+    // public function toHtml($categories, $product = null)
+    public function toHtml()
     {
         // return $this->renderForm($categories, $product);
         return "Product page";
