@@ -2,7 +2,7 @@
 
 class Model_Product extends Model_Abstract
 {
-    private $__table_name = 'ccc_product';
+    private $__tableName = 'ccc_product';
 
     public function __construct()
     {
@@ -10,31 +10,31 @@ class Model_Product extends Model_Abstract
 
     public function save($data)
     {
-        $query = $this->getQueryBuilder()->insert($this->__table_name, $data);
+        $query = $this->getQueryBuilder()->insert($this->__tableName, $data);
         return $this->getQueryBuilder()->execute($query);
     }
 
-    public function delete(array $where_condition)
+    public function delete(array $whereCondition)
     {
-        $query = $this->getQueryBuilder()->delete($this->__table_name, $where_condition);
+        $query = $this->getQueryBuilder()->delete($this->__tableName, $whereCondition);
         return $this->getQueryBuilder()->execute($query);
     }
 
-    public function update(array $data, array $where_condition)
+    public function update(array $data, array $whereCondition)
     {
-        $query = $this->getQueryBuilder()->update($this->__table_name, $data, $where_condition);
+        $query = $this->getQueryBuilder()->update($this->__tableName, $data, $whereCondition);
         return $this->getQueryBuilder()->execute($query);
     }
-    public function fetchOne(array $data, array $where_condition)
+    public function fetchOne(array $data, array $whereCondition)
     {
-        $query = $this->getQueryBuilder()->select($this->__table_name, $data, $where_condition);
+        $query = $this->getQueryBuilder()->select($this->__tableName, $data, $whereCondition);
         $result = $this->getQueryBuilder()->execute($query);
         return $this->getQueryExecutor()->fetchAssoc($result);
     }
 
     public function fetch(array $columns, array $condition = [])
     {
-        $query = $this->getQueryBuilder()->select($this->__table_name, $columns, $condition = []);
+        $query = $this->getQueryBuilder()->select($this->__tableName, $columns, $condition = []);
         $result = $this->getQueryBuilder()->execute($query);
         return $this->getQueryExecutor()->fetchAssoc($result);
     }

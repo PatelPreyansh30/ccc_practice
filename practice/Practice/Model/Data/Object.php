@@ -1,6 +1,6 @@
 <?php
 
-class Model_DataObject
+class Model_Data_Object
 {
     private $_row = [];
     public function __construct($row = [])

@@ -17,37 +17,37 @@ class View_Product_List
     }
     public function renderTableBody($product, $category)
     {
-        $table_body = '<tbody>';
-        foreach ($product as $data_object) {
-            $table_body .= "<tr>";
-            $table_body .= "<td>{$data_object->getProduct_id()}</td>";
-            $table_body .= "<td>{$data_object->getProduct_name()}</td>";
-            $table_body .= "<td>{$category[$data_object->getCat_id()]}</td>";
-            $table_body .= "<td>{$data_object->getProduct_sku()}</td>";
-            $table_body .= "<td>{$data_object->getProduct_type()}</td>";
-            $table_body .= "<td>{$data_object->getManufacturer_cost()}</td>";
-            $table_body .= "<td>{$data_object->getShipping_cost()}</td>";
-            $table_body .= "<td>{$data_object->getTotal_cost()}</td>";
-            $table_body .= "<td>{$data_object->getProduct_price()}</td>";
-            $table_body .= "<td>{$data_object->getProduct_status()}</td>";
-            $table_body .= "<td>{$data_object->getProduct_created_at()}</td>";
-            $table_body .= "<td>{$data_object->getProduct_updated_at()}</td>";
-            $table_body .= "<td><a href='?action=delete&product_id={$data_object->getProduct_id()}'>Delete</a></td>";
-            $table_body .= "<td><a href='?action=update&product_id={$data_object->getProduct_id()}'>Update</a></td>";
-            $table_body .= "</tr>";
+        $tableBody = '<tbody>';
+        foreach ($product as $dataObject) {
+            $tableBody .= "<tr>";
+            $tableBody .= "<td>{$dataObject->getProduct_id()}</td>";
+            $tableBody .= "<td>{$dataObject->getProduct_name()}</td>";
+            $tableBody .= "<td>{$category[$dataObject->getCat_id()]}</td>";
+            $tableBody .= "<td>{$dataObject->getProduct_sku()}</td>";
+            $tableBody .= "<td>{$dataObject->getProduct_type()}</td>";
+            $tableBody .= "<td>{$dataObject->getManufacturer_cost()}</td>";
+            $tableBody .= "<td>{$dataObject->getShipping_cost()}</td>";
+            $tableBody .= "<td>{$dataObject->getTotal_cost()}</td>";
+            $tableBody .= "<td>{$dataObject->getProduct_price()}</td>";
+            $tableBody .= "<td>{$dataObject->getProduct_status()}</td>";
+            $tableBody .= "<td>{$dataObject->getProduct_created_at()}</td>";
+            $tableBody .= "<td>{$dataObject->getProduct_updated_at()}</td>";
+            $tableBody .= "<td><a href='?action=delete&product_id={$dataObject->getProduct_id()}'>Delete</a></td>";
+            $tableBody .= "<td><a href='?action=update&product_id={$dataObject->getProduct_id()}'>Update</a></td>";
+            $tableBody .= "</tr>";
         }
-        $table_body .= "</tbody>";
-        return $table_body;
+        $tableBody .= "</tbody>";
+        return $tableBody;
     }
     public function renderTableHead()
     {
-        $table_head = '<thead><tr>';
-        $head_data = ["Id", "Name", "Category", "SKU", "Type", "Manufacturer Cost", "Shipping Cost", "Total Cost", "Price", "Status", "Created At", "Updated At", "Delete", "Update"];
-        foreach ($head_data as $value) {
-            $table_head .= "<th>{$value}</th>";
+        $tableHead = '<thead><tr>';
+        $headData = ["Id", "Name", "Category", "SKU", "Type", "Manufacturer Cost", "Shipping Cost", "Total Cost", "Price", "Status", "Created At", "Updated At", "Delete", "Update"];
+        foreach ($headData as $value) {
+            $tableHead .= "<th>{$value}</th>";
         }
-        $table_head .= "</tr></thead>";
-        return $table_head;
+        $tableHead .= "</tr></thead>";
+        return $tableHead;
     }
     // public function toHtml($product, $category)
     public function toHtml()

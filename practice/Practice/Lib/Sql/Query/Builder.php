@@ -1,6 +1,6 @@
 <?php
 
-class Lib_Sql_QueryBuilder extends Lib_Connection
+class Lib_Sql_Query_Builder extends Lib_Connection
 {
     public function __construct()
     {
@@ -18,7 +18,7 @@ class Lib_Sql_QueryBuilder extends Lib_Connection
         return "INSERT INTO {$table_name} ({$columns}) VALUES ({$values})";
     }
 
-    public function select(string $table_name, array $columns, array $condition = [])
+    public function select(string $tableName, array $columns, array $condition = [])
     {
         $otherParameter = [];
         foreach ($condition as $key => $value) {
@@ -26,33 +26,33 @@ class Lib_Sql_QueryBuilder extends Lib_Connection
         }
         $otherParameter = join(" ", $otherParameter);
         $columns = join(", ", $columns);
-        return "SELECT {$columns} FROM {$table_name} {$otherParameter};";
+        return "SELECT {$columns} FROM {$tableName} {$otherParameter};";
     }
 
-    public function delete(string $tablename, array $where)
+    public function delete(string $tableName, array $where)
     {
-        $where_cond = [];
+        $whereCond = [];
         foreach ($where as $col => $val) {
-            $where_cond[] = "`$col` = '$val'";
+            $whereCond[] = "`$col` = '$val'";
         }
         ;
-        $where_cond = implode(" AND ", $where_cond);
-        return "DELETE FROM {$tablename} WHERE {$where_cond};";
+        $whereCond = implode(" AND ", $whereCond);
+        return "DELETE FROM {$tableName} WHERE {$whereCond};";
     }
 
-    public function update(string $tablename, array $data, array $where)
+    public function update(string $tableName, array $data, array $where)
     {
-        $columns = $where_cond = [];
+        $columns = $whereCond = [];
         foreach ($data as $col => $val) {
             $columns[] = "`$col` = '$val'";
         }
         ;
         foreach ($where as $col => $val) {
-            $where_cond[] = "`$col` = '$val'";
+            $whereCond[] = "`$col` = '$val'";
         }
         ;
         $columns = implode(", ", $columns);
-        $where_cond = implode(" AND ", $where_cond);
-        return "UPDATE {$tablename} SET {$columns} WHERE {$where_cond};";
+        $whereCond = implode(" AND ", $whereCond);
+        return "UPDATE {$tableName} SET {$columns} WHERE {$whereCond};";
     }
 }

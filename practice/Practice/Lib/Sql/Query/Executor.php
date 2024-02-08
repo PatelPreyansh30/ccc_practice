@@ -1,6 +1,6 @@
 <?php
 
-class Lib_Sql_QueryExecutor extends Lib_Connection
+class Lib_Sql_Query_Executor extends Lib_Connection
 {
     public function __construct()
     {
@@ -9,7 +9,7 @@ class Lib_Sql_QueryExecutor extends Lib_Connection
     public function fetchAssoc(mysqli_result|bool $data)
     {
         // $result = [];
-        $data_collection = new Model_DataCollectionObject();
+        $data_collection = new Model_Data_Collection_Object();
         while ($row = $data->fetch_assoc()) {
             $data_collection->addData($row);
         }

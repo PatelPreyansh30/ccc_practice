@@ -2,7 +2,7 @@
 
 include("Lib/autoload.php");
 
-class CCC
+class Ccc
 {
     public static function init()
     {
@@ -11,7 +11,7 @@ class CCC
     }
 }
 
-CCC::init();
+Ccc::init();
 // $request = new Model_Request();
 // $abstract = new Model_Abstract();
 

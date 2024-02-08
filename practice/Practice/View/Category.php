@@ -16,25 +16,26 @@ class View_Category
     }
     private function renderTextField($name, $label)
     {
-        $textfield = "
+        $textField = "
         <div>
             <label for={$name}>{$label}</label>
             <input type='text' name={$name} id={$name}>
         </div>
         ";
-        return $textfield;
+        return $textField;
     }
     private function renderSubmitButton()
     {
-        $textfield = "
+        $textField = "
         <div>
             <input type='submit' name='submit' value='Submit' id='submit'>
         </div>
         ";
-        return $textfield;
+        return $textField;
     }
-    public function toHTML()
+    public function toHtml()
     {
-        return $this->renderForm();
+        // return $this->renderForm();
+        return "Category page";
     }
 }

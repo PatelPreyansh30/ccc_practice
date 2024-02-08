@@ -8,8 +8,8 @@ class Model_Request
 
     public function getRequestURI()
     {
-        $request_uri = $_SERVER['REQUEST_URI'];
-        return $request_uri;
+        $requestUri = $_SERVER['REQUEST_URI'];
+        return $requestUri;
     }
     public function getParams(string $key = '')
     {
