@@ -1,6 +1,6 @@
 <?php
 
-class Core_Block_Template
+class Core_Block_Template extends Core_Block_Abstract
 {
 
     public function toHtml()
