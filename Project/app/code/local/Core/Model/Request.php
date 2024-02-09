@@ -7,15 +7,17 @@ class Core_Model_Request
     public function __construct()
     {
         $requestUri = $this->getRequestUri();
-        $requestUri = explode("/", $requestUri);
-        $this->_moduleName = $requestUri[0];
-        $this->_controllerName = $requestUri[1];
-        $this->_actionName = $requestUri[2];
+        if ($requestUri != "") {
+            $requestUri = explode("/", $requestUri);
+        }
+        $this->_moduleName = isset($requestUri[0]) ? $requestUri[0] : 'page';
+        $this->_controllerName = isset($requestUri[1]) ? $requestUri[1] : 'index';
+        $this->_actionName = isset($requestUri[2]) ? $requestUri[2] : 'index';
     }
 
     public function getFullControllerClass()
     {
-        $controllerClass = implode('_', [ucfirst($this->_moduleName), 'Controller', ucfirst($this->_controllerName)]);
+        $controllerClass = ucwords(implode('_', [$this->_moduleName, 'Controller', $this->_controllerName]), "_");
         return $controllerClass;
     }
     public function getModuleName()

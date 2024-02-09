@@ -4,9 +4,11 @@ class Core_Block_Abstract
 {
     public function setTemplate($template)
     {
+        // return 
     }
     public function getTemplate()
     {
+        return "page/demo.phtml";
     }
     public function __get($key)
     {
@@ -34,6 +36,7 @@ class Core_Block_Abstract
     }
     public function render()
     {
+        include Mage::getBaseDir('app') . '/design/frontend/template/' . $this->getTemplate();
     }
 
 }
