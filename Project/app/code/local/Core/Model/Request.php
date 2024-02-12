@@ -7,12 +7,10 @@ class Core_Model_Request
     public function __construct()
     {
         $requestUri = $this->getRequestUri();
-        if ($requestUri != "") {
-            $requestUri = explode("/", $requestUri);
-        }
-        $this->_moduleName = isset($requestUri[0]) ? $requestUri[0] : 'page';
-        $this->_controllerName = isset($requestUri[1]) ? $requestUri[1] : 'index';
-        $this->_actionName = isset($requestUri[2]) ? $requestUri[2] : 'index';
+        $requestUri = array_filter(explode("/", $requestUri));
+        $this->_moduleName = isset($requestUri[0]) ? $requestUri[0] : "page";
+        $this->_controllerName = isset($requestUri[1]) ? $requestUri[1] : "index";
+        $this->_actionName = isset($requestUri[2]) ? $requestUri[2] : "index";
     }
 
     public function getFullControllerClass()
@@ -38,6 +36,7 @@ class Core_Model_Request
     {
         $requestUri = $_SERVER['REQUEST_URI'];
         $requestUri = str_replace('/php/Project/', '', $requestUri);
+        $requestUri = stristr($requestUri, '?', true);
         return $requestUri;
     }
     public function getParams(string $key = '')

@@ -2,13 +2,14 @@
 
 class Core_Block_Abstract
 {
+    public $template;
     public function setTemplate($template)
     {
-        // return 
+        $this->template = $template;
     }
     public function getTemplate()
     {
-        return "page/demo.phtml";
+        return $this->template;
     }
     public function __get($key)
     {

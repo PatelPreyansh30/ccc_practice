@@ -8,9 +8,13 @@
 </head>
 
 <body>
-    <h1>
-        <?php echo get_class($this) ?>
-    </h1>
+    <h2>
+        <?php
+        print_r($this->getRequest()->getParams('id'));
+        echo "<br>";
+        echo get_class($this);
+        ?>
+    </h2>
 </body>
 
 </html>

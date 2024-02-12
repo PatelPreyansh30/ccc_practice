@@ -7,7 +7,7 @@ class Core_Controller_Front_Action
     public function getLayout()
     {
         if (is_null($this->_layout)) {
-            $this->_layout = Mage::getBlock('core/template');
+            $this->_layout = Mage::getBlock('core/layout');
         }
         return $this->_layout;
     }
