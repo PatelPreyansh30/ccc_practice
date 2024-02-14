@@ -1,0 +1,14 @@
+<?php
+$js = $this->getJs();
+$css = $this->getCss();
+if (count($js) > 0) {
+    foreach ($js as $file) {
+        echo "<script src=$file></script>";
+    }
+}
+if (count($css) > 0) {
+    foreach ($css as $file) {
+        // echo "<style type='' src=$file></style>";
+        // echo "<link rel='stylesheet' href=$file>";
+    }
+}

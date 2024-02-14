@@ -2,16 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo</title>
+    <title>Project</title>
+    <?php echo ($this->getChildHtml('head')) ?>
 </head>
 
 <body>
     <div>
-        <?php echo ($this->setTemplate('core/messages.phtml')) ?>
         <?php echo ($this->getChildHtml('messages')) ?>
-        <?php echo ($this->getChildHtml('head')) ?>
         <?php echo ($this->getChildHtml('header')) ?>
         <?php echo ($this->getChildHtml('content')) ?>
         <?php echo ($this->getChildHtml('footer')) ?>
