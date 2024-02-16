@@ -25,7 +25,8 @@ class Core_Model_Abstract
     public function getResource()
     {
         $modelClass = get_class($this);
-        $class = substr($modelClass, 0, strpos($modelClass, '_Model_') + 6) . '_Resource_' . substr($modelClass, strpos($modelClass, '_Model_') + 7);
+        // $class = substr($modelClass, 0, strpos($modelClass, '_Model_') + 6) . '_Resource_' . substr($modelClass, strpos($modelClass, '_Model_') + 7);
+        $class = str_replace('_Model_','_Model_Resource_',$modelClass);
         return new $class();
     }
     public function getCollection()

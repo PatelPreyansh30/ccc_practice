@@ -36,7 +36,8 @@ class Core_Model_Request
     {
         $requestUri = $_SERVER['REQUEST_URI'];
         $requestUri = str_replace('/php/Project/', '', $requestUri);
-        $requestUri = stristr($requestUri, '?', true);
+        if (strpos($requestUri, '?') !== false)
+            $requestUri = stristr($requestUri, '?', true);
         return $requestUri;
     }
     public function getParams(string $key = '')
