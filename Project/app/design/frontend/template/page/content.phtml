@@ -7,8 +7,12 @@
 <pre>
 <div>
     <?php
-    $productModel = Mage::getModel('product/product');
-    print_r($productModel->load(123));
+    $productModel = Mage::getModel('product/product')->load(1);
+    // print_r($productModel->load(1));
+    print_r($productModel->getId());
+    print_r($productModel->getProductName());
+    print_r($productModel->getProductSku());
+    // print_r($productModel);
     ?>
 </div>
 </pre>

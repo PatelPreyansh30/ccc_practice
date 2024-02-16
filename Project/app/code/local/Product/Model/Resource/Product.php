@@ -8,6 +8,19 @@ class Product_Model_Resource_Product
         $this->_tableName = $tableName;
         $this->_primaryKey = $primaryKey;
     }
+    public function getPrimaryKey()
+    {
+        return $this->_primaryKey;
+    }
+    public function load($id, $column = null)
+    {
+        $query = "SELECT * FROM {$this->_tableName} WHERE {$this->_primaryKey} = {$id} LIMIT 1";
+        return $this->getAdapter()->fetchRow($query);
+    }
+    public function getAdapter()
+    {
+        return new Core_Model_DB_Adapter();
+    }
     // Above part is abstract
 
     public function __construct()
