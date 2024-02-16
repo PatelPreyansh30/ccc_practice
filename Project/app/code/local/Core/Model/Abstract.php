@@ -2,11 +2,11 @@
 
 class Core_Model_Abstract
 {
-    protected $data = [];
-    protected $resourceClass = '';
-    protected $collectionClass = '';
-    protected $resource = null;
-    protected $collection = null;
+    protected $_data = [];
+    protected $_resourceClass = '';
+    protected $_collectionClass = '';
+    protected $_resource = null;
+    protected $_collection = null;
     public function __construct()
     {
     }
@@ -26,8 +26,8 @@ class Core_Model_Abstract
     {
         $modelClass = get_class($this);
         // $class = substr($modelClass, 0, strpos($modelClass, '_Model_') + 6) . '_Resource_' . substr($modelClass, strpos($modelClass, '_Model_') + 7);
-        $class = str_replace('_Model_','_Model_Resource_',$modelClass);
-        return new $class();
+        $className = str_replace('_Model_','_Model_Resource_',$modelClass);
+        return new $className();
     }
     public function getCollection()
     {

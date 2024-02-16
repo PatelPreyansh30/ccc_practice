@@ -1,5 +1,14 @@
-<?php
-echo $this->getRequest()->getParams('id');
-$productModel = Mage::getModel('product/product');
-print_r($productModel->load(123));
-?>
+<div>
+    <?php
+    echo $this->getRequest()->getParams('product_id');
+    ?>
+</div>
+
+<pre>
+<div>
+    <?php
+    $productModel = Mage::getModel('product/product');
+    print_r($productModel->load(123));
+    ?>
+</div>
+</pre>
