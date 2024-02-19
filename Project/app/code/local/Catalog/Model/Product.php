@@ -1,6 +1,6 @@
 <?php
 
-class Product_Model_Product extends Core_Model_Abstract
+class Catalog_Model_Product extends Core_Model_Abstract
 {
     public function init()
     {

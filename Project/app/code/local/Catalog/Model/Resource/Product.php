@@ -1,6 +1,6 @@
 <?php
 
-class Product_Model_Resource_Product
+class Catalog_Model_Resource_Product
 {
     protected $_tableName = '', $_primaryKey = '';
     public function init($tableName, $primaryKey)

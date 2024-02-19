@@ -1,20 +1,20 @@
 <?php
-class Product_Controller_Index
+class Catalog_Controller_Index
 {
     public function newAction()
     {
-        echo "Product New Action";
+        echo "Catalog New Action";
     }
     public function listAction()
     {
-        echo "Product List Action";
+        echo "Catalog List Action";
     }
     public function saveAction()
     {
-        echo "Product Save Action";
+        echo "Catalog Save Action";
     }
     public function deleteAction()
     {
-        echo "Product Delete Action";
+        echo "Catalog Delete Action";
     }
 }
