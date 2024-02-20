@@ -1,0 +1,80 @@
+<div class="form">
+    <h2>Product Form</h2>
+    <form method="POST" action="<?php echo $this->getUrl('/catalog/product/save') ?>">
+        <div class="row">
+            <input type="hidden" name="catalog_product[product_id]">
+        </div>
+        <div class="row">
+            <label for="sku">SKU:</label>
+            <input type="text" name="catalog_product[sku]" id="sku">
+        </div>
+        <div class="row">
+            <label for="name">Name:</label>
+            <input type="text" name="catalog_product[name]" id="name">
+        </div>
+
+        <div class="row">
+            <label for="color">Color:</label>
+            <input type="text" name="catalog_product[color]" id="color">
+        </div>
+
+        <div class="row">
+            <label for="size">Size:</label>
+            <input type="text" name="catalog_product[size]" id="size">
+        </div>
+
+        <div class="row">
+            <label for="description">Description:</label>
+            <textarea name="catalog_product[description]" id="description" cols="30" rows="10"></textarea>
+        </div>
+
+        <div class="row">
+            <label for="image_link">Image Link:</label>
+            <input type="file" name="catalog_product[image_link]" id="image_link">
+        </div>
+
+        <div class="row">
+            <label for="link">Link:</label>
+            <input type="file" name="catalog_product[link]" id="link">
+        </div>
+
+        <div class="row">
+            <label for="price">Price:</label>
+            <input type="number" name="catalog_product[price]" id="price">
+        </div>
+
+        <div class="row">
+            <label for="mfr_cost">MFR Cost:</label>
+            <input type="number" name="catalog_product[mfr_cost]" id="mfr_cost">
+        </div>
+
+        <div class="row">
+            <label for="shipping_cost">Shipping Cost:</label>
+            <input type="number" name="catalog_product[shipping_cost]" id="shipping_cost">
+        </div>
+
+        <div class="row">
+            <label for="total_cost">Total Cost:</label>
+            <input type="number" name="catalog_product[total_cost]" id="total_cost">
+        </div>
+
+        <div class="row">
+            <label for="margin_percentage">Margin Percentage:</label>
+            <input type="number" name="catalog_product[margin_percentage]" id="margin_percentage">
+        </div>
+
+        <div class="row">
+            <label for="min_price">Min Price:</label>
+            <input type="number" name="catalog_product[min_price]" id="min_price">
+        </div>
+
+        <div class="row">
+            <label for="status">Status:</label>
+            <input type="text" name="catalog_product[status]" id="status">
+        </div>
+
+        <div class="row">
+            <input type="submit" name="submit" value="Submit">
+        </div>
+    </form>
+</div>
