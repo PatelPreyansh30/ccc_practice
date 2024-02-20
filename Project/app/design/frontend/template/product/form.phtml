@@ -1,79 +1,151 @@
+<style>
+    .form {
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form .row {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 15px;
+    }
+
+    .form label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .form input[type="text"],
+    .form input[type="number"],
+    .form textarea,
+    .form input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+
+    .form input[type="text"]:focus,
+    .form input[type="number"]:focus,
+    .form textarea:focus,
+    .form input[type="file"]:focus {
+        border-color: #007bff;
+    }
+
+    .form textarea {
+        height: 100px;
+    }
+
+    .form input[type="submit"] {
+        width: 100%;
+        margin-top: 15px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .form input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+
 <div class="form">
     <h2>Product Form</h2>
     <form method="POST" action="<?php echo $this->getUrl('/catalog/product/save') ?>">
-        <div class="row">
+        <div>
             <input type="hidden" name="catalog_product[product_id]">
         </div>
         <div class="row">
-            <label for="sku">SKU:</label>
-            <input type="text" name="catalog_product[sku]" id="sku">
-        </div>
-        <div class="row">
-            <label for="name">Name:</label>
-            <input type="text" name="catalog_product[name]" id="name">
-        </div>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" name="catalog_product[name]" id="name">
+            </div>
+            <div>
+                <label for="sku">SKU:</label>
+                <input type="text" name="catalog_product[sku]" id="sku">
+            </div>
 
-        <div class="row">
-            <label for="color">Color:</label>
-            <input type="text" name="catalog_product[color]" id="color">
-        </div>
+            <div>
+                <label for="color">Color:</label>
+                <input type="text" name="catalog_product[color]" id="color">
+            </div>
 
-        <div class="row">
-            <label for="size">Size:</label>
-            <input type="text" name="catalog_product[size]" id="size">
-        </div>
+            <div>
+                <label for="size">Size:</label>
+                <input type="text" name="catalog_product[size]" id="size">
+            </div>
 
-        <div class="row">
-            <label for="description">Description:</label>
-            <textarea name="catalog_product[description]" id="description" cols="30" rows="10"></textarea>
-        </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea name="catalog_product[description]" id="description" cols="30" rows="10"></textarea>
+            </div>
 
-        <div class="row">
-            <label for="image_link">Image Link:</label>
-            <input type="file" name="catalog_product[image_link]" id="image_link">
-        </div>
+            <div>
+                <label for="image_link">Image Link:</label>
+                <input type="file" name="catalog_product[image_link]" id="image_link">
+            </div>
 
-        <div class="row">
-            <label for="link">Link:</label>
-            <input type="file" name="catalog_product[link]" id="link">
-        </div>
+            <div>
+                <label for="link">Link:</label>
+                <input type="file" name="catalog_product[link]" id="link">
+            </div>
 
-        <div class="row">
-            <label for="price">Price:</label>
-            <input type="number" name="catalog_product[price]" id="price">
-        </div>
+            <div>
+                <label for="price">Price:</label>
+                <input type="number" name="catalog_product[price]" id="price">
+            </div>
 
-        <div class="row">
-            <label for="mfr_cost">MFR Cost:</label>
-            <input type="number" name="catalog_product[mfr_cost]" id="mfr_cost">
-        </div>
+            <div>
+                <label for="mfr_cost">MFR Cost:</label>
+                <input type="number" name="catalog_product[mfr_cost]" id="mfr_cost">
+            </div>
 
-        <div class="row">
-            <label for="shipping_cost">Shipping Cost:</label>
-            <input type="number" name="catalog_product[shipping_cost]" id="shipping_cost">
-        </div>
+            <div>
+                <label for="shipping_cost">Shipping Cost:</label>
+                <input type="number" name="catalog_product[shipping_cost]" id="shipping_cost">
+            </div>
 
-        <div class="row">
-            <label for="total_cost">Total Cost:</label>
-            <input type="number" name="catalog_product[total_cost]" id="total_cost">
-        </div>
+            <div>
+                <label for="total_cost">Total Cost:</label>
+                <input type="number" name="catalog_product[total_cost]" id="total_cost">
+            </div>
 
-        <div class="row">
-            <label for="margin_percentage">Margin Percentage:</label>
-            <input type="number" name="catalog_product[margin_percentage]" id="margin_percentage">
-        </div>
+            <div>
+                <label for="margin_percentage">Margin Percentage:</label>
+                <input type="number" name="catalog_product[margin_percentage]" id="margin_percentage">
+            </div>
 
-        <div class="row">
-            <label for="min_price">Min Price:</label>
-            <input type="number" name="catalog_product[min_price]" id="min_price">
-        </div>
+            <div>
+                <label for="min_price">Min Price:</label>
+                <input type="number" name="catalog_product[min_price]" id="min_price">
+            </div>
 
-        <div class="row">
-            <label for="status">Status:</label>
-            <input type="text" name="catalog_product[status]" id="status">
-        </div>
+            <div>
+                <label for="status">Status:</label>
+                <input type="text" name="catalog_product[status]" id="status">
+            </div>
 
-        <div class="row">
+        </div>
+        <div>
             <input type="submit" name="submit" value="Submit">
         </div>
     </form>
