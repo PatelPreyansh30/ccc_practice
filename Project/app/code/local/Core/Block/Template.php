@@ -10,6 +10,7 @@ class Core_Block_Template extends Core_Block_Abstract
     public function addChild($key, $value)
     {
         $this->_child[$key] = $value;
+        return $this;
     }
     public function removeChild($key)
     {
@@ -20,7 +21,15 @@ class Core_Block_Template extends Core_Block_Abstract
     }
     public function getChildHtml($key)
     {
-        $this->getChild($key)->toHtml();
+        $html = '';
+        if ($key == '' && count($this->_child)) {
+            foreach ($this->_child as $_child) {
+                $html .= $_child->toHtml();
+            }
+        } else {
+            $html = $this->getChild($key)->toHtml();
+        }
+        return $html;
     }
     public function getRequest()
     {

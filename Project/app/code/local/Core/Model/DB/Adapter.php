@@ -14,6 +14,7 @@ class Core_Model_DB_Adapter
         if (is_null($this->connect)) {
             $this->connect = mysqli_connect($this->config['host'], $this->config['user'], $this->config['password'], $this->config['db']);
         }
+        return $this->connect;
     }
     public function fetchAll($query)
     {
@@ -27,8 +28,8 @@ class Core_Model_DB_Adapter
     public function fetchRow($query)
     {
         $row = [];
-        $this->connect();
-        $result = mysqli_query($this->connect, $query);
+        // $this->connect();
+        $result = mysqli_query($this->connect(), $query);
         while ($_row = $result->fetch_assoc()) {
             $row = $_row;
         }
@@ -36,6 +37,14 @@ class Core_Model_DB_Adapter
     }
     public function insert($query)
     {
+        // $this->status = $this->connection->query($query);
+        // return $this->status ? true : false;
+        // $this->connect();
+        $result = mysqli_query($this->connect(), $query);
+        while ($result) {
+            return mysqli_insert_id($this->connect());
+        }
+        return False;
     }
     public function update($query)
     {
