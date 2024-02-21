@@ -37,9 +37,6 @@ class Core_Model_DB_Adapter
     }
     public function insert($query)
     {
-        // $this->status = $this->connection->query($query);
-        // return $this->status ? true : false;
-        // $this->connect();
         $result = mysqli_query($this->connect(), $query);
         while ($result) {
             return mysqli_insert_id($this->connect());
@@ -51,6 +48,8 @@ class Core_Model_DB_Adapter
     }
     public function delete($query)
     {
+        $result = mysqli_query($this->connect(), $query);
+        return $result;
     }
     public function query($query)
     {

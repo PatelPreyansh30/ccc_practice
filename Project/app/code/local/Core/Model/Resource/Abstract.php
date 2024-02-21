@@ -31,6 +31,12 @@ class Core_Model_Resource_Abstract
         return $this->getAdapter()->fetchRow($query);
     }
 
+    public function delete(Catalog_Model_Product $product)
+    {
+        $query = "DELETE FROM {$this->_tableName} WHERE {$this->_primaryKey} = {$product->getId()}";
+        return $this->getAdapter()->delete($query);
+    }
+
     public function save(Catalog_Model_Product $product)
     {
         $data = $product->getData();
