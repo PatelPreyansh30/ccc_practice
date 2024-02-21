@@ -33,6 +33,6 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
         $layout->getChild('head')
             ->addCss('header.css')
             ->addCss('footer.css')
-            ->addCss('product.css');
+            ->addCss('product/form.css');
     }
 }
