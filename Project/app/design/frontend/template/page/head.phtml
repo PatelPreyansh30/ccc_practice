@@ -1,6 +1,4 @@
 <?php
-// $this -> Page_Block_Head object
-
 $js = $this->getJs();
 $css = $this->getCss();
 if (count($js) > 0) {
@@ -10,7 +8,6 @@ if (count($js) > 0) {
 }
 if (count($css) > 0) {
     foreach ($css as $file) {
-        // echo "<style type='' src=$file></style>";
-        // echo "<link rel='stylesheet' href=$file>";
+        echo "<link rel='stylesheet' href={$this->getCssUrl($file)}>";
     }
 }
