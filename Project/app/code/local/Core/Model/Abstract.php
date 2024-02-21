@@ -16,9 +16,13 @@ class Core_Model_Abstract
     }
     public function setResourceClass($resourceClass)
     {
+        $this->_resourceClass = $resourceClass;
+        return $this;
     }
     public function setCollectionClass($collectionClass)
     {
+        $this->_collectionClass = $collectionClass;
+        return $this;
     }
     public function setId($id)
     {
@@ -31,10 +35,6 @@ class Core_Model_Abstract
     }
     public function getResource()
     {
-        // $modelClass = get_class($this);
-        // $class = substr($modelClass, 0, strpos($modelClass, '_Model_') + 6) . '_Resource_' . substr($modelClass, strpos($modelClass, '_Model_') + 7);
-        // $className = str_replace('_Model_','_Model_Resource_',$modelClass);
-        // return new $className();
         return new $this->_resourceClass();
     }
     public function getCollection()
