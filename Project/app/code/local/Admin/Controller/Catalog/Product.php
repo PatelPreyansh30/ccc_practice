@@ -1,8 +1,8 @@
 <?php
 
-class Catalog_Controller_Product extends Core_Controller_Front_Action
+class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
 {
-    public function newAction()
+    public function formAction()
     {
         $this->includeCss();
         $layout = $this->getLayout();
@@ -22,7 +22,7 @@ class Catalog_Controller_Product extends Core_Controller_Front_Action
     public function includeCss()
     {
         $layout = $this->getLayout();
-        $head = $layout->getChild('head')
+        $layout->getChild('head')
             ->addCss('header.css')
             ->addCss('footer.css')
             ->addCss('product.css');
