@@ -1,0 +1,32 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footerSection-1 {
+    display: flex;
+    padding: 2rem 5rem;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #9E9A9A;
+    background-color: #282828;
+}
+
+.footerItem {
+    width: 25%;
+    margin: 0 50px;
+}
+
+.footerHeading {
+    font-size: 22px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.footerSection-2 {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    background-color: #000000;
+}
