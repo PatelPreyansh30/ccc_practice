@@ -1,9 +1,21 @@
-<form action="" method="post">
-    <div>
-        <label for="category_name">Name:</label>
-        <input type="text" id="category_name">
-    </div>
-    <div>
-        <input type="submit" name="submit" value="Submit">
-    </div>
-</form>
+<div class="form">
+    <h2>Category Form</h2>
+    <form method="POST" action="<?php echo $this->getUrl('admin/catalog_category/save') ?>">
+        <div>
+            <input type="hidden" name="catalog_category[category_id]">
+        </div>
+        <div class="row">
+            <div>
+                <label for="name">Category Name:</label>
+                <input type="text" name="catalog_category[category_name]" id="name">
+            </div>
+            <div>
+                <label for="status">Category Status:</label>
+                <input type="text" name="catalog_category[status]" id="status">
+            </div>
+        </div>
+        <div>
+            <input type="submit" name="submit" value="Submit">
+        </div>
+    </form>
+</div>

@@ -31,21 +31,21 @@ class Core_Model_Resource_Abstract
         return $this->getAdapter()->fetchRow($query);
     }
 
-    public function delete(Catalog_Model_Product $product)
+    public function delete(Core_Model_Abstract $abstract)
     {
-        $query = "DELETE FROM {$this->_tableName} WHERE {$this->_primaryKey} = {$product->getId()}";
+        $query = "DELETE FROM {$this->_tableName} WHERE {$this->_primaryKey} = {$abstract->getId()}";
         return $this->getAdapter()->delete($query);
     }
 
-    public function save(Catalog_Model_Product $product)
+    public function save(Core_Model_Abstract $abstract)
     {
-        $data = $product->getData();
+        $data = $abstract->getData();
         if (isset($data[$this->getPrimaryKey()])) {
             unset($data[$this->getPrimaryKey()]);
         }
         $sql = $this->insertSql($this->getTableName(), $data);
         $id = $this->getAdapter()->insert($sql);
-        $product->setId($id);
+        $abstract->setId($id);
     }
 
     public function insertSql($tablename, $data)
