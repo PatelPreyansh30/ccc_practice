@@ -25,8 +25,7 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
     {
         $productId = $this->getRequest()->getParams('product_id');
         Mage::getModel('catalog/product')
-            ->setId($productId)
-            ->delete();
+            ->load($productId)->delete();
     }
     public function listAction()
     {
