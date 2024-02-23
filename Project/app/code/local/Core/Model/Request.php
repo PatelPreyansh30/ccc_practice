@@ -40,9 +40,15 @@ class Core_Model_Request
             $requestUri = stristr($requestUri, '?', true);
         return $requestUri;
     }
-    public function getParams(string $key = '')
+
+    public function getParams($key = '', $arg = null)
     {
-        return $key == '' ? $_REQUEST : (isset($_REQUEST[$key]) ? $_REQUEST[$key] : '');
+        return ($key == '')
+            ? $_REQUEST
+            : (isset($_REQUEST[$key])
+                ? $_REQUEST[$key]
+                : ((!is_null($arg)) ? $arg : '')
+            );
     }
 
     public function getPostData(string $key = '')

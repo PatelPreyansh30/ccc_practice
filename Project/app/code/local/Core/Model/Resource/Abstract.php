@@ -27,25 +27,27 @@ class Core_Model_Resource_Abstract
 
     public function load($id, $column = null)
     {
-        $query = "SELECT * FROM {$this->_tableName} WHERE {$this->_primaryKey} = {$id} LIMIT 1";
+        $query = "SELECT * FROM {$this->getTableName()} WHERE {$this->getPrimaryKey()} = {$id} LIMIT 1";
         return $this->getAdapter()->fetchRow($query);
     }
 
     public function delete(Core_Model_Abstract $abstract)
     {
-        $query = "DELETE FROM {$this->_tableName} WHERE {$this->_primaryKey} = {$abstract->getId()}";
+        $query = "DELETE FROM {$this->getTableName()} WHERE {$this->getPrimaryKey()} = {$abstract->getId()}";
         return $this->getAdapter()->delete($query);
     }
 
     public function save(Core_Model_Abstract $abstract)
     {
         $data = $abstract->getData();
-        if (isset($data[$this->getPrimaryKey()])) {
-            unset($data[$this->getPrimaryKey()]);
+        if ($data[$this->getPrimaryKey()]) {
+            $sql = $this->updateSql($this->getTableName(), $data, $abstract->getId());
+            $id = $this->getAdapter()->update($sql);
+        } else {
+            $sql = $this->insertSql($this->getTableName(), $data);
+            $id = $this->getAdapter()->insert($sql);
+            $abstract->setId($id);
         }
-        $sql = $this->insertSql($this->getTableName(), $data);
-        $id = $this->getAdapter()->insert($sql);
-        $abstract->setId($id);
     }
 
     public function insertSql($tablename, $data)
@@ -58,5 +60,16 @@ class Core_Model_Resource_Abstract
         $columns = implode(", ", $columns);
         $values = implode(", ", $values);
         return "INSERT INTO {$tablename} ({$columns}) VALUES ({$values})";
+    }
+
+    function updateSql($tablename, $data, $primaryKey)
+    {
+        $columns = $where_cond = [];
+        foreach ($data as $col => $val) {
+            $columns[] = "`$col` = '$val'";
+        }
+        $columns = implode(", ", $columns);
+        $where_cond = implode(" AND ", $where_cond);
+        return "UPDATE {$tablename} SET {$columns} WHERE {$this->getPrimaryKey()} = {$primaryKey};";
     }
 }
