@@ -1,3 +1,13 @@
+<?php
+$productModel = Mage::getModel("catalog/product")->getCollection();
+// print_r($productModel->getCollection());
+// $productModel->addFieldToFilter('name', 'abc');
+// $productModel->addFieldToFilter('product_id', ['in'=>[52,53,54]]);
+// $productModel->addFieldToFilter('sku', ['like'=>'%abc']);
+// foreach ($productModel->getData() as $product) {
+// }
+?>
+
 <div class="list">
     <h2>Product List</h2>
     <table>
@@ -10,13 +20,25 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Abc</td>
-                <td>Xyz</td>
-                <td>Hello</td>
-                <td><a href="#">Delete</a></td>
-                <td><a href="#">Update</a></td>
-            </tr>
+            <?php foreach ($productModel->getData() as $_product): ?>
+                <tr>
+                    <td>
+                        <?php echo $_product->getName() ?>
+                    </td>
+                    <td>
+                        <?php echo $_product->getSku() ?>
+                    </td>
+                    <td>
+                        <?php echo $_product->getColor() ?>
+                    </td>
+                    <td><a
+                            href="<?php echo $this->getUrl("admin/catalog_product/delete?product_id={$_product->getId()}") ?>">Delete</a>
+                    </td>
+                    <td><a
+                            href="<?php echo $this->getUrl("admin/catalog_product/form?product_id={$_product->getId()}") ?>">Update</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>
