@@ -40,9 +40,14 @@ class Core_Model_Resource_Abstract
     public function save(Core_Model_Abstract $abstract)
     {
         $data = $abstract->getData();
-        if ($data[$this->getPrimaryKey()]) {
-            $sql = $this->updateSql($this->getTableName(), $data, $abstract->getId());
-            $id = $this->getAdapter()->update($sql);
+        if (isset($data[$this->getPrimaryKey()]) && !empty($data[$this->getPrimaryKey()])) {
+            unset($data[$this->getPrimaryKey()]);
+            $sql = $this->updateSql(
+                $this->getTableName(),
+                $data,
+                $abstract->getId()
+            );
+            $this->getAdapter()->update($sql);
         } else {
             $sql = $this->insertSql($this->getTableName(), $data);
             $id = $this->getAdapter()->insert($sql);
@@ -64,12 +69,11 @@ class Core_Model_Resource_Abstract
 
     function updateSql($tablename, $data, $primaryKey)
     {
-        $columns = $where_cond = [];
+        $columns = [];
         foreach ($data as $col => $val) {
             $columns[] = "`$col` = '$val'";
         }
         $columns = implode(", ", $columns);
-        $where_cond = implode(" AND ", $where_cond);
         return "UPDATE {$tablename} SET {$columns} WHERE {$this->getPrimaryKey()} = {$primaryKey};";
     }
 }

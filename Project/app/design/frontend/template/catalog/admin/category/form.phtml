@@ -1,17 +1,22 @@
+<?php
+$data = $this->getCategory();
+?>
+
 <div class="form">
     <h2>Category Form</h2>
     <form method="POST" action="<?php echo $this->getUrl('admin/catalog_category/save') ?>">
         <div>
-            <input type="hidden" name="catalog_category[category_id]">
+            <input type="hidden" value="<?php echo $data->getCategoryId() ?>" name="catalog_category[category_id]">
         </div>
         <div class="row">
             <div>
                 <label for="name">Category Name:</label>
-                <input type="text" name="catalog_category[category_name]" id="name">
+                <input type="text" value="<?php echo $data->getCategoryName() ?>" name="catalog_category[category_name]"
+                    id="name">
             </div>
             <div>
                 <label for="status">Category Status:</label>
-                <input type="text" name="catalog_category[status]" id="status">
+                <input type="text" value="<?php echo $data->getStatus() ?>" name="catalog_category[status]" id="status">
             </div>
         </div>
         <div>

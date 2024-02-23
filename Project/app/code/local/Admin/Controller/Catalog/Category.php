@@ -9,7 +9,7 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Front_Action
             ->addCss('category/form.css');
         $child = $layout->getChild('content');
 
-        $categoryForm = $layout->createBlock('catalog/admin_category');
+        $categoryForm = $layout->createBlock('catalog/admin_category_form');
         $child->addChild('form', $categoryForm);
         echo $layout->toHtml();
     }

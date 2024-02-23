@@ -39,6 +39,7 @@ class Core_Model_DB_Adapter
     {
         $result = mysqli_query($this->connect(), $query);
         while ($result) {
+            echo '<script>alert("Data inserted successfully")</script>';
             return mysqli_insert_id($this->connect());
         }
         return False;
@@ -47,9 +48,9 @@ class Core_Model_DB_Adapter
     {
         $result = mysqli_query($this->connect(), $query);
         if ($result) {
-            echo '<script>alert("Data deleted successfully")</script>';
+            echo '<script>alert("Data updated successfully")</script>';
         } else {
-            echo '<script>alert("Data not deleted")</script>';
+            echo '<script>alert("Data not updated")</script>';
         }
     }
     public function delete($query)

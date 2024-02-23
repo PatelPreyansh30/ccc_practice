@@ -28,4 +28,16 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
             ->setId($productId)
             ->delete();
     }
+    public function listAction()
+    {
+        $layout = $this->getLayout();
+        $layout->getChild('head')
+            ->addCss('product/list.css');
+        $child = $layout->getChild('content');
+
+        $productList = $layout->createBlock('catalog/admin_product_list');
+
+        $child->addChild('list', $productList);
+        $layout->toHtml();
+    }
 }

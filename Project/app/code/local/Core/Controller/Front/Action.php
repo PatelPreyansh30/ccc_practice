@@ -8,6 +8,7 @@ class Core_Controller_Front_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
+            ->addCss('main.css')
             ->addCss('header.css')
             ->addCss('footer.css');
     }
