@@ -6,7 +6,8 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('product/form.css');
+            ->addCss('product/form.css')
+            ->addJs('product/form.js');
         $child = $layout->getChild('content');
 
         $productForm = $layout->createBlock('catalog/admin_product_form');

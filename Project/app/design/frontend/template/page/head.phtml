@@ -3,7 +3,7 @@ $js = $this->getJs();
 $css = $this->getCss();
 if (count($js) > 0) {
     foreach ($js as $file) {
-        echo "<script src=$file></script>";
+        echo "<script src={$this->getJsUrl($file)}></script>";
     }
 }
 if (count($css) > 0) {

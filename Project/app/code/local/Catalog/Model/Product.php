@@ -14,6 +14,6 @@ class Catalog_Model_Product extends Core_Model_Abstract
             '1' => 'Enabled',
             '0' => 'Disabled',
         ];
-        return $embeddings[$this->_data['status']];
+        return isset($this->_data['status']) ? $embeddings[$this->_data['status']] : '';
     }
 }

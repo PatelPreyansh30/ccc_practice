@@ -6,7 +6,8 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Front_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('category/form.css');
+            ->addCss('category/form.css')
+            ->addJs('category/form.js');
         $child = $layout->getChild('content');
 
         $categoryForm = $layout->createBlock('catalog/admin_category_form');

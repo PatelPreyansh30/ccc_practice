@@ -19,6 +19,8 @@ label {
 input[type="text"],
 input[type="number"],
 textarea,
+select,
+option,
 input[type="file"] {
     width: 100%;
     padding: 10px;
@@ -32,6 +34,8 @@ input[type="file"] {
 input[type="text"]:focus,
 input[type="number"]:focus,
 textarea:focus,
+select:focus,
+option:focus,
 input[type="file"]:focus {
     border-color: #007bff;
 }
