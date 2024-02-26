@@ -15,6 +15,7 @@ $productModel = Mage::getModel("catalog/product")->getCollection();
             <tr>
                 <th>Name</th>
                 <th>SKU</th>
+                <th>Status</th>
                 <th>Color</th>
                 <th colspan="2">Action</th>
             </tr>
@@ -27,6 +28,9 @@ $productModel = Mage::getModel("catalog/product")->getCollection();
                     </td>
                     <td>
                         <?php echo $_product->getSku() ?>
+                    </td>
+                    <td>
+                        <?php echo $_product->getStatus() ?>
                     </td>
                     <td>
                         <?php echo $_product->getColor() ?>
