@@ -27,4 +27,16 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Front_Action
             ->setId($categoryId)
             ->delete();
     }
+    public function listAction()
+    {
+        $layout = $this->getLayout();
+        $layout->getChild('head')
+            ->addCss('category/list.css');
+        $child = $layout->getChild('content');
+
+        $categoryList = $layout->createBlock('catalog/admin_category_list');
+
+        $child->addChild('list', $categoryList);
+        $layout->toHtml();
+    }
 }

@@ -1,0 +1,31 @@
+.list {
+    padding: 20px 8rem;
+}
+
+.list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.list table {
+    width: 100%;
+}
+
+.list table,
+th,
+td {
+    padding: 5px 0;
+    text-align: center;
+    border: 3px solid white;
+    border-collapse: collapse;
+}
+
+.list th {
+    color: white;
+    background-color: #0056b3;
+}
+
+.list td a {
+    color: #0056b3;
+}
