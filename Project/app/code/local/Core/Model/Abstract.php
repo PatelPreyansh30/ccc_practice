@@ -35,15 +35,15 @@ class Core_Model_Abstract
     }
     public function getResource()
     {
-        return new $this->_resourceClass();
+        return new $this->_resourceClass;
     }
     public function getCollection()
     {
-        $collection = new $this->_collectionClass();
+        $collection = new $this->_collectionClass;
         $collection->setResource($this->getResource());
+        $collection->setModel(get_class($this));
         $collection->select();
         return $collection;
-
     }
     // public function getPrimaryKey()
     // {

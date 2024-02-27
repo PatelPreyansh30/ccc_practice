@@ -10,10 +10,10 @@ class Catalog_Model_Category extends Core_Model_Abstract
 
     public function getStatus()
     {
-        $embeddings = [
+        $bindding = [
             '1' => 'Enabled',
             '0' => 'Disabled',
         ];
-        return isset($this->_data['status']) ? $embeddings[$this->_data['status']] : '';
+        return isset($this->_data['status']) ? $bindding[$this->_data['status']] : '';
     }
 }

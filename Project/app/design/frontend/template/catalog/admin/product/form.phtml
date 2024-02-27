@@ -1,90 +1,98 @@
 <?php
-$data = $this->getProduct();
+$categoryData = $this->getCategory();
+$productData = $this->getProduct();
+echo "<script>
+var status = '{$productData->getStatus()}';
+var categoryId = '{$productData->getCategoryId()}';
+</script>";
 ?>
 
 <div class="form">
     <h2>Product Form</h2>
     <form method="POST" action="<?php echo $this->getUrl('admin/catalog_product/save') ?>">
         <div>
-            <input type="hidden" value="<?php echo $data->getProductId() ?>" name="catalog_product[product_id]">
+            <input type="hidden" value="<?php echo $productData->getProductId() ?>" name="catalog_product[product_id]">
         </div>
         <div class="row">
             <div>
                 <label for="name">Name:</label>
-                <input type="text" value="<?php echo $data->getName() ?>" name="catalog_product[name]" id="name">
+                <input type="text" value="<?php echo $productData->getName() ?>" name="catalog_product[name]" id="name">
             </div>
             <div>
                 <label for="sku">SKU:</label>
-                <input type="text" value="<?php echo $data->getSku() ?>" name="catalog_product[sku]" id="sku">
+                <input type="text" value="<?php echo $productData->getSku() ?>" name="catalog_product[sku]" id="sku">
             </div>
-
             <div>
                 <label for="color">Color:</label>
-                <input type="text" value="<?php echo $data->getColor() ?>" name="catalog_product[color]" id="color">
+                <input type="text" value="<?php echo $productData->getColor() ?>" name="catalog_product[color]"
+                    id="color">
             </div>
-
             <div>
                 <label for="size">Size:</label>
-                <input type="text" value="<?php echo $data->getSize() ?>" name="catalog_product[size]" id="size">
+                <input type="text" value="<?php echo $productData->getSize() ?>" name="catalog_product[size]" id="size">
             </div>
+            <div>
+                <label for="category">Category:</label>
+                <select name="catalog_product[category_id]" id="category">
+                    <?php foreach ($categoryData as $_category): ?>
+                        <option value=<?php echo $_category->getCategoryId() ?> class="category">
+                            <?php echo $_category->getCategoryName() ?>
+                        </option>;
+                    <?php endforeach; ?>
 
+                </select>
+            </div>
             <div>
                 <label for="description">Description:</label>
                 <textarea name="catalog_product[description]" id="description" cols="30"
-                    rows="10"><?php echo $data->getDescription() ?></textarea>
+                    rows="10"><?php echo $productData->getDescription() ?></textarea>
             </div>
-
             <div>
                 <label for="image_link">Image Link:</label>
-                <input type="file" value="<?php echo $data->getImageLink() ?>" name="catalog_product[image_link]"
+                <input type="file" value="<?php echo $productData->getImageLink() ?>" name="catalog_product[image_link]"
                     id="image_link">
             </div>
-
             <div>
                 <label for="link">Link:</label>
-                <input type="file" value="<?php echo $data->getLink() ?>" name="catalog_product[link]" id="link">
+                <input type="file" value="<?php echo $productData->getLink() ?>" name="catalog_product[link]" id="link">
             </div>
-
             <div>
                 <label for="price">Price:</label>
-                <input type="number" value="<?php echo $data->getPrice() ?>" name="catalog_product[price]" id="price">
+                <input type="number" value="<?php echo $productData->getPrice() ?>" name="catalog_product[price]"
+                    id="price">
             </div>
-
             <div>
                 <label for="mfr_cost">MFR Cost:</label>
-                <input type="number" value="<?php echo $data->getMfrCost() ?>" name="catalog_product[mfr_cost]"
+                <input type="number" value="<?php echo $productData->getMfrCost() ?>" name="catalog_product[mfr_cost]"
                     id="mfr_cost">
             </div>
-
             <div>
                 <label for="shipping_cost">Shipping Cost:</label>
-                <input type="number" value="<?php echo $data->getShippingCost() ?>"
+                <input type="number" value="<?php echo $productData->getShippingCost() ?>"
                     name="catalog_product[shipping_cost]" id="shipping_cost">
             </div>
-
             <div>
                 <label for="total_cost">Total Cost:</label>
-                <input type="number" value="<?php echo $data->getTotalCost() ?>" name="catalog_product[total_cost]"
-                    id="total_cost">
+                <input type="number" value="<?php echo $productData->getTotalCost() ?>"
+                    name="catalog_product[total_cost]" id="total_cost">
             </div>
-
             <div>
                 <label for="margin_percentage">Margin Percentage:</label>
-                <input type="number" value="<?php echo $data->getMarginPercentage() ?>"
+                <input type="number" value="<?php echo $productData->getMarginPercentage() ?>"
                     name="catalog_product[margin_percentage]" id="margin_percentage">
             </div>
-
             <div>
                 <label for="min_price">Min Price:</label>
-                <input type="number" value="<?php echo $data->getMinPrice() ?>" name="catalog_product[min_price]"
+                <input type="number" value="<?php echo $productData->getMinPrice() ?>" name="catalog_product[min_price]"
                     id="min_price">
             </div>
-
             <div>
                 <label for="status">Status:</label>
-                <input type="text" value="<?php echo $data->getStatus() ?>" name="catalog_product[status]" id="status">
+                <select name="catalog_product[status]" id="status">
+                    <option value='1' class="status">Enabled</option>;
+                    <option value='0' class="status">Disabled</option>;
+                </select>
             </div>
-
         </div>
         <div>
             <input type="submit" name="submit" value="Submit">
