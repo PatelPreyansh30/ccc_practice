@@ -10,20 +10,27 @@
 
 .list table {
     width: 100%;
+    border-collapse: collapse;
+    border: 1px solid;
 }
 
-.list table,
-th,
-td {
-    padding: 5px 0;
+.list th,
+.list td {
+    padding: 10px 0;
     text-align: center;
-    border: 3px solid white;
-    border-collapse: collapse;
+    border-bottom: 1px solid;
 }
 
 .list th {
+    font-size: 20px;
     color: white;
     background-color: #0056b3;
+}
+
+.list table tr:hover {
+    cursor: pointer;
+    background-color: lightgrey;
+    transition: 0.2s;
 }
 
 .list td a {

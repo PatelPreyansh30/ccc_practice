@@ -29,6 +29,11 @@ input[type="file"] {
     box-sizing: border-box;
     font-size: 14px;
     transition: border-color 0.3s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+option {
+    font-size: 18px;
 }
 
 input[type="text"]:focus,
