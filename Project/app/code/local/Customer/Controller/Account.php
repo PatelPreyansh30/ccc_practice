@@ -26,18 +26,76 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
     }
     public function loginAction()
     {
-        $layout = $this->getLayout();
-        $content = $layout->getChild("content");
+        if ($this->getRequest()->isPost()) {
+            $data = $this->getRequest()->getParams('customer');
 
-        $loginForm = Mage::getBlock('customer/account_login');
-        $content->addChild('form', $loginForm);
+            $data = Mage::getModel('customer/account')
+                ->getCollection()
+                ->addFieldToFilter('customer_email', $data['customer_email'])
+                ->addFieldToFilter('password', $data['password']);
 
-        $layout->toHtml();
+            $count = 0;
+            $customerId = 0;
+
+            foreach ($data->getData() as $_data) {
+                $count++;
+                $customerId = $_data->getId();
+            }
+
+            if ($count) {
+                Mage::getSingleton('core/session')
+                    ->set('logged_in_customer_id', $customerId);
+            }
+        } else {
+            $layout = $this->getLayout();
+            $layout->getChild('head')
+                ->addCss('customer/account/form.css')
+                ->addJs('');
+
+            $content = $layout->getChild("content");
+
+            $loginForm = Mage::getBlock('customer/account_login');
+            $content->addChild('form', $loginForm);
+
+            $layout->toHtml();
+        }
     }
     public function dashboardAction()
     {
+        $customerId = Mage::getSingleton('core/session')
+            ->get('logged_in_customer_id');
+
+        if ($customerId) {
+            $data = Mage::getModel('customer/account')
+                ->load($customerId);
+            // echo get_class($data);
+            print_r($data);
+        } else {
+            echo "You are not allowed to view this page";
+        }
     }
     public function forgotpasswordAction()
     {
+        if ($this->getRequest()->isPost()) {
+            $data = $this->getRequest()->getParams('customer');
+
+            $data = Mage::getModel('customer/account')
+                ->getCollection()
+                ->addFieldToFilter('customer_email', $data['customer_email']);
+
+            print_r($data->getData());
+        } else {
+            $layout = $this->getLayout();
+            $layout->getChild('head')
+                ->addCss('customer/account/form.css')
+                ->addJs('');
+
+            $content = $layout->getChild("content");
+
+            $forgotpasswordForm = Mage::getBlock('customer/account_forgotpassword');
+            $content->addChild('form', $forgotpasswordForm);
+
+            $layout->toHtml();
+        }
     }
 }
