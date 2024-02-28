@@ -16,4 +16,9 @@ class Catalog_Model_Product extends Core_Model_Abstract
         ];
         return isset($this->_data['status']) ? $bindding[$this->_data['status']] : '';
     }
+    public function getCategoryName()
+    {
+        $category = Mage::getModel('catalog/category')->load($this->getCategoryId());
+        return $category->getCategoryName();
+    }
 }
