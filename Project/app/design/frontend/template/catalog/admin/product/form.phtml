@@ -1,5 +1,4 @@
 <?php
-$categoryData = $this->getCategory();
 $productData = $this->getProduct();
 echo "<script>
 var status = '{$productData->getStatus()}';
@@ -34,12 +33,11 @@ var categoryId = '{$productData->getCategoryId()}';
             <div>
                 <label for="category">Category:</label>
                 <select name="catalog_product[category_id]" id="category">
-                    <?php foreach ($categoryData as $_category): ?>
+                    <?php foreach ($this->getCategory() as $_category): ?>
                         <option value=<?php echo $_category->getCategoryId() ?> class="category">
                             <?php echo $_category->getCategoryName() ?>
                         </option>;
                     <?php endforeach; ?>
-
                 </select>
             </div>
             <div>

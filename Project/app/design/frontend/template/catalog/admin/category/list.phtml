@@ -1,7 +1,3 @@
-<?php
-$categoryModel = Mage::getModel("catalog/category")->getCollection();
-?>
-
 <div class="list">
     <h2>Category List</h2>
     <table>
@@ -13,7 +9,7 @@ $categoryModel = Mage::getModel("catalog/category")->getCollection();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($categoryModel->getData() as $_category): ?>
+            <?php foreach ($this->getCategoryList() as $_category): ?>
                 <tr>
                     <td>
                         <?php echo $_category->getCategoryName() ?>

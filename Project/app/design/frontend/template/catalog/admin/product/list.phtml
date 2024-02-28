@@ -1,16 +1,3 @@
-<?php
-$productModel = Mage::getModel("catalog/product")->getCollection();
-// $productModel->addFieldToFilter('name', 'abc');
-// $productModel->addFieldToFilter('product_id', ['in'=>[52,53,54]]);
-// $productModel->addFieldToFilter('sku', ['like'=>'%abc']);
-// foreach ($productModel->getData() as $product) {
-//     // echo get_class($product);
-//     echo "<pre>";
-//     print_r($product);
-//     echo "<br>";
-// }
-?>
-
 <div class="list">
     <h2>Product List</h2>
     <table>
@@ -19,12 +6,13 @@ $productModel = Mage::getModel("catalog/product")->getCollection();
                 <th>Name</th>
                 <th>SKU</th>
                 <th>Status</th>
+                <th>Category</th>
                 <th>Color</th>
                 <th colspan="2">Action</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($productModel->getData() as $_product): ?>
+            <?php foreach ($this->getProductList() as $_product): ?>
                 <tr>
                     <td>
                         <?php echo $_product->getName() ?>
@@ -34,6 +22,9 @@ $productModel = Mage::getModel("catalog/product")->getCollection();
                     </td>
                     <td>
                         <?php echo $_product->getStatus() ?>
+                    </td>
+                    <td>
+                        <?php echo $_product->getCategoryId() ?>
                     </td>
                     <td>
                         <?php echo $_product->getColor() ?>

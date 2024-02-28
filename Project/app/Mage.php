@@ -4,6 +4,7 @@ class Mage
 {
     protected static $_baseDir = 'C:/xampp/htdocs/php/Project';
     protected static $_baseUrl = 'http://localhost/php/Project';
+    private static $_singleton = [];
 
     public static function init()
     {
@@ -27,6 +28,11 @@ class Mage
 
     public static function getSingleton($className)
     {
+        if (isset(self::$_singleton[$className])) {
+            return self::$_singleton[$className];
+        } else {
+            return self::$_singleton[$className] = self::getModel($className);
+        }
     }
     public static function register($key, $value)
     {
