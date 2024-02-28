@@ -8,6 +8,8 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
         $layout->getChild('head')
             ->addCss('customer/account/form.css')
             ->addJs('');
+        $layout->removeChild('header')
+            ->removeChild('footer');
 
         $content = $layout->getChild("content");
 
@@ -51,6 +53,8 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
             $layout->getChild('head')
                 ->addCss('customer/account/form.css')
                 ->addJs('');
+            $layout->removeChild('header')
+                ->removeChild('footer');
 
             $content = $layout->getChild("content");
 
