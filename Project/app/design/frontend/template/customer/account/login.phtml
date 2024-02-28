@@ -1,18 +1,20 @@
-<div class="form">
-    <h2>Customer Login</h2>
-    <form method="POST" action="<?php echo $this->getUrl('customer/account/login') ?>">
-        <div class="row">
-            <div>
-                <label for="customer_email">Email:</label>
-                <input type="text" value="" name="customer[customer_email]" id="customer_email">
+<div class="container">
+    <div class="form">
+        <h2>Customer Login</h2>
+        <form method="POST" action="<?php echo $this->getUrl('customer/account/login') ?>">
+            <div class="row">
+                <div>
+                    <label for="customer_email">Email:</label>
+                    <input type="text" value="" name="customer[customer_email]" id="customer_email">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" value="" name="customer[password]" id="password">
+                </div>
             </div>
             <div>
-                <label for="password">Password:</label>
-                <input type="password" value="" name="customer[password]" id="password">
+                <input type="submit" name="submit" value="Submit">
             </div>
-        </div>
-        <div>
-            <input type="submit" name="submit" value="Submit">
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

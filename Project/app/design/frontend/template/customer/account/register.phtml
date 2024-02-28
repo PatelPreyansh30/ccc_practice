@@ -1,76 +1,78 @@
-<div class="form">
-    <h2>Customer Register</h2>
-    <form method="POST" action="<?php echo $this->getUrl('customer/account/save') ?>">
-        <div>
-            <input type="hidden" value="" name="customer[customer_id]">
-        </div>
-        <div class="row">
+<div class="container">
+    <div class="form">
+        <h2>Customer Register</h2>
+        <form method="POST" action="<?php echo $this->getUrl('customer/account/save') ?>">
             <div>
-                <label for="customer_email">Email:</label>
-                <input type="text" value="" name="customer[customer_email]" id="customer_email">
+                <input type="hidden" value="" name="customer[customer_id]">
+            </div>
+            <div class="row">
+                <div>
+                    <label for="customer_email">Email:</label>
+                    <input type="text" value="" name="customer[customer_email]" id="customer_email">
+                </div>
+                <div>
+                    <label for="first_name">First Name:</label>
+                    <input type="text" value="" name="customer[first_name]" id="first_name">
+                </div>
+                <div>
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" value="" name="customer[last_name]" id="last_name">
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" value="" name="customer[password]" id="password">
+                </div>
+                <div>
+                    <label for="billing_address">Billing Address:</label>
+                    <input type="text" value="" name="customer[billing_address]" id="billing_address">
+                </div>
+                <div>
+                    <label for="billing_city">Billing City:</label>
+                    <input type="text" value="" name="customer[billing_city]" id="billing_city">
+                </div>
+                <div>
+                    <label for="billing_region">Billing Region:</label>
+                    <input type="text" value="" name="customer[billing_region]" id="billing_region">
+                </div>
+                <div>
+                    <label for="billing_country">Billing Country:</label>
+                    <input type="text" value="" name="customer[billing_country]" id="billing_country">
+                </div>
+                <div>
+                    <label for="billing_phone">Billing Phone:</label>
+                    <input type="text" value="" name="customer[billing_phone]" id="billing_phone">
+                </div>
+                <div>
+                    <label for="shipping_address">Shipping Address:</label>
+                    <input type="text" value="" name="customer[shipping_address]" id="shipping_address">
+                </div>
+                <div>
+                    <label for="shipping_city">Shipping City:</label>
+                    <input type="text" value="" name="customer[shipping_city]" id="shipping_city">
+                </div>
+                <div>
+                    <label for="shipping_region">Shipping Region:</label>
+                    <input type="text" value="" name="customer[shipping_region]" id="shipping_region">
+                </div>
+                <div>
+                    <label for="shipping_country">Shipping Country:</label>
+                    <input type="text" value="" name="customer[shipping_country]" id="shipping_country">
+                </div>
+                <div>
+                    <label for="shipping_phone">Shipping Phone:</label>
+                    <input type="text" value="" name="customer[shipping_phone]" id="shipping_phone">
+                </div>
+                <div>
+                    <label for="default">Default:</label>
+                    <select name="customer[default]" id="default">
+                        <option value='1' class="default">Yes</option>;
+                        <option value='0' class="default">No</option>;
+                    </select>
+                </div>
             </div>
             <div>
-                <label for="first_name">First Name:</label>
-                <input type="text" value="" name="customer[first_name]" id="first_name">
+                <input type="submit" name="submit" value="Submit">
             </div>
-            <div>
-                <label for="last_name">Last Name:</label>
-                <input type="text" value="" name="customer[last_name]" id="last_name">
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" value="" name="customer[password]" id="password">
-            </div>
-            <div>
-                <label for="billing_address">Billing Address:</label>
-                <input type="text" value="" name="customer[billing_address]" id="billing_address">
-            </div>
-            <div>
-                <label for="billing_city">Billing City:</label>
-                <input type="text" value="" name="customer[billing_city]" id="billing_city">
-            </div>
-            <div>
-                <label for="billing_region">Billing Region:</label>
-                <input type="text" value="" name="customer[billing_region]" id="billing_region">
-            </div>
-            <div>
-                <label for="billing_country">Billing Country:</label>
-                <input type="text" value="" name="customer[billing_country]" id="billing_country">
-            </div>
-            <div>
-                <label for="billing_phone">Billing Phone:</label>
-                <input type="text" value="" name="customer[billing_phone]" id="billing_phone">
-            </div>
-            <div>
-                <label for="shipping_address">Shipping Address:</label>
-                <input type="text" value="" name="customer[shipping_address]" id="shipping_address">
-            </div>
-            <div>
-                <label for="shipping_city">Shipping City:</label>
-                <input type="text" value="" name="customer[shipping_city]" id="shipping_city">
-            </div>
-            <div>
-                <label for="shipping_region">Shipping Region:</label>
-                <input type="text" value="" name="customer[shipping_region]" id="shipping_region">
-            </div>
-            <div>
-                <label for="shipping_country">Shipping Country:</label>
-                <input type="text" value="" name="customer[shipping_country]" id="shipping_country">
-            </div>
-            <div>
-                <label for="shipping_phone">Shipping Phone:</label>
-                <input type="text" value="" name="customer[shipping_phone]" id="shipping_phone">
-            </div>
-            <div>
-                <label for="default">Default:</label>
-                <select name="customer[default]" id="default">
-                    <option value='1' class="default">Yes</option>;
-                    <option value='0' class="default">No</option>;
-                </select>
-            </div>
-        </div>
-        <div>
-            <input type="submit" name="submit" value="Submit">
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
