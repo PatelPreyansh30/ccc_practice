@@ -2,12 +2,21 @@
 
 class Customer_Controller_Account extends Core_Controller_Front_Action
 {
+    protected $_allowedAction = ['register', 'login'];
+    public function init()
+    {
+        if (
+            !in_array($this->getRequest()->getActionName(), $this->_allowedAction) &&
+            !Mage::getSingleton('core/session')->get('logged_in_customer_id')
+        ) {
+            $this->setRedirect('customer/account/login');
+        }
+    }
     public function registerAction()
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('customer/account/form.css')
-            ->addJs('');
+            ->addCss('customer/account/form.css');
         $layout->removeChild('header')
             ->removeChild('footer');
 
@@ -21,26 +30,17 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
     public function saveAction()
     {
         $customerData = $this->getRequest()->getParams('customer');
-        // echo ($customerData['customer_email']);
-        // die;
 
         $customerModel = Mage::getModel('customer/customer');
         $customerCollection = $customerModel->getCollection();
 
         $existingCustomer = $customerCollection->addFieldToFilter('customer_email', $customerData['customer_email'])->getData();
 
-        $address = Mage::getBaseUrl('customer/account');
         if (count($existingCustomer)) {
-            echo "<script>
-                alert('Email already exits');
-                location. href='{$address}/register';
-            </script>";
+            $this->setRedirect('customer/account/register');
         } else {
             $customerModel->setData($customerData)->save();
-            echo "<script>
-                alert('Customer register successfully');
-                location. href='{$address}/login';
-            </script>";
+            $this->setRedirect('customer/account/login');
         }
     }
     public function loginAction()
@@ -54,25 +54,17 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
                 ->addFieldToFilter('password', $loginData['password'])
                 ->getData();
 
-            $address = Mage::getBaseUrl('customer/account');
             if (count($loginData)) {
                 Mage::getSingleton('core/session')
                     ->set('logged_in_customer_id', $loginData[0]->getId());
-                echo "<script>
-                    alert('Login Successfully');
-                    location. href='{$address}/dashboard';
-                </script>";
+                $this->setRedirect('customer/account/dashboard');
             } else {
-                echo "<script>
-                    alert('Invalid credentials');
-                    location. href='{$address}/login';
-                </script>";
+                $this->setRedirect('customer/account/login');
             }
         } else {
             $layout = $this->getLayout();
             $layout->getChild('head')
-                ->addCss('customer/account/form.css')
-                ->addJs('');
+                ->addCss('customer/account/form.css');
             $layout->removeChild('header')
                 ->removeChild('footer');
 
@@ -93,11 +85,15 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
         if ($customerId) {
             $customerData = Mage::getModel('customer/customer')
                 ->load($customerId);
+
+            $layout = $this->getLayout();
+            $content = $layout->getChild("content");
+
+            // $dashboard = Mage::getBlock('customer/account_dashboard');
+            // $content->addChild('form', $dashboard);
+
             print_r($customerData);
-        } else {
-            echo "<script>
-                    location. href='{$address}/login';
-                </script>";
+            $layout->toHtml();
         }
     }
     public function forgotpasswordAction()
@@ -114,8 +110,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
         } else {
             $layout = $this->getLayout();
             $layout->getChild('head')
-                ->addCss('customer/account/form.css')
-                ->addJs('');
+                ->addCss('customer/account/form.css');
             $layout->removeChild('header')
                 ->removeChild('footer');
 

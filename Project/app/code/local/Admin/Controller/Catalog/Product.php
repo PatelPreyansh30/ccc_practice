@@ -1,7 +1,8 @@
 <?php
 
-class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
+class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
 {
+    protected $_allowedAction = [];
     public function formAction()
     {
         $layout = $this->getLayout();

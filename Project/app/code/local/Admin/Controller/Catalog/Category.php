@@ -1,7 +1,8 @@
 <?php
 
-class Admin_Controller_Catalog_Category extends Core_Controller_Front_Action
+class Admin_Controller_Catalog_Category extends Core_Controller_Admin_Action
 {
+    protected $_allowedAction = [];
     public function formAction()
     {
         $layout = $this->getLayout();
@@ -12,7 +13,7 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Front_Action
 
         $categoryForm = $layout->createBlock('catalog/admin_category_form');
         $child->addChild('form', $categoryForm);
-        echo $layout->toHtml();
+        $layout->toHtml();
     }
     public function saveAction()
     {
