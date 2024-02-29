@@ -12,14 +12,18 @@ class Core_Model_DB_Adapter
     public function connect()
     {
         if (is_null($this->connect)) {
-            $this->connect = mysqli_connect($this->config['host'], $this->config['user'], $this->config['password'], $this->config['db']);
+            $this->connect = mysqli_connect(
+                $this->config['host'],
+                $this->config['user'],
+                $this->config['password'],
+                $this->config['db']
+            );
         }
         return $this->connect;
     }
     public function fetchAll($query)
     {
         $row = [];
-        // $this->connect();
         $result = mysqli_query($this->connect(), $query);
         while ($_row = $result->fetch_assoc()) {
             $row[] = $_row;
@@ -35,7 +39,6 @@ class Core_Model_DB_Adapter
     public function fetchRow($query)
     {
         $row = [];
-        // $this->connect();
         $result = mysqli_query($this->connect(), $query);
         while ($_row = $result->fetch_assoc()) {
             $row = $_row;
@@ -46,28 +49,17 @@ class Core_Model_DB_Adapter
     {
         $result = mysqli_query($this->connect(), $query);
         while ($result) {
-            echo '<script>alert("Data inserted successfully")</script>';
             return mysqli_insert_id($this->connect());
         }
         return False;
     }
     public function update($query)
     {
-        $result = mysqli_query($this->connect(), $query);
-        if ($result) {
-            echo '<script>alert("Data updated successfully")</script>';
-        } else {
-            echo '<script>alert("Data not updated")</script>';
-        }
+        return mysqli_query($this->connect(), $query);
     }
     public function delete($query)
     {
-        $result = mysqli_query($this->connect(), $query);
-        if ($result) {
-            echo '<script>alert("Data deleted successfully")</script>';
-        } else {
-            echo '<script>alert("Data not deleted")</script>';
-        }
+        return mysqli_query($this->connect(), $query);
     }
     public function query($query)
     {

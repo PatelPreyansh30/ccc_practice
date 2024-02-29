@@ -20,33 +20,53 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
     }
     public function saveAction()
     {
-        $data = $this->getRequest()->getParams('customer');
+        $customerData = $this->getRequest()->getParams('customer');
+        // echo ($customerData['customer_email']);
+        // die;
 
-        Mage::getModel('customer/account')
-            ->setData($data)
-            ->save();
+        $customerModel = Mage::getModel('customer/customer');
+        $customerCollection = $customerModel->getCollection();
+
+        $existingCustomer = $customerCollection->addFieldToFilter('customer_email', $customerData['customer_email'])->getData();
+
+        $address = Mage::getBaseUrl('customer/account');
+        if (count($existingCustomer)) {
+            echo "<script>
+                alert('Email already exits');
+                location. href='{$address}/register';
+            </script>";
+        } else {
+            $customerModel->setData($customerData)->save();
+            echo "<script>
+                alert('Customer register successfully');
+                location. href='{$address}/login';
+            </script>";
+        }
     }
     public function loginAction()
     {
         if ($this->getRequest()->isPost()) {
-            $data = $this->getRequest()->getParams('customer');
+            $loginData = $this->getRequest()->getParams('customer');
 
-            $data = Mage::getModel('customer/account')
+            $loginData = Mage::getModel('customer/customer')
                 ->getCollection()
-                ->addFieldToFilter('customer_email', $data['customer_email'])
-                ->addFieldToFilter('password', $data['password']);
+                ->addFieldToFilter('customer_email', $loginData['customer_email'])
+                ->addFieldToFilter('password', $loginData['password'])
+                ->getData();
 
-            $count = 0;
-            $customerId = 0;
-
-            foreach ($data->getData() as $_data) {
-                $count++;
-                $customerId = $_data->getId();
-            }
-
-            if ($count) {
+            $address = Mage::getBaseUrl('customer/account');
+            if (count($loginData)) {
                 Mage::getSingleton('core/session')
-                    ->set('logged_in_customer_id', $customerId);
+                    ->set('logged_in_customer_id', $loginData[0]->getId());
+                echo "<script>
+                    alert('Login Successfully');
+                    location. href='{$address}/dashboard';
+                </script>";
+            } else {
+                echo "<script>
+                    alert('Invalid credentials');
+                    location. href='{$address}/login';
+                </script>";
             }
         } else {
             $layout = $this->getLayout();
@@ -69,25 +89,28 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
         $customerId = Mage::getSingleton('core/session')
             ->get('logged_in_customer_id');
 
+        $address = Mage::getBaseUrl('customer/account');
         if ($customerId) {
-            $data = Mage::getModel('customer/account')
+            $customerData = Mage::getModel('customer/customer')
                 ->load($customerId);
-            // echo get_class($data);
-            print_r($data);
+            print_r($customerData);
         } else {
-            echo "You are not allowed to view this page";
+            echo "<script>
+                    location. href='{$address}/login';
+                </script>";
         }
     }
     public function forgotpasswordAction()
     {
         if ($this->getRequest()->isPost()) {
-            $data = $this->getRequest()->getParams('customer');
+            $customerData = $this->getRequest()->getParams('customer');
 
-            $data = Mage::getModel('customer/account')
+            $customerData = Mage::getModel('customer/customer')
                 ->getCollection()
-                ->addFieldToFilter('customer_email', $data['customer_email']);
+                ->addFieldToFilter('customer_email', $customerData['customer_email'])
+                ->getData();
 
-            print_r($data->getData());
+            print_r($customerData);
         } else {
             $layout = $this->getLayout();
             $layout->getChild('head')
