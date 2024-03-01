@@ -43,7 +43,7 @@ class Core_Model_Request
 
     public function getParams($key = '', $arg = null)
     {
-        return ($key == '')
+        return($key == '')
             ? $_REQUEST
             : (isset($_REQUEST[$key])
                 ? $_REQUEST[$key]
@@ -54,6 +54,11 @@ class Core_Model_Request
     public function getPostData(string $key = '')
     {
         return $key == '' ? $_POST : (isset($_POST[$key]) ? $_POST[$key] : '');
+    }
+
+    public function getFileData(string $key = '')
+    {
+        return $key == '' ? $_FILES : (isset($_FILES[$key]) ? $_FILES[$key] : '');
     }
 
     public function getQueryData(string $key = '')
