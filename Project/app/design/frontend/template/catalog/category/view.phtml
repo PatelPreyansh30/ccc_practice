@@ -1,0 +1,19 @@
+<div class="product-card-list">
+    <?php foreach ($this->getProductByCategory() as $_product): ?>
+        <div class="product-card">
+            <img src="product1.jpg" alt="Product 1">
+            <h3>
+                <?php echo $_product->getName() ?>
+            </h3>
+            <p>
+                <?php echo $_product->getDescription() ?>
+            </p>
+            <span>
+                <?php echo "&#8377;" . $_product->getPrice() ?>
+            </span>
+            <a href="<?php echo $this->getUrl('catalog/product/view?product_id=' . $_product->getId()) ?>">
+                View Product
+            </a>
+        </div>
+    <?php endforeach; ?>
+</div>
