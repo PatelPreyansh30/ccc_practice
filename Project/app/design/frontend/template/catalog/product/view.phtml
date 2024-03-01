@@ -1,0 +1,28 @@
+<?php
+$_product = $this->getSingleProduct();
+?>
+<form action="<?php echo $this->getUrl('sales/quote/add') ?>" method="post">
+    <div class="product-page">
+        <div class="product-image">
+            <img src="product.jpg" alt="Product">
+        </div>
+        <div class="product-info">
+            <h1>
+                <?php echo $_product->getName() ?>
+            </h1>
+            <p>
+                <?php echo $_product->getDescription() ?>
+            </p>
+            <p>
+                <?php echo "&#8377;" . $_product->getPrice() ?>
+            </p>
+            <div class="quantity">
+                <label for="quantity">Quantity:</label>
+                <input type="hidden" name="sales_quote[product_id]" value="<?php echo $_product->getId() ?>">
+                <input type="hidden" name="sales_quote[price]" value="<?php echo $_product->getPrice() ?>">
+                <input type="number" id="quantity" name="sales_quote[qty]" min="1" value="1">
+            </div>
+            <input type="submit" name="submit" value="Add to Cart" class="add-to-cart">
+        </div>
+    </div>
+</form>
