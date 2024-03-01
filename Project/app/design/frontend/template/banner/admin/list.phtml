@@ -4,6 +4,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>View</th>
                 <th>Status</th>
                 <th colspan="2">Action</th>
             </tr>
@@ -12,7 +13,10 @@
             <?php foreach ($this->getBannerList() as $_banner): ?>
                 <tr>
                     <td>
-                        <?php echo $_banner->getBannerImage() ?>
+                        <?php echo $_banner->getBannerPath() ?>
+                    </td>
+                    <td>
+                        <a href="<?php echo $_banner->getBannerImage() ?>" target="_blank">View</a>
                     </td>
                     <td>
                         <?php echo $_banner->getStatus() ?>

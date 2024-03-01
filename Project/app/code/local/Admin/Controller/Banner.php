@@ -20,14 +20,14 @@ class Admin_Controller_Banner extends Core_Controller_Admin_Action
         $bannerData = $this->getRequest()->getPostData('banner');
         $bannerFileData = $this->getRequest()->getFileData('banner');
 
-        $bannerName = $bannerFileData['name']['banner_image'];
-        $bannerData['banner_image'] = $bannerName;
+        $bannerName = $bannerFileData['name']['banner_path'];
+        $bannerData['banner_path'] = $bannerName;
 
         $bannerModel = Mage::getModel('banner/banner');
         $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerName;
 
         move_uploaded_file(
-            $bannerFileData['tmp_name']['banner_image'],
+            $bannerFileData['tmp_name']['banner_path'],
             $bannerMediaPath
         );
         $bannerModel->setData($bannerData)
@@ -46,5 +46,17 @@ class Admin_Controller_Banner extends Core_Controller_Admin_Action
 
         $child->addChild('list', $banneList);
         $layout->toHtml();
+    }
+    public function deleteAction()
+    {
+        $bannerId = $this->getRequest()->getParams('banner_id');
+        $bannerData = Mage::getModel('banner/banner')
+            ->load($bannerId);
+
+        $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerData->getBannerImage();
+        unlink($bannerMediaPath);
+        $bannerData->delete();
+
+        $this->setRedirect('admin/banner/list');
     }
 }

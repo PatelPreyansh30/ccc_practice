@@ -6,4 +6,9 @@ class Banner_Block_Form extends Core_Block_Template
     {
         $this->setTemplate('banner/admin/form.phtml');
     }
+    public function getBanner()
+    {
+        return Mage::getModel('banner/banner')
+            ->load($this->getRequest()->getParams('banner_id', 0));
+    }
 }

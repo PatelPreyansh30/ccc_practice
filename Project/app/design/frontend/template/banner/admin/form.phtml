@@ -1,19 +1,30 @@
+<?php
+$bannerData = $this->getBanner();
+?>
+
 <div class="form">
     <h2>Banner Form</h2>
     <form method="POST" action="<?php echo $this->getUrl('admin/banner/save') ?>" enctype="multipart/form-data">
         <div>
-            <input type="hidden" value="" name="banner[banner_id]">
+            <input type="hidden" value="<?php echo $bannerData->getBannerId() ?>" name="banner[banner_id]">
         </div>
         <div class="row">
             <div>
                 <label for="name">Banner Image:</label>
-                <input type="file" value="" name="banner[banner_image]" id="name">
+                <input type="file" value="" name="banner[banner_path]" id="name">
+            </div>
+            <div>
+                <?php if ($bannerData->getBannerImage()): ?>
+                    <img src="<?php echo $bannerData->getBannerImage() ?>" alt="Banner Image">
+                <?php endif; ?>
             </div>
             <div>
                 <label for="status">Banner Status:</label>
                 <select name="banner[status]" id="status">
-                    <option value='1' class="status">Enabled</option>;
-                    <option value='0' class="status">Disabled</option>;
+                    <option value='1' <?php echo $bannerData->getStatus() == 'Enabled' ? 'selected' : '' ?>>Enabled
+                    </option>;
+                    <option value='0' <?php echo $bannerData->getStatus() == 'Disabled' ? 'selected' : '' ?>>
+                        Disabled</option>;
                 </select>
             </div>
         </div>
