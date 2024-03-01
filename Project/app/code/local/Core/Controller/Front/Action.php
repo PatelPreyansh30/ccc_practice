@@ -3,7 +3,7 @@
 class Core_Controller_Front_Action
 {
     protected $_layout = null;
-
+    protected $_allowedAction = [];
     public function __construct()
     {
         $this->init();
@@ -15,6 +15,12 @@ class Core_Controller_Front_Action
     }
     public function init()
     {
+        if (
+            !in_array($this->getRequest()->getActionName(), $this->_allowedAction) &&
+            !Mage::getSingleton('core/session')->get('logged_in_customer_id')
+        ) {
+            $this->setRedirect('customer/account/login');
+        }
         return $this;
     }
     public function getLayout()

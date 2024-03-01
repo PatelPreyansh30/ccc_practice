@@ -1,1 +1,7 @@
-Banner.phtml
+<div class="list">
+    <?php foreach ($this->getBannerList() as $_banner): ?>
+        <div>
+            <img src="<?php echo $_banner->getBannerImage() ?>" alt="Banner Image">
+        </div>
+    <?php endforeach; ?>
+</div>
