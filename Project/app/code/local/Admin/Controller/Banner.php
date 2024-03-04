@@ -53,7 +53,7 @@ class Admin_Controller_Banner extends Core_Controller_Admin_Action
         $bannerData = Mage::getModel('banner/banner')
             ->load($bannerId);
 
-        $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerData->getBannerImage();
+        $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerData->getBannerPath();
         unlink($bannerMediaPath);
         $bannerData->delete();
 
