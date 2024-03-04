@@ -6,7 +6,8 @@ class Page_Controller_Index extends Core_Controller_Front_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('banner/banner.css');
+            ->addCss('banner/banner.css')
+            ->addJs('banner/banner.js');
 
         $banner = $layout->createBlock('banner/banner');
         $layout->getChild('content')

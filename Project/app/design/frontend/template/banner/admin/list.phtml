@@ -10,21 +10,21 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($this->getBannerList() as $_banner): ?>
+            <?php foreach ($this->getBannerList() as $banner): ?>
                 <tr>
                     <td>
-                        <?php echo $_banner->getBannerPath() ?>
+                        <?php echo $banner->getBannerPath() ?>
                     </td>
                     <td>
-                        <a href="<?php echo $_banner->getBannerImage() ?>" target="_blank">View</a>
+                        <a href="<?php echo $banner->getBannerImage() ?>" target="_blank">View</a>
                     </td>
                     <td>
-                        <?php echo $_banner->getStatus() ?>
+                        <?php echo $banner->getStatus() ?>
                     </td>
                     <td><a
-                            href="<?php echo $this->getUrl("admin/banner/delete?banner_id={$_banner->getId()}") ?>">Delete</a>
+                            href="<?php echo $this->getUrl("admin/banner/delete?banner_id={$banner->getId()}") ?>">Delete</a>
                     </td>
-                    <td><a href="<?php echo $this->getUrl("admin/banner/form?banner_id={$_banner->getId()}") ?>">Update</a>
+                    <td><a href="<?php echo $this->getUrl("admin/banner/form?banner_id={$banner->getId()}") ?>">Update</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

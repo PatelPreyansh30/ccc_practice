@@ -3,15 +3,6 @@
 class Customer_Controller_Account extends Core_Controller_Front_Action
 {
     protected $_allowedAction = ['register', 'login'];
-    public function init()
-    {
-        if (
-            !in_array($this->getRequest()->getActionName(), $this->_allowedAction) &&
-            !Mage::getSingleton('core/session')->get('logged_in_customer_id')
-        ) {
-            $this->setRedirect('customer/account/login');
-        }
-    }
     public function registerAction()
     {
         $layout = $this->getLayout();
@@ -81,7 +72,6 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
         $customerId = Mage::getSingleton('core/session')
             ->get('logged_in_customer_id');
 
-        $address = Mage::getBaseUrl('customer/account');
         if ($customerId) {
             $customerData = Mage::getModel('customer/customer')
                 ->load($customerId);
@@ -91,8 +81,9 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
 
             // $dashboard = Mage::getBlock('customer/account_dashboard');
             // $content->addChild('form', $dashboard);
-
+            echo "<pre>";
             print_r($customerData);
+            echo "</pre>";
             $layout->toHtml();
         }
     }

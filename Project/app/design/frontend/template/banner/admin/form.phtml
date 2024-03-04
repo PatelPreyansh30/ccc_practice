@@ -11,13 +11,14 @@ $bannerData = $this->getBanner();
         <div class="row">
             <div>
                 <label for="name">Banner Image:</label>
-                <input type="file" value="" name="banner[banner_path]" id="name">
+                <input type="file" value="<?php echo $bannerData->getBannerPath() ?>" name="banner[banner_path]"
+                    id="name">
             </div>
-            <div>
-                <?php if ($bannerData->getBannerImage()): ?>
+            <?php if ($bannerData->getBannerPath()): ?>
+                <div>
                     <img src="<?php echo $bannerData->getBannerImage() ?>" alt="Banner Image">
-                <?php endif; ?>
-            </div>
+                </div>
+            <?php endif; ?>
             <div>
                 <label for="status">Banner Status:</label>
                 <select name="banner[status]" id="status">

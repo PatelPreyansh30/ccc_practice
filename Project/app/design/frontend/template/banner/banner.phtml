@@ -1,7 +1,9 @@
-<div class="list">
-    <?php foreach ($this->getBannerList() as $_banner): ?>
-        <div>
+<div class="banner-slider">
+    <div class="slides">
+        <?php foreach ($this->getBannerList() as $_banner): ?>
             <img src="<?php echo $_banner->getBannerImage() ?>" alt="Banner Image">
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
+    <button class="prev" onclick="prevSlide()">&#10094;</button>
+    <button class="next" onclick="nextSlide()">&#10095;</button>
 </div>

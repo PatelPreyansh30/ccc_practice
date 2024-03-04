@@ -1,4 +1,4 @@
-.list {
+/* .list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,4 +8,41 @@
 
 .list img {
     width: 720px;
+} */
+
+.banner-slider {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+}
+
+.slides img {
+    width: 100%;
+    display: block;
+}
+
+button.prev,
+button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1;
+}
+
+button.prev {
+    left: 0;
+}
+
+button.next {
+    right: 0;
 }
