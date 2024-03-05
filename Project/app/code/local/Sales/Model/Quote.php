@@ -12,9 +12,10 @@ class Sales_Model_Quote extends Core_Model_Abstract
         $quoteId = Mage::getSingleton('core/session')->get('quote_id');
         if (!$quoteId) {
             $quote = Mage::getModel('sales/quote')
-                ->setData(['tax_percent' => 8, 'grand_total' => 0])
+                ->setData(['tax_percent' => 0, 'grand_total' => 0])
                 ->save();
-            Mage::getSingleton('core/session')->set('quote_id', $quote->getId());
+            Mage::getSingleton('core/session')
+                ->set('quote_id', $quote->getId());
             $quoteId = $quote->getId();
             $this->load($quoteId);
         } else {
@@ -44,7 +45,15 @@ class Sales_Model_Quote extends Core_Model_Abstract
     {
         $this->initQuote();
         if ($this->getId()) {
-            Mage::getModel('sales/quote_item')->addItem($this, $quoteData['product_id'], $quoteData['qty']);
+            Mage::getModel('sales/quote_item')
+                ->addItem(
+                    $this,
+                    $quoteData['product_id'],
+                    $quoteData['qty'],
+                    isset($quoteData['item_id'])
+                    ? $quoteData['item_id']
+                    : null
+                );
         }
         $this->save();
     }
