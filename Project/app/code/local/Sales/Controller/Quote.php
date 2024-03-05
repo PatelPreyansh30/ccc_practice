@@ -9,4 +9,13 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
         Mage::getSingleton("sales/quote")
             ->addProduct($quoteData);
     }
+    public function deleteAction()
+    {
+        Mage::getSingleton("sales/quote")
+            ->deleteProduct(
+                $this->getRequest()
+                    ->getParams('item_id')
+            );
+        $this->setRedirect('cart');
+    }
 }

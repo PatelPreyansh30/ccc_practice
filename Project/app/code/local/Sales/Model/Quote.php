@@ -48,4 +48,15 @@ class Sales_Model_Quote extends Core_Model_Abstract
         }
         $this->save();
     }
+    public function deleteProduct($itemId)
+    {
+        $quoteId = Mage::getSingleton('core/session')
+            ->get('quote_id');
+        $this->load($quoteId);
+
+        if ($this->getId()) {
+            Mage::getModel('sales/quote_item')->deleteItem($this, $itemId);
+        }
+        $this->save();
+    }
 }
