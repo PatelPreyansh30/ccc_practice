@@ -20,11 +20,25 @@ class Sales_Model_Quote extends Core_Model_Abstract
         } else {
             $this->load($quoteId);
         }
-        echo "Quote Id: " . $quoteId;
         return $this;
     }
-    protected function _beforeSave(){
-        
+    public function getItemCollection()
+    {
+        return Mage::getModel('sales/quote_item')
+            ->getCollection()
+            ->addFieldToFilter('quote_id', $this->getId());
+    }
+    protected function _beforeSave()
+    {
+        $grandTotal = 0;
+        foreach ($this->getItemCollection()->getData() as $item) {
+            $grandTotal += $item->getRowTotal();
+        }
+        if ($this->getTaxPercent()) {
+            $tax = round($grandTotal / $this->getTaxPercent(), 2);
+            $grandTotal += $tax;
+        }
+        $this->addData('grand_total', $grandTotal);
     }
     public function addProduct($quoteData)
     {
