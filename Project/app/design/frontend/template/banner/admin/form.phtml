@@ -17,6 +17,7 @@ $bannerData = $this->getBanner();
             <?php if ($bannerData->getBannerPath()): ?>
                 <div>
                     <img src="<?php echo $bannerData->getBannerImage() ?>" alt="Banner Image">
+                    <input type="hidden" value="<?php echo $bannerData->getBannerPath() ?>" name="banner_path">
                 </div>
             <?php endif; ?>
             <div>
