@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="form">
+        <h2>Customer Address</h2>
+        <form method="POST" action="<?php echo $this->getUrl('sales/quote/saveAddress') ?>">
+            <div>
+                <input type="hidden" value="<?php echo $this->getCustomerAddress()->getCustomerId() ?>"
+                    name="customer_address[customer_id]">
+            </div>
+            <div>
+                <input type="hidden" value="<?php echo $this->getCustomerAddress()->getCustomerEmail() ?>"
+                    name="customer_address[email]">
+            </div>
+            <div>
+                <input type="hidden" value="<?php echo $this->getQuoteId() ?>" name="customer_address[quote_id]">
+            </div>
+            <p onclick="populateFieldBasedOnBillingAddress()" style="cursor: pointer;">
+                <input type="checkbox" id="checkbox">
+                Same as billing address
+            </p>
+            <div class="row">
+                <div>
+                    <label for="billing_address">Billing Address:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getBillingAddress() ?>"
+                        name="customer_address[billing_address]" id="billing_address">
+                </div>
+                <div>
+                    <label for="shipping_address">Shipping Address:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getShippingAddress() ?>"
+                        name="customer_address[shipping_address]" id="shipping_address">
+                </div>
+                <div>
+                    <label for="billing_city">Billing City:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getBillingCity() ?>"
+                        name="customer_address[billing_city]" id="billing_city">
+                </div>
+                <div>
+                    <label for="shipping_city">Shipping City:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getShippingCity() ?>"
+                        name="customer_address[shipping_city]" id="shipping_city">
+                </div>
+                <div>
+                    <label for="billing_region">Billing Region:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getBillingRegion() ?>"
+                        name="customer_address[billing_region]" id="billing_region">
+                </div>
+                <div>
+                    <label for="shipping_region">Shipping Region:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getShippingRegion() ?>"
+                        name="customer_address[shipping_region]" id="shipping_region">
+                </div>
+                <div>
+                    <label for="billing_country">Billing Country:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getBillingCountry() ?>"
+                        name="customer_address[billing_country]" id="billing_country">
+                </div>
+                <div>
+                    <label for="shipping_country">Shipping Country:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getShippingCountry() ?>"
+                        name="customer_address[shipping_country]" id="shipping_country">
+                </div>
+                <div>
+                    <label for="billing_phone">Billing Phone:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getBillingPhone() ?>"
+                        name="customer_address[billing_phone]" id="billing_phone">
+                </div>
+                <div>
+                    <label for="shipping_phone">Shipping Phone:</label>
+                    <input type="text" value="<?php echo $this->getCustomerAddress()->getShippingPhone() ?>"
+                        name="customer_address[shipping_phone]" id="shipping_phone">
+                </div>
+            </div>
+            <div>
+                <input type="submit" name="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>

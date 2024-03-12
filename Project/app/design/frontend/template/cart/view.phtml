@@ -45,7 +45,7 @@
                     <?php echo "Total Price: &#8377;" . $this->getQuote()->getGrandTotal() ?>
                 </strong>
             </p>
-            <button class="checkout-btn">Checkout</button>
+            <a class="checkout-btn" href="<?php echo $this->getUrl('cart/checkout/index') ?>">Checkout</a>
         </div>
     <?php else: ?>
         <p class="empty-cart">Your cart is empty, please add product</p>

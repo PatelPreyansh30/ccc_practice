@@ -1,0 +1,38 @@
+<!-- <?php
+$data = $this->getUser();
+?> -->
+
+<div class="form">
+    <form method="POST" action="<?php echo $this->getUrl('licence/index/save') ?>">
+        <div>
+            <input type="hidden" name="ccc_license_request[id]">
+        </div>
+        <div class="row">
+            <div>
+                <label for="user_name">User Name:</label>
+                <input type="text" name="ccc_license_request[user_name]"
+                    id="user_name">
+            </div>
+            <div>
+                <label for="state">State:</label>
+                <select name="ccc_license_request[state]" id="state">
+                    <?php foreach ($this->getState() as $state): ?>
+                        <option value=<?php echo $state->getId() ?> class="state">
+                            <?php echo $state->getState() ?>
+                        </option>;
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="licence_type">Licence Type:</label>
+                <select name="ccc_license_request[licence_type]" id="licence_type" multiple>
+                    <option value='LL' class="licence_type">LL</option>;
+                    <option value='DL' class="licence_type">DL</option>;
+                </select>
+            </div>
+        </div>
+        <div>
+            <input type="submit" name="submit" value="Submit">
+        </div>
+    </form>
+</div>
