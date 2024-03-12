@@ -6,8 +6,9 @@ class Core_Model_Session
     {
         // if(is_null($_SESSION)){
         // if (is_null($_SESSION) || !isset($_SESSION)) {
-        session_start();
-        // }
+        if (!isset($_SESSION)) {
+            session_start();
+        }
     }
     public function getId()
     {

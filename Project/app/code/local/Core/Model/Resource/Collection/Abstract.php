@@ -26,6 +26,11 @@ class Core_Model_Resource_Collection_Abstract
         $this->_select['WHERE'][$field][] = $value;
         return $this;
     }
+    public function addLimit($limit)
+    {
+        $this->_select['LIMIT'][] = $limit;
+        return $this;
+    }
     public function load()
     {
         $sql = "SELECT * FROM {$this->_select['FROM']}";
@@ -58,6 +63,10 @@ class Core_Model_Resource_Collection_Abstract
                 }
             }
             $sql .= " WHERE " . implode(" AND ", $whereCondition);
+        }
+        if (isset($this->_select['LIMIT'])) {
+            $limit = implode(', ', array_values($this->_select['LIMIT']));
+            $sql .= " LIMIT {$limit}";
         }
         $result = $this->_resource->getAdapter()->fetchAll($sql);
         foreach ($result as $row) {
