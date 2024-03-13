@@ -28,6 +28,8 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
 
             $customerAddressData = $this->getRequest()
                 ->getParams('customer_address');
+            echo "<pre>";
+            print_r($customerAddressData);
             $quoteModel->addAddress($customerAddressData);
         } else {
             $this->setRedirect('page');
