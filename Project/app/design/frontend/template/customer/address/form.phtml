@@ -4,7 +4,8 @@
         <?php if (count($this->getCustomerAllAddress()) > 0): ?>
             <div class="list-item">
                 <?php foreach ($this->getCustomerAllAddress() as $address): ?>
-                    <div class="address-card">
+                    <div class="address-card"
+                        data-json='{"billing_address": "<?php echo $address->getBillingAddress(); ?>","billing_city": "<?php echo $address->getBillingCity(); ?>","billing_country": "<?php echo $address->getBillingCountry(); ?>","billing_region": "<?php echo $address->getBillingCountry(); ?>","billing_phone": "<?php echo $address->getBillingCountry(); ?>","shipping_address": "<?php echo $address->getShippingCountry(); ?>","shipping_city": "<?php echo $address->getShippingCountry(); ?>","shipping_country": "<?php echo $address->getShippingCountry(); ?>","shipping_region": "<?php echo $address->getShippingCountry(); ?>","shipping_phone": "<?php echo $address->getShippingCountry(); ?>"}'>
                         <div>
                             <h4>Billing Address</h4>
                             <div class="address-details">
@@ -85,53 +86,43 @@
             <div class="row">
                 <div>
                     <label for="billing_address">Billing Address:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getBillingAddress() ?>"
-                        name="customer_address[billing_address]" id="billing_address">
+                    <input type="text" value="" name="customer_address[billing_address]" id="billing_address">
                 </div>
                 <div>
                     <label for="shipping_address">Shipping Address:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getShippingAddress() ?>"
-                        name="customer_address[shipping_address]" id="shipping_address">
+                    <input type="text" value="" name="customer_address[shipping_address]" id="shipping_address">
                 </div>
                 <div>
                     <label for="billing_city">Billing City:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getBillingCity() ?>"
-                        name="customer_address[billing_city]" id="billing_city">
+                    <input type="text" value="" name="customer_address[billing_city]" id="billing_city">
                 </div>
                 <div>
                     <label for="shipping_city">Shipping City:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getShippingCity() ?>"
-                        name="customer_address[shipping_city]" id="shipping_city">
+                    <input type="text" value="" name="customer_address[shipping_city]" id="shipping_city">
                 </div>
                 <div>
                     <label for="billing_region">Billing Region:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getBillingRegion() ?>"
-                        name="customer_address[billing_region]" id="billing_region">
+                    <input type="text" value="" name="customer_address[billing_region]" id="billing_region">
                 </div>
                 <div>
                     <label for="shipping_region">Shipping Region:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getShippingRegion() ?>"
-                        name="customer_address[shipping_region]" id="shipping_region">
+                    <input type="text" value="" name="customer_address[shipping_region]" id="shipping_region">
                 </div>
                 <div>
                     <label for="billing_country">Billing Country:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getBillingCountry() ?>"
-                        name="customer_address[billing_country]" id="billing_country">
+                    <input type="text" value="" name="customer_address[billing_country]" id="billing_country">
                 </div>
                 <div>
                     <label for="shipping_country">Shipping Country:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getShippingCountry() ?>"
-                        name="customer_address[shipping_country]" id="shipping_country">
+                    <input type="text" value="" name="customer_address[shipping_country]" id="shipping_country">
                 </div>
                 <div>
                     <label for="billing_phone">Billing Phone:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getBillingPhone() ?>"
-                        name="customer_address[billing_phone]" id="billing_phone">
+                    <input type="text" value="" name="customer_address[billing_phone]" id="billing_phone">
                 </div>
                 <div>
                     <label for="shipping_phone">Shipping Phone:</label>
-                    <input type="text" value="<?php echo $this->getCustomerFirstAddress()->getShippingPhone() ?>"
-                        name="customer_address[shipping_phone]" id="shipping_phone">
+                    <input type="text" value="" name="customer_address[shipping_phone]" id="shipping_phone">
                 </div>
             </div>
             <div>

@@ -14,7 +14,7 @@ class Cart_Controller_Checkout extends Core_Controller_Front_Action
                 ->addJs('customer/address/form.js');
             $content = $layout->getChild('content');
 
-            $addressForm = Mage::getBlock('cart/address');
+            $addressForm = Mage::getBlock('customer/address');
             $content->addChild('form', $addressForm);
 
             $layout->toHtml();
