@@ -68,4 +68,20 @@ class Sales_Model_Quote extends Core_Model_Abstract
         }
         $this->save();
     }
+    public function addAddress($address)
+    {
+        $session = Mage::getSingleton('core/session');
+        $quoteCustomerId = $session->get('quote_customer_id');
+
+        $quoteCustomerModel = Mage::getModel('sales/quote_customer');
+        $quoteCustomerModel->setData($address);
+
+        if ($quoteCustomerId) {
+            $quoteCustomerModel->addData('quote_customer_id', $quoteCustomerId);
+            $quoteCustomerModel->save();
+        } else {
+            $id = $quoteCustomerModel->save()->getId();
+            $session->set('quote_customer_id', $id);
+        }
+    }
 }

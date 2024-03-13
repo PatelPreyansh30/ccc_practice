@@ -24,21 +24,11 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
         $quoteId = Mage::getSingleton('core/session')->get('quote_id');
 
         if ($quoteId) {
-            $session = Mage::getSingleton('core/session');
-            $quoteCustomerModel = Mage::getModel('sales/quote_customer');
+            $quoteModel = Mage::getModel('sales/quote');
 
             $customerAddressData = $this->getRequest()
                 ->getParams('customer_address');
-            $quoteCustomerModel->setData($customerAddressData);
-
-            $quoteCustomerId = $session->get('quote_customer_id');
-            if ($quoteCustomerId) {
-                $quoteCustomerModel->addData('quote_customer_id', $quoteCustomerId);
-                $quoteCustomerModel->save();
-            } else {
-                $id = $quoteCustomerModel->save()->getId();
-                $session->set('quote_customer_id', $id);
-            }
+            $quoteModel->addAddress($customerAddressData);
         } else {
             $this->setRedirect('page');
         }
