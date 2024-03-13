@@ -27,12 +27,20 @@ class Sales_Model_Quote extends Core_Model_Abstract
     {
         return Mage::getModel('sales/quote_item')
             ->getCollection()
-            ->addFieldToFilter('quote_id', $this->getId());
+            ->addFieldToFilter('quote_id', $this->getId())
+            ->getData();
+    }
+    public function getCustomer()
+    {
+        return Mage::getModel('sales/quote_customer')
+            ->getCollection()
+            ->addFieldToFilter('quote_id', $this->getId())
+            ->getFirstItem();
     }
     protected function _beforeSave()
     {
         $grandTotal = 0;
-        foreach ($this->getItemCollection()->getData() as $item) {
+        foreach ($this->getItemCollection() as $item) {
             $grandTotal += $item->getRowTotal();
         }
         if ($this->getTaxPercent()) {
@@ -83,5 +91,34 @@ class Sales_Model_Quote extends Core_Model_Abstract
             $id = $quoteCustomerModel->save()->getId();
             $session->set('quote_customer_id', $id);
         }
+    }
+    public function convert()
+    {
+        echo "<pre>";
+        if ($this->getId()) {
+
+            $orderId = Mage::getModel('sales/order')
+                ->setData($this->getData())
+                ->removeData('quote_id')
+                ->save()
+                ->getId();
+            foreach ($this->getItemCollection() as $item) {
+                Mage::getModel('sales/order_item')
+                    ->setData($item->getData())
+                    ->removeData('item_id')
+                    ->removeData('quote_id')
+                    ->addData('order_id', $orderId)
+                    ->save();
+            }
+            if ($this->getCustomer()) {
+                Mage::getModel('sales/order_customer')
+                    ->setData($this->getCustomer()->getData())
+                    ->removeData('quote_customer_id')
+                    ->removeData('quote_id')
+                    ->addData('order_id', $orderId)
+                    ->save();
+            }
+        }
+        print_r($this);
     }
 }
