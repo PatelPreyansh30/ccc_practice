@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.form {
+    width: 50%;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+.form h2 {
+    margin: 15px 0;
+    color: #333;
+}
+
+.form .row {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 5px;
+    margin-bottom: 25px;
+}

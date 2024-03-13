@@ -22,4 +22,17 @@ class Cart_Controller_Checkout extends Core_Controller_Front_Action
             $this->setRedirect('page');
         }
     }
+    public function methodAction()
+    {
+        $layout = $this->getLayout();
+        $layout->getChild('head')
+            ->addCss('cart/checkout/method.css');
+        // ->addJs('cart/checkout/method.js');
+        $content = $layout->getChild('content');
+
+        $methodForm = Mage::getBlock('cart/checkout_method');
+        $content->addChild('method', $methodForm);
+
+        $layout->toHtml();
+    }
 }

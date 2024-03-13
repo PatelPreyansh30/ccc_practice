@@ -28,11 +28,37 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
 
             $customerAddressData = $this->getRequest()
                 ->getParams('customer_address');
-            echo "<pre>";
-            print_r($customerAddressData);
             $quoteModel->addAddress($customerAddressData);
+            $this->setRedirect('cart/checkout/method');
         } else {
             $this->setRedirect('page');
         }
+    }
+    public function placeOrderAction()
+    {
+        $paymentMethodData = $this->getRequest()
+            ->getParams('quote_payment_method');
+        $shippingMethodData = $this->getRequest()
+            ->getParams('quote_shipping_method');
+
+        $quoteId = Mage::getSingleton('core/session')->get('quote_id');
+        $quoteModel = Mage::getModel('sales/quote')->load($quoteId);
+
+        $paymentMethodModel = Mage::getModel('sales/quote_payment');
+        $shippingMethodModel = Mage::getModel('sales/quote_shipping');
+
+        $paymentMethodId = $paymentMethodModel->setData($paymentMethodData)
+            ->save()
+            ->getId();
+        $shippingMethodId = $shippingMethodModel->setData($shippingMethodData)
+            ->save()
+            ->getId();
+
+        $quoteModel->addData('payment_id', $paymentMethodId)
+            ->addData('shipping_id', $shippingMethodId)
+            ->removeData('order_id')
+            ->save();
+
+        $quoteModel->convert();
     }
 }

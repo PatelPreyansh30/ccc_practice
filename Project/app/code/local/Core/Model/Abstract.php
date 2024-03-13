@@ -90,7 +90,7 @@ class Core_Model_Abstract
     }
     public function removeData($key = null)
     {
-        if (isset($this->_data[$key])) {
+        if (isset($this->_data[$key]) || is_null($this->_data[$key])) {
             unset($this->_data[$key]);
         }
         return $this;
