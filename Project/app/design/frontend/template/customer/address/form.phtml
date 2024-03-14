@@ -4,8 +4,19 @@
         <?php if (count($this->getCustomerAllAddress()) > 0): ?>
             <div class="list-item">
                 <?php foreach ($this->getCustomerAllAddress() as $address): ?>
-                    <div class="address-card"
-                        data-json='{"billing_address": "<?php echo $address->getBillingAddress(); ?>","billing_city": "<?php echo $address->getBillingCity(); ?>","billing_country": "<?php echo $address->getBillingCountry(); ?>","billing_region": "<?php echo $address->getBillingCountry(); ?>","billing_phone": "<?php echo $address->getBillingCountry(); ?>","shipping_address": "<?php echo $address->getShippingCountry(); ?>","shipping_city": "<?php echo $address->getShippingCountry(); ?>","shipping_country": "<?php echo $address->getShippingCountry(); ?>","shipping_region": "<?php echo $address->getShippingCountry(); ?>","shipping_phone": "<?php echo $address->getShippingCountry(); ?>"}'>
+                    <div class="address-card" data-json='
+                        {
+                            "billing_address": "<?php echo $address->getBillingAddress(); ?>",
+                            "billing_city": "<?php echo $address->getBillingCity(); ?>",
+                            "billing_country": "<?php echo $address->getBillingCountry(); ?>",
+                            "billing_region": "<?php echo $address->getBillingRegion(); ?>",
+                            "billing_phone": "<?php echo $address->getBillingPhone(); ?>",
+                            "shipping_address": "<?php echo $address->getShippingAddress(); ?>",
+                            "shipping_city": "<?php echo $address->getShippingCity(); ?>",
+                            "shipping_country": "<?php echo $address->getShippingCountry(); ?>",
+                            "shipping_region": "<?php echo $address->getShippingRegion(); ?>",
+                            "shipping_phone": "<?php echo $address->getShippingPhone(); ?>"
+                        }'>
                         <div>
                             <h4>Billing Address</h4>
                             <div class="address-details">
@@ -125,12 +136,13 @@
                     <input type="text" value="" name="customer_address[shipping_phone]" id="shipping_phone">
                 </div>
             </div>
-            <div>
+            <div class="buttons">
                 <input type="submit" name="submit" value="Submit">
-                <input type="reset" name="reset" value="Reset">
+                <input type="reset" class="bg-red" name="reset" value="Reset">
             </div>
             <div>
-                <button type="submit" formaction="<?php echo $this->getUrl('customer/address/save') ?>">Save Address
+                <button type="submit" class="save-address"
+                    formaction="<?php echo $this->getUrl('customer/address/save') ?>">Save Address
                     Permanently</button>
             </div>
         </form>

@@ -68,6 +68,23 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+input[type="reset"] {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: red;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="reset"]:hover {
+    background-color: rgb(197, 0, 0);
+}
+
 .warning-p {
     color: red;
 }

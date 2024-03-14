@@ -1,6 +1,6 @@
 .container {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 0.7fr));
+    grid-template-columns: 40% 60%;
     gap: 20px;
     justify-content: center;
     width: 95%;
@@ -83,4 +83,26 @@
 .address-details label {
     font-weight: bold;
     margin: 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.save-address {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.save-address:hover {
+    background-color: rgb(1, 104, 1);
 }

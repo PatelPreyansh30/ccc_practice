@@ -39,4 +39,12 @@ class Core_Controller_Front_Action
         $url = Mage::getBaseUrl($url);
         header("Location: {$url}");
     }
+    public function checkDataIsNull(array $data, string $url)
+    {
+        foreach ($data as $value) {
+            if (!$value || empty($value)) {
+                $this->setRedirect($url);
+            }
+        }
+    }
 }

@@ -12,15 +12,18 @@ class Sales_Model_Quote extends Core_Model_Abstract
         $quoteId = Mage::getSingleton('core/session')->get('quote_id');
         if (!$quoteId) {
             $quote = Mage::getModel('sales/quote')
-                ->setData(['tax_percent' => 0, 'grand_total' => 0])
+                ->setData(
+                    [
+                        'tax_percent' => 0,
+                        'grand_total' => 0,
+                    ]
+                )
                 ->save();
             Mage::getSingleton('core/session')
                 ->set('quote_id', $quote->getId());
             $quoteId = $quote->getId();
-            $this->load($quoteId);
-        } else {
-            $this->load($quoteId);
         }
+        $this->load($quoteId);
         return $this;
     }
     public function getItemCollection()
@@ -63,6 +66,9 @@ class Sales_Model_Quote extends Core_Model_Abstract
                     : null
                 );
         }
+        $this->removeData('order_id')
+            ->removeData('payment_id')
+            ->removeData('shipping_id');
         $this->save();
     }
     public function deleteProduct($itemId)
@@ -74,6 +80,9 @@ class Sales_Model_Quote extends Core_Model_Abstract
         if ($this->getId()) {
             Mage::getModel('sales/quote_item')->deleteItem($this, $itemId);
         }
+        $this->removeData('order_id')
+            ->removeData('payment_id')
+            ->removeData('shipping_id');
         $this->save();
     }
     public function addAddress($address)
@@ -94,14 +103,16 @@ class Sales_Model_Quote extends Core_Model_Abstract
     }
     public function convert()
     {
-        echo "<pre>";
         if ($this->getId()) {
-
             $orderId = Mage::getModel('sales/order')
                 ->setData($this->getData())
                 ->removeData('quote_id')
                 ->save()
                 ->getId();
+
+            $this->addData('order_id', $orderId)
+                ->save();
+
             foreach ($this->getItemCollection() as $item) {
                 Mage::getModel('sales/order_item')
                     ->setData($item->getData())
@@ -119,6 +130,5 @@ class Sales_Model_Quote extends Core_Model_Abstract
                     ->save();
             }
         }
-        print_r($this);
     }
 }

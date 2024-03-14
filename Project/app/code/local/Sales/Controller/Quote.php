@@ -6,6 +6,8 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
     {
         $quoteData = $this->getRequest()
             ->getParams('sales_quote');
+        $this->checkDataIsNull([$quoteData], '');
+
         Mage::getSingleton("sales/quote")
             ->addProduct($quoteData);
         $this->setRedirect('cart');
@@ -22,27 +24,29 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
     public function saveAddressAction()
     {
         $quoteId = Mage::getSingleton('core/session')->get('quote_id');
+        $this->checkDataIsNull([$quoteId], '');
 
-        if ($quoteId) {
-            $quoteModel = Mage::getModel('sales/quote');
+        $quoteModel = Mage::getModel('sales/quote');
 
-            $customerAddressData = $this->getRequest()
-                ->getParams('customer_address');
-            $quoteModel->addAddress($customerAddressData);
-            $this->setRedirect('cart/checkout/method');
-        } else {
-            $this->setRedirect('page');
-        }
+        $customerAddressData = $this->getRequest()
+            ->getParams('customer_address');
+        $quoteModel->addAddress($customerAddressData);
+        $this->setRedirect('cart/checkout/method');
     }
     public function placeOrderAction()
     {
+        $quoteId = Mage::getSingleton('core/session')->get('quote_id');
+        $this->checkDataIsNull([$quoteId], '');
+        $quoteModel = Mage::getModel('sales/quote')->load($quoteId);
+
         $paymentMethodData = $this->getRequest()
             ->getParams('quote_payment_method');
         $shippingMethodData = $this->getRequest()
             ->getParams('quote_shipping_method');
-
-        $quoteId = Mage::getSingleton('core/session')->get('quote_id');
-        $quoteModel = Mage::getModel('sales/quote')->load($quoteId);
+        $this->checkDataIsNull(
+            [$paymentMethodData, $shippingMethodData],
+            'cart/checkout/method'
+        );
 
         $paymentMethodModel = Mage::getModel('sales/quote_payment');
         $shippingMethodModel = Mage::getModel('sales/quote_shipping');
@@ -60,5 +64,7 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
             ->save();
 
         $quoteModel->convert();
+        // $this->setRedirect('');
+        echo "Order placed successfully";
     }
 }
