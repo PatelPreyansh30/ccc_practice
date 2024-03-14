@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   populateFieldBasedOnBillingAddress();
   fillAddressForm();
+  countryAJAX();
 });
 
 function populateFieldBasedOnBillingAddress() {
@@ -26,4 +27,52 @@ function fillAddressForm() {
       }
     });
   }
+}
+
+function countryAJAX() {
+  let billingSelect = document.getElementById("billing_country");
+  let billingRegion = document.getElementById("billing_region");
+  let json = JSON.parse(billingSelect.getAttribute("country"));
+
+  let billingRegionId = 1;
+  for (let key in json[billingRegionId]) {
+    let option = document.createElement("option");
+    option.value = key;
+    option.innerHTML = json[billingRegionId][key];
+    billingSelect.appendChild(option);
+  }
+
+  billingRegion.addEventListener("change", () => {
+    billingSelect.innerHTML = "";
+    let billingRegionId = billingRegion.value;
+    for (let key in json[billingRegionId]) {
+      let option = document.createElement("option");
+      option.value = key;
+      option.innerHTML = json[billingRegionId][key];
+      billingSelect.appendChild(option);
+    }
+  });
+
+  let shippingSelect = document.getElementById("shipping_country");
+  let shippingRegion = document.getElementById("shipping_region");
+  let shippingJson = JSON.parse(shippingSelect.getAttribute("country"));
+
+  let shippingRegionId = 1;
+  for (let key in json[shippingRegionId]) {
+    let option = document.createElement("option");
+    option.value = key;
+    option.innerHTML = json[shippingRegionId][key];
+    shippingSelect.appendChild(option);
+  }
+
+  shippingRegion.addEventListener("change", () => {
+    shippingSelect.innerHTML = "";
+    let shippingRegionId = shippingRegion.value;
+    for (let key in shippingJson[shippingRegionId]) {
+      let option = document.createElement("option");
+      option.value = key;
+      option.innerHTML = shippingJson[shippingRegionId][key];
+      shippingSelect.appendChild(option);
+    }
+  });
 }

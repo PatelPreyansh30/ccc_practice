@@ -26,7 +26,7 @@ class Admin_Controller_Banner extends Core_Controller_Admin_Action
 
             $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerFileImage;
 
-            if (isset($bannerData['banner_id'])) {
+            if (!empty($bannerData['banner_id'])) {
                 $singleBannerData = Mage::getModel('banner/banner')->load($bannerData['banner_id']);
                 unlink(Mage::getBaseDir('media/banner/') . $singleBannerData->getBannerPath());
             }

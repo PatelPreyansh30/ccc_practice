@@ -113,19 +113,35 @@
                 </div>
                 <div>
                     <label for="billing_region">Billing Region:</label>
-                    <input type="text" value="" name="customer_address[billing_region]" id="billing_region">
+                    <select name="customer_address[billing_region]" id="billing_region">
+                        <?php foreach ($this->getRegions() as $key => $val): ?>
+                            <option value='<?php echo $key ?>' class="billing_region">
+                                <?php echo $val ?>
+                            </option>;
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <div>
                     <label for="shipping_region">Shipping Region:</label>
-                    <input type="text" value="" name="customer_address[shipping_region]" id="shipping_region">
+                    <select name="customer_address[shipping_region]" id="shipping_region">
+                        <?php foreach ($this->getRegions() as $key => $val): ?>
+                            <option value='<?php echo $key ?>' class="shipping_region">
+                                <?php echo $val ?>
+                            </option>;
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <div>
                     <label for="billing_country">Billing Country:</label>
-                    <input type="text" value="" name="customer_address[billing_country]" id="billing_country">
+                    <select name="customer_address[billing_country]" id="billing_country"
+                        country='<?php echo $this->getCountry() ?>'>
+                    </select>
                 </div>
                 <div>
                     <label for="shipping_country">Shipping Country:</label>
-                    <input type="text" value="" name="customer_address[shipping_country]" id="shipping_country">
+                    <select name="customer_address[shipping_country]" id="shipping_country"
+                        country='<?php echo $this->getCountry() ?>'>
+                    </select>
                 </div>
                 <div>
                     <label for="billing_phone">Billing Phone:</label>

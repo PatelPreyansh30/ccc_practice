@@ -64,7 +64,9 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
             ->save();
 
         $quoteModel->convert();
-        // $this->setRedirect('');
-        echo "Order placed successfully";
+
+        Mage::getSingleton('core/session')->remove('quote_id');
+        echo "<script>alert('Order placed successfully')</script>";
+        $this->setRedirect('');
     }
 }
