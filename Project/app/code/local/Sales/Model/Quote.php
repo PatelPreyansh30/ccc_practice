@@ -73,9 +73,7 @@ class Sales_Model_Quote extends Core_Model_Abstract
     }
     public function deleteProduct($itemId)
     {
-        $quoteId = Mage::getSingleton('core/session')
-            ->get('quote_id');
-        $this->load($quoteId);
+        $this->initQuote();
 
         if ($this->getId()) {
             Mage::getModel('sales/quote_item')->deleteItem($this, $itemId);
@@ -100,6 +98,31 @@ class Sales_Model_Quote extends Core_Model_Abstract
             $id = $quoteCustomerModel->save()->getId();
             $session->set('quote_customer_id', $id);
         }
+    }
+    public function addPayment($paymentMethodData)
+    {
+        $this->initQuote();
+        if ($this->getId()) {
+            $id = Mage::getModel("sales/quote_payment")
+                ->addPaymentMethod($this, $paymentMethodData)
+                ->getId();
+            $this->addData('payment_id', $id);
+        }
+        $this->removeData('order_id');
+        $this->removeData('shipping_id');
+        $this->save();
+    }
+    public function addShipping($shippingMethodData)
+    {
+        $this->initQuote();
+        if ($this->getId()) {
+            $id = Mage::getModel("sales/quote_shipping")
+                ->addShippingMethod($this, $shippingMethodData)
+                ->getId();
+            $this->addData('shipping_id', $id);
+        }
+        $this->removeData('order_id');
+        $this->save();
     }
     public function convert()
     {

@@ -15,7 +15,6 @@ class Cart_Block_View extends Core_Block_Template
             ->getCollection()
             ->addFieldToFilter('quote_id', $quoteId)
             ->getData();
-        ;
     }
     public function getQuote()
     {

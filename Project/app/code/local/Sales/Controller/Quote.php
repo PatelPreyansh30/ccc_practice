@@ -14,11 +14,11 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
     }
     public function deleteAction()
     {
+        $quoteItemId = $this->getRequest()->getParams('item_id');
+        $this->checkDataIsNull([$quoteItemId], '');
+
         Mage::getSingleton("sales/quote")
-            ->deleteProduct(
-                $this->getRequest()
-                    ->getParams('item_id')
-            );
+            ->deleteProduct($quoteItemId);
         $this->setRedirect('cart');
     }
     public function saveAddressAction()
@@ -37,7 +37,8 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
     {
         $quoteId = Mage::getSingleton('core/session')->get('quote_id');
         $this->checkDataIsNull([$quoteId], '');
-        $quoteModel = Mage::getModel('sales/quote')->load($quoteId);
+
+        $quoteModel = Mage::getModel('sales/quote');
 
         $paymentMethodData = $this->getRequest()
             ->getParams('quote_payment_method');
@@ -48,20 +49,8 @@ class Sales_Controller_Quote extends Core_Controller_Front_Action
             'cart/checkout/method'
         );
 
-        $paymentMethodModel = Mage::getModel('sales/quote_payment');
-        $shippingMethodModel = Mage::getModel('sales/quote_shipping');
-
-        $paymentMethodId = $paymentMethodModel->setData($paymentMethodData)
-            ->save()
-            ->getId();
-        $shippingMethodId = $shippingMethodModel->setData($shippingMethodData)
-            ->save()
-            ->getId();
-
-        $quoteModel->addData('payment_id', $paymentMethodId)
-            ->addData('shipping_id', $shippingMethodId)
-            ->removeData('order_id')
-            ->save();
+        $quoteModel->addPayment($paymentMethodData);
+        $quoteModel->addShipping($shippingMethodData);
 
         $quoteModel->convert();
 
