@@ -142,13 +142,7 @@ class Sales_Model_Quote extends Core_Model_Abstract
     {
         if ($this->getId()) {
             $orderModel = Mage::getModel('sales/order');
-            $orderId = $orderModel->setData($this->getData())
-                ->removeData('quote_id')
-                ->removeData('order_id')
-                ->removeData('payment_id')
-                ->removeData('shipping_id')
-                ->save()
-                ->getId();
+            $orderId = $orderModel->addOrder($this->getData())->getId();
 
             foreach ($this->getItemCollection() as $item) {
                 $orderModel->addOrderItem($item->getData());

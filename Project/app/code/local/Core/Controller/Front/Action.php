@@ -4,6 +4,7 @@ class Core_Controller_Front_Action
 {
     protected $_layout = null;
     protected $_allowedAction = [];
+    protected $_notAllowedAction = [];
     public function __construct()
     {
         $this->init();
@@ -15,9 +16,11 @@ class Core_Controller_Front_Action
     }
     public function init()
     {
+        $actionName = $this->getRequest()->getActionName();
+        $customerId = Mage::getSingleton('core/session')->get('logged_in_customer_id');
+
         if (
-            !in_array($this->getRequest()->getActionName(), $this->_allowedAction) &&
-            !Mage::getSingleton('core/session')->get('logged_in_customer_id')
+            in_array($actionName, $this->_notAllowedAction) && !$customerId
         ) {
             $this->setRedirect('customer/account/login');
         }

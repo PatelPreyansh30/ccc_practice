@@ -24,6 +24,16 @@ class Sales_Model_Order extends Core_Model_Abstract
         }
         $this->addData('order_number', $orderNumber);
     }
+    public function addOrder($order)
+    {
+        $this->setData($order)
+            ->removeData('quote_id')
+            ->removeData('order_id')
+            ->removeData('payment_id')
+            ->removeData('shipping_id')
+            ->save();
+        return $this;
+    }
     public function addOrderItem($quoteItem)
     {
         if ($this->getId()) {
