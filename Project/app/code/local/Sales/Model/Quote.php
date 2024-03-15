@@ -9,16 +9,28 @@ class Sales_Model_Quote extends Core_Model_Abstract
     }
     public function initQuote()
     {
-        $quoteId = Mage::getSingleton('core/session')->get('quote_id');
+        $sessionModel = Mage::getSingleton('core/session');
+        $quoteId = $sessionModel->get('quote_id');
+        $customerId = $sessionModel->get('logged_in_customer_id');
+
         if (!$quoteId) {
             $quote = Mage::getModel('sales/quote')
-                ->setData(
-                    [
-                        'tax_percent' => 0,
-                        'grand_total' => 0,
-                    ]
-                )
-                ->save();
+                ->setData(['tax_percent' => 0, 'grand_total' => 0]);
+            $quote->save();
+
+            if ($customerId) {
+                $existingQuote = Mage::getModel('sales/quote')
+                    ->getCollection()
+                    ->addFieldToFilter('quote_id', $quote->getId())
+                    ->addFieldToFilter('customer_id', $customerId)
+                    ->getFirstItem();
+                if ($existingQuote) {
+                    $quote->addData('quote_id', $existingQuote->getId());
+                }
+                $quote->addData('customer_id', $customerId);
+            }
+
+            $quote->save();
             Mage::getSingleton('core/session')
                 ->set('quote_id', $quote->getId());
             $quoteId = $quote->getId();
@@ -75,13 +87,14 @@ class Sales_Model_Quote extends Core_Model_Abstract
                     $this,
                     $quoteData['product_id'],
                     $quoteData['qty'],
-                    isset($quoteData['item_id'])
+                    isset ($quoteData['item_id'])
                     ? $quoteData['item_id']
                     : null
                 );
         }
         $this->removeData('order_id')
             ->removeData('payment_id')
+            ->removeData('customer_id')
             ->removeData('shipping_id');
         $this->save();
     }
@@ -94,11 +107,13 @@ class Sales_Model_Quote extends Core_Model_Abstract
         }
         $this->removeData('order_id')
             ->removeData('payment_id')
+            ->removeData('customer_id')
             ->removeData('shipping_id');
         $this->save();
     }
     public function addAddress($address)
     {
+        $this->initQuote();
         $session = Mage::getSingleton('core/session');
         $quoteCustomerId = $session->get('quote_customer_id');
 
@@ -112,6 +127,11 @@ class Sales_Model_Quote extends Core_Model_Abstract
             $id = $quoteCustomerModel->save()->getId();
             $session->set('quote_customer_id', $id);
         }
+        $this->addData('customer_id', $address['customer_id'])
+            ->removeData('order_id')
+            ->removeData('payment_id')
+            ->removeData('shipping_id')
+            ->save();
     }
     public function addPayment($paymentMethodData)
     {

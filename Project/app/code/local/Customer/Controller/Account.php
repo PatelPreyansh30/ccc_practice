@@ -48,7 +48,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
             if (count($loginData)) {
                 Mage::getSingleton('core/session')
                     ->set('logged_in_customer_id', $loginData[0]->getId());
-                $this->setRedirect('customer/account/dashboard');
+                $this->setRedirect('');
             } else {
                 $this->setRedirect('customer/account/login');
             }
@@ -81,9 +81,9 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
 
             // $dashboard = Mage::getBlock('customer/account_dashboard');
             // $content->addChild('form', $dashboard);
-            echo "<pre>";
-            print_r($customerData);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($customerData);
+            // echo "</pre>";
             $layout->toHtml();
         }
     }
