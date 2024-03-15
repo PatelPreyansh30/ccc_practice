@@ -40,6 +40,20 @@ class Sales_Model_Quote extends Core_Model_Abstract
             ->addFieldToFilter('quote_id', $this->getId())
             ->getFirstItem();
     }
+    public function getPaymentMethod()
+    {
+        return Mage::getModel('sales/quote_payment')
+            ->getCollection()
+            ->addFieldToFilter('quote_id', $this->getId())
+            ->getFirstItem();
+    }
+    public function getShippingMethod()
+    {
+        return Mage::getModel('sales/quote_shipping')
+            ->getCollection()
+            ->addFieldToFilter('quote_id', $this->getId())
+            ->getFirstItem();
+    }
     protected function _beforeSave()
     {
         $grandTotal = 0;
@@ -127,31 +141,30 @@ class Sales_Model_Quote extends Core_Model_Abstract
     public function convert()
     {
         if ($this->getId()) {
-            $orderId = Mage::getModel('sales/order')
-                ->setData($this->getData())
+            $orderModel = Mage::getModel('sales/order');
+            $orderId = $orderModel->setData($this->getData())
                 ->removeData('quote_id')
+                ->removeData('order_id')
+                ->removeData('payment_id')
+                ->removeData('shipping_id')
                 ->save()
                 ->getId();
 
-            $this->addData('order_id', $orderId)
-                ->save();
-
             foreach ($this->getItemCollection() as $item) {
-                Mage::getModel('sales/order_item')
-                    ->setData($item->getData())
-                    ->removeData('item_id')
-                    ->removeData('quote_id')
-                    ->addData('order_id', $orderId)
-                    ->save();
+                $orderModel->addOrderItem($item->getData());
             }
             if ($this->getCustomer()) {
-                Mage::getModel('sales/order_customer')
-                    ->setData($this->getCustomer()->getData())
-                    ->removeData('quote_customer_id')
-                    ->removeData('quote_id')
-                    ->addData('order_id', $orderId)
-                    ->save();
+                $orderModel->addOrderCustomer($this->getCustomer()->getData());
             }
+            if ($this->getPaymentMethod()) {
+                $orderModel->addOrderPayment($this->getPaymentMethod()->getData());
+            }
+            if ($this->getShippingMethod()) {
+                $orderModel->addOrderShipping($this->getShippingMethod()->getData());
+            }
+
+            $this->addData('order_id', $orderId)
+                ->save();
         }
     }
 }

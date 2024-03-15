@@ -24,4 +24,36 @@ class Sales_Model_Order extends Core_Model_Abstract
         }
         $this->addData('order_number', $orderNumber);
     }
+    public function addOrderItem($quoteItem)
+    {
+        if ($this->getId()) {
+            Mage::getModel('sales/order_item')
+                ->addItem($this, $quoteItem);
+        }
+    }
+    public function addOrderCustomer($quoteCustomer)
+    {
+        if ($this->getId()) {
+            Mage::getModel('sales/order_customer')
+                ->addCustomer($this, $quoteCustomer);
+        }
+    }
+    public function addOrderPayment($quotePayment)
+    {
+        if ($this->getId()) {
+            $id = Mage::getModel('sales/order_payment')
+                ->addPayment($this, $quotePayment)
+                ->getId();
+            $this->addData('payment_id', $id)->save();
+        }
+    }
+    public function addOrderShipping($quoteShipping)
+    {
+        if ($this->getId()) {
+            $id = Mage::getModel('sales/order_shipping')
+                ->addShipping($this, $quoteShipping)
+                ->getId();
+            $this->addData('shipping_id', $id)->save();
+        }
+    }
 }

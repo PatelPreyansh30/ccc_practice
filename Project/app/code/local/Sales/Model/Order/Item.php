@@ -18,4 +18,13 @@ class Sales_Model_Order_Item extends Core_Model_Abstract
             $this->addData('product_color', $this->getProduct()->getColor());
         }
     }
+    public function addItem(Sales_Model_Order $order,$quoteItem)
+    {
+        $this->setData($quoteItem)
+            ->removeData('item_id')
+            ->removeData('quote_id')
+            ->addData('order_id', $order->getId())
+            ->save();
+        return $this;
+    }
 }
