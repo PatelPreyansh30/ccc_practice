@@ -31,10 +31,15 @@ class Core_Model_Resource_Collection_Abstract
         $this->_select['LIMIT'][] = $limit;
         return $this;
     }
+    public function addOrderBy($column, $type = 'ASC')
+    {
+        $this->_select['ORDER_BY'][] = "{$column} {$type}";
+        return $this;
+    }
     public function load()
     {
         $sql = "SELECT * FROM {$this->_select['FROM']}";
-        if (isset($this->_select["WHERE"])) {
+        if (isset ($this->_select["WHERE"])) {
             $whereCondition = [];
             foreach ($this->_select["WHERE"] as $column => $value) {
                 foreach ($value as $_value) {
@@ -64,7 +69,13 @@ class Core_Model_Resource_Collection_Abstract
             }
             $sql .= " WHERE " . implode(" AND ", $whereCondition);
         }
-        if (isset($this->_select['LIMIT'])) {
+
+        if (isset ($this->_select['ORDER_BY'])) {
+            $orderBy = implode(", ", array_values($this->_select['ORDER_BY']));
+            $sql .= " ORDER BY {$orderBy}";
+        }
+
+        if (isset ($this->_select['LIMIT'])) {
             $limit = implode(', ', array_values($this->_select['LIMIT']));
             $sql .= " LIMIT {$limit}";
         }
@@ -82,6 +93,6 @@ class Core_Model_Resource_Collection_Abstract
     public function getFirstItem()
     {
         $this->load();
-        return isset($this->_data[0]) ? $this->_data[0] : null;
+        return isset ($this->_data[0]) ? $this->_data[0] : null;
     }
 }

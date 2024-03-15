@@ -2,7 +2,7 @@
 
 class Cart_Controller_Checkout extends Core_Controller_Front_Action
 {
-    protected $_notAllowedAction = ['index', 'method'];
+    protected $_notAllowedAction = ['index', 'method', 'success'];
     public function indexAction()
     {
         $quoteId = Mage::getSingleton('core/session')->get('quote_id');
@@ -29,6 +29,19 @@ class Cart_Controller_Checkout extends Core_Controller_Front_Action
 
         $methodForm = Mage::getBlock('cart/checkout_method');
         $content->addChild('method', $methodForm);
+
+        $layout->toHtml();
+    }
+    public function successAction()
+    {
+        $layout = $this->getLayout();
+        $layout->getChild('head')
+            ->addCss('cart/checkout/success.css');
+        // ->addJs('cart/checkout/success.js');
+        $content = $layout->getChild('content');
+
+        $successPage = Mage::getBlock('cart/checkout_success');
+        $content->addChild('method', $successPage);
 
         $layout->toHtml();
     }
