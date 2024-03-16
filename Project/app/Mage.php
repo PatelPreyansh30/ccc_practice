@@ -28,7 +28,7 @@ class Mage
 
     public static function getSingleton($className)
     {
-        if (isset(self::$_singleton[$className])) {
+        if (isset (self::$_singleton[$className])) {
             return self::$_singleton[$className];
         } else {
             return self::$_singleton[$className] = self::getModel($className);

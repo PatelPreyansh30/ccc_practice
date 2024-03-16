@@ -21,7 +21,7 @@ class Sales_Model_Quote extends Core_Model_Abstract
                 $existingQuote = Mage::getModel('sales/quote')
                     ->getCollection()
                     ->addFieldToFilter('customer_id', $customerId)
-                    ->addFieldToFilter('order_id', null)
+                    ->addFieldToFilter('order_id', ['is_null' => null])
                     ->addOrderBy('quote_id', 'DESC')
                     ->getFirstItem();
                 if ($existingQuote) {
@@ -40,10 +40,13 @@ class Sales_Model_Quote extends Core_Model_Abstract
     }
     public function getItemCollection()
     {
-        return Mage::getModel('sales/quote_item')
-            ->getCollection()
-            ->addFieldToFilter('quote_id', $this->getId())
-            ->getData();
+        if ($this->getId()) {
+            return Mage::getModel('sales/quote_item')
+                ->getCollection()
+                ->addFieldToFilter('quote_id', $this->getId())
+                ->getData();
+        }
+        return [];
     }
     public function getCustomer()
     {

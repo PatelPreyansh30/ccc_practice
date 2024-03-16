@@ -63,6 +63,9 @@ class Core_Model_Resource_Collection_Abstract
                             case 'like':
                                 $whereCondition[] = "{$column} LIKE '{$_v}'";
                                 break;
+                            case 'is_null':
+                                $whereCondition[] = "{$column} IS NULL";
+                                break;
                         }
                     }
                 }

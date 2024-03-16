@@ -17,10 +17,26 @@
     display: flex;
 }
 
+.cart-count {
+    padding: 3px 6px;
+    font-weight: 500;
+    border-radius: 40%;
+    background-color: #4CAF50;
+}
+
+.logout {
+    color: #333 !important;
+    background-color: #fff !important;
+}
+
+.logout:hover {
+    background-color: #e2e2e2 !important;
+}
+
 .nav a {
     color: #fff;
     text-decoration: none;
-    margin-left: 20px;
+    margin-left: 10px;
     padding: 5px 10px;
     border-radius: 5px;
     transition: background-color 0.3s;

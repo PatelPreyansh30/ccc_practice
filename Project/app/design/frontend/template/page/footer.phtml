@@ -9,12 +9,10 @@
             <div class="footerItem">
                 <p class="footerHeading">Categories</p>
                 <ul>
-                    <li><a href="#">Clothing</a></li>
-                    <li><a href="#">Lingrie</a></li>
-                    <li><a href="#">Footwear</a></li>
-                    <li><a href="#">Hand bag</a></li>
-                    <li><a href="#">Jwellery</a></li>
-                    <li><a href="#">Belt</a></li>
+                    <?php foreach ($this->getCategories() as $category) {
+                        echo "$category";
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="footerItem">
