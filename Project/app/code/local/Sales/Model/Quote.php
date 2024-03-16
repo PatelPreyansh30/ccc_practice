@@ -16,13 +16,13 @@ class Sales_Model_Quote extends Core_Model_Abstract
         if (!$quoteId) {
             $quote = Mage::getModel('sales/quote')
                 ->setData(['tax_percent' => 0, 'grand_total' => 0]);
-            $quote->save();
 
             if ($customerId) {
                 $existingQuote = Mage::getModel('sales/quote')
                     ->getCollection()
-                    ->addFieldToFilter('quote_id', $quote->getId())
                     ->addFieldToFilter('customer_id', $customerId)
+                    ->addFieldToFilter('order_id', null)
+                    ->addOrderBy('quote_id', 'DESC')
                     ->getFirstItem();
                 if ($existingQuote) {
                     $quote->addData('quote_id', $existingQuote->getId());

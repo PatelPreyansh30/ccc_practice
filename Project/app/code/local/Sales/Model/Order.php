@@ -9,20 +9,22 @@ class Sales_Model_Order extends Core_Model_Abstract
     }
     public function _beforeSave()
     {
-        $orderNumber = rand(1000000, 9999999);
-
-        $flag = True;
-        while ($flag) {
-            $existOrderNumber = Mage::getModel('sales/order')
-                ->getCollection()
-                ->addFieldToFilter('order_number', $orderNumber)
-                ->getFirstItem();
-            if (!$existOrderNumber) {
-                $flag = False;
-            }
+        if (empty ($this->getId())) {
             $orderNumber = rand(1000000, 9999999);
+
+            $flag = True;
+            while ($flag) {
+                $existOrderNumber = Mage::getModel('sales/order')
+                    ->getCollection()
+                    ->addFieldToFilter('order_number', $orderNumber)
+                    ->getFirstItem();
+                if (!$existOrderNumber) {
+                    $flag = False;
+                }
+                $orderNumber = rand(1000000, 9999999);
+            }
+            $this->addData('order_number', $orderNumber);
         }
-        $this->addData('order_number', $orderNumber);
     }
     public function addOrder($order)
     {
