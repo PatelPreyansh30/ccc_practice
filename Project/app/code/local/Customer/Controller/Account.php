@@ -2,7 +2,7 @@
 
 class Customer_Controller_Account extends Core_Controller_Front_Action
 {
-    protected $_notAllowedAction = ['dashboard', 'forgotPassword'];
+    protected $_notAllowedAction = ['dashboard', 'forgotPassword', 'logout'];
     public function registerAction()
     {
         $layout = $this->getLayout();
@@ -66,6 +66,11 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
 
             $layout->toHtml();
         }
+    }
+    public function logoutAction()
+    {
+        Mage::getSingleton('core/session')->destroy();
+        $this->setRedirect('customer/account/login');
     }
     public function dashboardAction()
     {
