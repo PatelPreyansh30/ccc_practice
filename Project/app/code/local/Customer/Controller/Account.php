@@ -2,12 +2,12 @@
 
 class Customer_Controller_Account extends Core_Controller_Front_Action
 {
-    protected $_allowedAction = ['register', 'login'];
+    protected $_notAllowedAction = ['dashboard', 'forgotPassword'];
     public function registerAction()
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('customer/account/form.css');
+            ->addCss('customer/account/register.css');
         $layout->removeChild('header')
             ->removeChild('footer');
 
@@ -55,7 +55,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
         } else {
             $layout = $this->getLayout();
             $layout->getChild('head')
-                ->addCss('customer/account/form.css');
+                ->addCss('customer/account/login.css');
             $layout->removeChild('header')
                 ->removeChild('footer');
 
@@ -87,7 +87,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
             $layout->toHtml();
         }
     }
-    public function forgotpasswordAction()
+    public function forgotPasswordAction()
     {
         if ($this->getRequest()->isPost()) {
             $customerData = $this->getRequest()->getParams('customer');

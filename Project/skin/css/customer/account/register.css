@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 3rem;
+}
+
+.form {
+    height: fit-content;
+    width: 40%;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px 0px rgba(0, 123, 255, 0.4);
+}
+
+.form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form .row {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 15px;
+}
+
+.form>p>a {
+    display: inline-block;
+    color: #0056b3;
+    letter-spacing: 1px;
+}
+
+.form>p>a:hover {
+    text-decoration: underline;
+}

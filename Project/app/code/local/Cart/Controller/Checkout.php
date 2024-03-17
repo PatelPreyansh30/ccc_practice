@@ -10,11 +10,11 @@ class Cart_Controller_Checkout extends Core_Controller_Front_Action
 
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('customer/address/form.css')
+            ->addCss('customer/address/quote/form.css')
             ->addJs('customer/address/form.js');
         $content = $layout->getChild('content');
 
-        $addressForm = Mage::getBlock('customer/address');
+        $addressForm = Mage::getBlock('customer/quote_address');
         $content->addChild('form', $addressForm);
 
         $layout->toHtml();

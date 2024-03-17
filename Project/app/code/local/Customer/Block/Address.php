@@ -15,11 +15,6 @@ class Customer_Block_Address extends Core_Block_Template
             ->addFieldToFilter('customer_id', $customerId)
             ->getData();
     }
-    public function getQuoteId()
-    {
-        return Mage::getSingleton('core/session')
-            ->get('quote_id');
-    }
     public function getCustomerEmail()
     {
         $customerId = Mage::getSingleton('core/session')

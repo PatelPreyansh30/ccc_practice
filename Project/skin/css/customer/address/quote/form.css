@@ -1,0 +1,108 @@
+.container {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 20px;
+    justify-content: center;
+    width: 95%;
+    padding: 2rem;
+}
+
+.form {
+    height: fit-content;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+.form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form .row {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 15px;
+}
+
+.form>p>a {
+    display: inline-block;
+    color: #0056b3;
+    letter-spacing: 1px;
+}
+
+.form>p>a:hover {
+    text-decoration: underline;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: auto;
+    height: fit-content;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+.list-item {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 20px;
+}
+
+.list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.address-card {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;
+    padding: 0 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.address-card h4 {
+    margin: 15px 0;
+}
+
+.address-details {
+    margin-bottom: 10px;
+}
+
+.address-details p {
+    margin: 0;
+}
+
+.address-details label {
+    font-weight: bold;
+    margin: 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.save-address {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.save-address:hover {
+    background-color: rgb(1, 104, 1);
+}
