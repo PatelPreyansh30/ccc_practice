@@ -1,0 +1,38 @@
+<div class="list">
+    <?php if ($this->getOrderList()): ?>
+        <h2>Product List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Total</th>
+                    <th>Tax</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->getOrderList() as $order): ?>
+                    <tr>
+                        <td>
+                            <?php echo $order->getOrderNumber() ?>
+                        </td>
+                        <td>
+                            <?php echo $order->getGrandTotal() ?>
+                        </td>
+                        <td>
+                            <?php echo $order->getTaxPercent() ?>
+                        </td>
+                        <td>
+                            <a href="<?php echo $this->getUrl("customer/order/view?order_id={$order->getId()}") ?>">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p class="warning-p">No orders found</p>
+        <a class="home-button" href="<?php echo $this->getUrl('') ?>">Go To Home</a>
+    <?php endif; ?>
+</div>

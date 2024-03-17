@@ -5,6 +5,15 @@
             Cart <span class="cart-count">
                 <?php echo $this->getCartCount() ?>
             </span> </a>
-        <?php echo $this->getUser() ?>
+        <?php if ($this->getUser()): ?>
+            <a href='<?php echo $this->getUrl('customer/order/list') ?>'>Order</a>
+            <a href='<?php echo $this->getUrl('customer/address/list') ?>'>Address</a>
+            <a href='<?php echo $this->getUrl('customer/account/dashboard') ?>'>
+                <?php echo $this->getUser(); ?>
+            </a>
+            <a class='logout' href='<?php echo $this->getUrl('customer/account/logout') ?>'>Logout</a>
+        <?php else: ?>
+            <a href='<?php echo $this->getUrl('customer/account/login') ?>'>Login</a>
+        <?php endif; ?>
     </nav>
 </header>

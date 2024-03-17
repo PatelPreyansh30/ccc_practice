@@ -11,13 +11,12 @@ class Page_Block_Header extends Core_Block_Template
         $customerId = Mage::getSingleton('core/session')
             ->get('logged_in_customer_id');
         if ($customerId) {
-            $customer = Mage::getModel('customer/customer')->load($customerId);
-            $msg = "Welcome " . "<b>" . strtoupper($customer->getFirstName()) . "</b>";
-            return "<a href='{$this->getUrl('customer/account/dashboard')}'>" .
-                $msg . "</a>" .
-                "<a class='logout' href='{$this->getUrl('customer/account/logout')}'>Logout</a>";
+            $firstName = Mage::getModel('customer/customer')
+                ->load($customerId)
+                ->getFirstName();
+            return "Welcome " . "<b>" . strtoupper($firstName) . "</b>";
         }
-        return "<a href='{$this->getUrl('customer/account/login')}'>Login</a>";
+        return null;
     }
     public function getCartCount()
     {
