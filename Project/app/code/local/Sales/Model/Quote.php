@@ -30,10 +30,18 @@ class Sales_Model_Quote extends Core_Model_Abstract
                 $quote->addData('customer_id', $customerId);
             }
 
-            $quote->save();
-            Mage::getSingleton('core/session')
-                ->set('quote_id', $quote->getId());
-            $quoteId = $quote->getId();
+            $quoteId = $quote->save()->getId();
+            $sessionModel->set('quote_id', $quoteId);
+        } else {
+            if ($customerId) {
+                $quoteId = Mage::getModel('sales/quote')->load($quoteId)
+                    ->addData('customer_id', $customerId)
+                    ->removeData('order_id')
+                    ->removeData('payment_id')
+                    ->removeData('shipping_id')
+                    ->save()
+                    ->getId();
+            }
         }
         $this->load($quoteId);
         return $this;

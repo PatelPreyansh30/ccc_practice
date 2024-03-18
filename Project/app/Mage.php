@@ -1,5 +1,6 @@
 <?php
 
+error_reporting(E_ALL ^ E_WARNING);
 class Mage
 {
     protected static $_baseDir = 'C:/xampp/htdocs/php/Project';
