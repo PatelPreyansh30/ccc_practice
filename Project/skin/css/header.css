@@ -17,11 +17,28 @@
     display: flex;
 }
 
+.cart-icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.cart-icon i {
+    font-size: 22px;
+    font-weight: 700 !important;
+    color: white;
+}
+
 .cart-count {
-    padding: 3px 6px;
-    font-weight: 500;
-    border-radius: 40%;
-    background-color: #4CAF50;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff6347;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .logout {

@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="order-card">
+        <div class="order-header">
+            <h2>
+                <?php echo "Order #{$this->getOrder()->getOrderNumber()}" ?>
+            </h2>
+            <p>
+                <?php echo "Total: &#8377;{$this->getOrder()->getGrandTotal()}" ?>
+            </p>
+        </div>
+        <div class="order-details">
+            <div class="order-section">
+                <h3>Order Items</h3>
+                <?php foreach ($this->getOrderItems() as $item): ?>
+                    <div class="order-item">
+                        <div class="item-image"><img src="product1.jpg" alt="Product"></div>
+                        <div class="item-info">
+                            <p>
+                                <?php echo "Product Name: {$item->getProductName()}"; ?>
+                            </p>
+                            <p>
+                                <?php echo "Color: {$item->getProductColor()}"; ?>
+                            </p>
+                            <p>
+                                <?php echo "Quantity: {$item->getQty()}"; ?>
+                            </p>
+                            <p>
+                                <?php echo "Total: &#8377;{$item->getPrice()}"; ?>
+                            </p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="order-section">
+                <h3>Order Shipping & Payment</h3>
+                <p>
+                    <?php echo "Shipping Method: {$this->getOrderShipping()}" ?>
+                </p>
+                <p>
+                    <?php echo "Payment Method: {$this->getOrderPayment()}" ?>
+                </p>
+            </div>
+            <div class="order-section">
+                <h3>Order Delivery Address</h3>
+                <p>
+                    <?php echo "Email: {$this->getOrderAddress()->getEmail()}" ?>
+                </p>
+                <div class="address-section">
+                    <div>
+                        <p>
+                            <?php echo "Shipping Address: {$this->getOrderAddress()->getShippingAddress()}" ?>
+                        </p>
+                        <p>
+                            <?php echo "Shipping City: {$this->getOrderAddress()->getShippingCity()}" ?>
+                        </p>
+                        <p>
+                            <?php echo "Shipping Country: {$this->getOrderAddress()->getShippingCountry()}" ?>
+                        </p>
+                        <p>
+                            <?php echo "Shipping Region: {$this->getOrderAddress()->getShippingRegion()}" ?>
+                        </p>
+                        <p>
+                            <?php echo "Shipping Phone: {$this->getOrderAddress()->getShippingPhone()}" ?>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <?php echo "Billing Address: {$this->getOrderAddress()->getBillingAddress()}" ?>
+                        </p>
+                        <p>
+                            <?php echo "Billing City: {$this->getOrderAddress()->getBillingCity()}" ?>
+                        </p>
+                        <p>
+                            <?php echo "Billing Country: {$this->getOrderAddress()->getBillingCountry()}" ?>
+                        </p>
+                        <p>
+                            <?php echo "Billing Region: {$this->getOrderAddress()->getBillingRegion()}" ?>
+                        </p>
+                        <p>
+                            <?php echo "Billing Phone: {$this->getOrderAddress()->getBillingPhone()}" ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
