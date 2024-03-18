@@ -175,9 +175,6 @@ class Sales_Model_Quote extends Core_Model_Abstract
             $orderModel = Mage::getModel('sales/order');
             $orderId = $orderModel->addOrder($this->getData())->getId();
 
-            foreach ($this->getItemCollection() as $item) {
-                $orderModel->addOrderItem($item->getData());
-            }
             if ($this->getCustomer()) {
                 $orderModel->addOrderCustomer($this->getCustomer()->getData());
             }
@@ -186,6 +183,9 @@ class Sales_Model_Quote extends Core_Model_Abstract
             }
             if ($this->getShippingMethod()) {
                 $orderModel->addOrderShipping($this->getShippingMethod()->getData());
+            }
+            foreach ($this->getItemCollection() as $item) {
+                $orderModel->addOrderItem($item->getData());
             }
 
             $this->addData('order_id', $orderId)

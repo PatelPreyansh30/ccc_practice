@@ -19,7 +19,8 @@ $_product = $this->getSingleProduct();
             <div class="quantity">
                 <label for="quantity">Quantity:</label>
                 <input type="hidden" name="sales_quote[product_id]" value="<?php echo $_product->getId() ?>">
-                <input type="number" id="quantity" name="sales_quote[qty]" min="1" value="1">
+                <input type="number" id="quantity" name="sales_quote[qty]" max="<?php echo $_product->getInventory() ?>"
+                    min="1" value="1">
             </div>
             <input type="submit" name="submit" value="Add to Cart" class="add-to-cart">
         </div>
