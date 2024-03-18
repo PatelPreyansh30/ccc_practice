@@ -1,12 +1,12 @@
 <div class="list">
     <?php if ($this->getOrderList()): ?>
-        <h2>Product List</h2>
+        <h2>My Orders</h2>
         <table>
             <thead>
                 <tr>
                     <th>Order Number</th>
-                    <th>Total</th>
-                    <th>Tax</th>
+                    <th>Total (in Rs.)</th>
+                    <th>Tax (in %)</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -17,7 +17,7 @@
                             <?php echo $order->getOrderNumber() ?>
                         </td>
                         <td>
-                            <?php echo $order->getGrandTotal() ?>
+                            <?php echo "&#8377;" . $order->getGrandTotal() ?>
                         </td>
                         <td>
                             <?php echo $order->getTaxPercent() ?>
