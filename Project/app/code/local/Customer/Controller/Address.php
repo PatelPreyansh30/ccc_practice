@@ -1,7 +1,7 @@
 <?php
 class Customer_Controller_Address extends Core_Controller_Front_Action
 {
-    protected $_notAllowedAction = ['form', 'save', 'delete', 'list'];
+    protected $_allowedAction = [];
     public function formAction()
     {
         $layout = $this->getLayout();

@@ -2,7 +2,7 @@
 
 class Customer_Controller_Account extends Core_Controller_Front_Action
 {
-    protected $_notAllowedAction = ['dashboard', 'forgotPassword', 'logout'];
+    protected $_allowedAction = ['register', 'save', 'login'];
     public function registerAction()
     {
         $layout = $this->getLayout();

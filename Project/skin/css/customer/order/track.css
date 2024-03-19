@@ -1,0 +1,155 @@
+.container {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: end;
+    gap: 15px;
+}
+
+.row button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.row button:hover {
+    background-color: #0056b3;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: center;
+}
+
+.hh-grayBox {
+    background-color: #F8F8F8;
+    padding: 35px;
+}
+
+.order-tracking {
+    text-align: center;
+    width: 33.33%;
+    position: relative;
+    display: block;
+}
+
+.order-tracking .is-complete {
+    display: block;
+    position: relative;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: 0px solid #AFAFAF;
+    background-color: #f7be16;
+    margin: 0 auto;
+    transition: background 0.25s linear;
+    -webkit-transition: background 0.25s linear;
+    z-index: 2;
+}
+
+.order-tracking .is-complete:after {
+    display: block;
+    position: absolute;
+    content: '';
+    height: 14px;
+    width: 7px;
+    top: -2px;
+    bottom: 0;
+    left: 5px;
+    margin: auto 0;
+    border: 0px solid #AFAFAF;
+    border-width: 0px 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+.order-tracking.completed .is-complete {
+    border-color: #27aa80;
+    border-width: 0px;
+    background-color: #27aa80;
+}
+
+.order-tracking.completed .is-complete:after {
+    border-color: #fff;
+    border-width: 0px 3px 3px 0;
+    width: 7px;
+    left: 11px;
+    opacity: 1;
+}
+
+.order-tracking.not-completed .is-complete {
+    border-color: red;
+    border-width: 0px;
+    background-color: red;
+}
+
+.order-tracking.not-completed .is-complete:after {
+    border-color: #fff;
+    border-width: 0px 3px 3px 0;
+    width: 7px;
+    left: 11px;
+    opacity: 1;
+}
+
+.order-tracking p {
+    color: #A4A4A4;
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 0;
+    line-height: 20px;
+}
+
+.order-tracking p span {
+    font-size: 14px;
+}
+
+.order-tracking.completed p {
+    color: #000;
+}
+
+.order-tracking.not-completed p {
+    color: #000;
+}
+
+.order-tracking::before {
+    content: '';
+    display: block;
+    height: 3px;
+    width: calc(100% - 40px);
+    background-color: #f7be16;
+    top: 13px;
+    position: absolute;
+    left: calc(-50% + 20px);
+    z-index: 0;
+}
+
+.order-tracking:first-child:before {
+    display: none;
+}
+
+.order-tracking.completed:before {
+    background-color: #27aa80;
+}
+
+.order-tracking.not-completed:before {
+    background-color: red;
+}

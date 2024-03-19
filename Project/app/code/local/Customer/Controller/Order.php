@@ -2,7 +2,7 @@
 
 class Customer_Controller_Order extends Core_Controller_Front_Action
 {
-    protected $_notAllowedAction = ['list', 'view'];
+    protected $_allowedAction = ['track'];
     public function listAction()
     {
         $layout = $this->getLayout();
@@ -25,6 +25,19 @@ class Customer_Controller_Order extends Core_Controller_Front_Action
         $orderView = $layout->createBlock('customer/order_view');
 
         $child->addChild('list', $orderView);
+        $layout->toHtml();
+    }
+    public function trackAction()
+    {
+        $layout = $this->getLayout();
+        $layout->getChild('head')
+            ->addCss('customer/order/track.css')
+            ->addJs('customer/order/track.js');
+        $child = $layout->getChild('content');
+
+        $orderTrack = $layout->createBlock('customer/order_track');
+
+        $child->addChild('track', $orderTrack);
         $layout->toHtml();
     }
 }

@@ -4,7 +4,6 @@ class Core_Controller_Front_Action
 {
     protected $_layout = null;
     protected $_allowedAction = [];
-    protected $_notAllowedAction = [];
     public function __construct()
     {
         $this->init();
@@ -20,7 +19,7 @@ class Core_Controller_Front_Action
         $customerId = Mage::getSingleton('core/session')->get('logged_in_customer_id');
 
         if (
-            in_array($actionName, $this->_notAllowedAction) && !$customerId
+            !in_array($actionName, $this->_allowedAction) && !$customerId
         ) {
             $this->setRedirect('customer/account/login');
         }
@@ -45,7 +44,7 @@ class Core_Controller_Front_Action
     public function checkDataIsNull(array $data, string $url)
     {
         foreach ($data as $value) {
-            if (!$value || empty($value)) {
+            if (!$value || empty ($value)) {
                 $this->setRedirect($url);
             }
         }

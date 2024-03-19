@@ -1,0 +1,18 @@
+<div class="container">
+    <form action="<?php echo $this->getUrl('customer/order/track') ?>" method="get">
+        <div class="row">
+            <div>
+                <label for="order_number">Order Number:</label>
+                <input type="text" required maxlength="7" minlength="7" name="order_number" id="order_number">
+            </div>
+            <button type="submit">Track My Order</button>
+        </div>
+    </form>
+    <div class="flex width-100">
+        <div class="width-100 hh-grayBox">
+            <div class="flex justify-content-between" id="set-status" status="<?php echo $this->getOrderStatus() ?>">
+                
+            </div>
+        </div>
+    </div>
+</div>

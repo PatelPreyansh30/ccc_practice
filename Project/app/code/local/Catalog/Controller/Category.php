@@ -1,7 +1,7 @@
 <?php
 class Catalog_Controller_Category extends Core_Controller_Front_Action
 {
-    protected $_allowedAction = [];
+    protected $_allowedAction = ['view'];
     public function viewAction()
     {
         $layout = $this->getLayout();

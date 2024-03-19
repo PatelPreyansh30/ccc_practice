@@ -1,7 +1,7 @@
 <?php
 class Customer_Controller_Quote_Address extends Core_Controller_Front_Action
 {
-    protected $_notAllowedAction = ['save'];
+    protected $_allowedAction = [];
     public function saveAction()
     {
         $customerAddressData = $this->getRequest()

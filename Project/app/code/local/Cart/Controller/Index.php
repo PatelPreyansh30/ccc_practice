@@ -2,7 +2,7 @@
 
 class Cart_Controller_Index extends Core_Controller_Front_Action
 {
-    protected $_allowedAction = [];
+    protected $_allowedAction = ['index'];
     public function indexAction()
     {
         $layout = $this->getLayout();

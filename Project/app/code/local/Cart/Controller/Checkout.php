@@ -2,7 +2,7 @@
 
 class Cart_Controller_Checkout extends Core_Controller_Front_Action
 {
-    protected $_notAllowedAction = ['index', 'method', 'success'];
+    protected $_allowedAction = [];
     public function indexAction()
     {
         $quoteId = Mage::getSingleton('core/session')->get('quote_id');

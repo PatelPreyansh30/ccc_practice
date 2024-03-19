@@ -2,7 +2,7 @@
 
 class Sales_Controller_Quote extends Core_Controller_Front_Action
 {
-    protected $_notAllowedAction = ['saveAddress','placeOrder'];
+    protected $_allowedAction = ['add','delete'];
     public function addAction()
     {
         $quoteData = $this->getRequest()
