@@ -12,7 +12,7 @@ function setStatusClass() {
       element.setAttribute("class", "order-status half-completed");
     } else if (status == "completed" || status == "refunded") {
       element.setAttribute("class", "order-status completed");
-    } else {
+    } else if (status == "cancelled" || status == "declined") {
       element.setAttribute("class", "order-status not-completed");
     }
   }

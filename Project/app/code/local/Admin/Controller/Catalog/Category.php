@@ -21,6 +21,7 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Admin_Action
         Mage::getModel('catalog/category')
             ->setData($data)
             ->save();
+        $this->setRedirect('admin/catalog_category/list');
     }
     public function deleteAction()
     {
@@ -28,6 +29,7 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Admin_Action
         Mage::getModel('catalog/category')
             ->setId($categoryId)
             ->delete();
+        $this->setRedirect('admin/catalog_category/list');
     }
     public function listAction()
     {

@@ -22,12 +22,14 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
         Mage::getModel('catalog/product')
             ->setData($data)
             ->save();
+        $this->setRedirect('admin/catalog_product/list');
     }
     public function deleteAction()
     {
         $productId = $this->getRequest()->getParams('product_id');
         Mage::getModel('catalog/product')
             ->load($productId)->delete();
+        $this->setRedirect('admin/catalog_product/list');
     }
     public function listAction()
     {

@@ -10,7 +10,7 @@ function setStatusClass() {
     statusTag.setAttribute("class", "half-completed");
   } else if (status == "completed" || status == "refunded") {
     statusTag.setAttribute("class", "completed");
-  } else {
+  } else if (status == "cancelled" || status == "declined") {
     statusTag.setAttribute("class", "not-completed");
   }
 }
