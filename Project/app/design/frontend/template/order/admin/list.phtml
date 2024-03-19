@@ -6,6 +6,7 @@
                 <th>Order Number</th>
                 <th>Total (in Rs.)</th>
                 <th>Tax Percent (in %)</th>
+                <th>Status</th>
                 <th>Customer</th>
                 <th>Action</th>
             </tr>
@@ -21,6 +22,11 @@
                     </td>
                     <td>
                         <?php echo $order->getTaxPercent() ?>
+                    </td>
+                    <td class="order-status" status="<?php echo $order->getStatus() ?>">
+                        <b>
+                            <?php echo ucfirst($order->getStatus()) ?>
+                        </b>
                     </td>
                     <td>
                         <?php echo $this->getCustomerName($order->getCustomerId()) ?>

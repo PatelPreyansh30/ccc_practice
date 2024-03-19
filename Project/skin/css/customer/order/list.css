@@ -16,9 +16,9 @@
 
 .list th,
 .list td {
-    padding: 10px 0;
+    padding: 15px 0;
     text-align: center;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid black;
 }
 
 .list th {
@@ -43,4 +43,19 @@
     border-radius: 10px;
     color: white;
     background-color: #0056b3;
+}
+
+.not-completed {
+    padding: 0 10px !important;
+    color: red;
+}
+
+.completed {
+    padding: 0 10px !important;
+    color: green;
+}
+
+.half-completed {
+    padding: 0 10px !important;
+    color: lightseagreen;
 }

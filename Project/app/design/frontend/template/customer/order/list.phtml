@@ -7,6 +7,7 @@
                     <th>Order Number</th>
                     <th>Total (in Rs.)</th>
                     <th>Tax (in %)</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -21,6 +22,11 @@
                         </td>
                         <td>
                             <?php echo $order->getTaxPercent() ?>
+                        </td>
+                        <td class="order-status" status="<?php echo $order->getStatus() ?>">
+                            <b>
+                                <?php echo ucfirst($order->getStatus()) ?>
+                            </b>
                         </td>
                         <td>
                             <a href="<?php echo $this->getUrl("customer/order/view?order_id={$order->getId()}") ?>">

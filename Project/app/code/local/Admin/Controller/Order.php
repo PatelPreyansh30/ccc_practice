@@ -6,6 +6,7 @@ class Admin_Controller_Order extends Core_Controller_Admin_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
+            ->addJs('customer/order/list.js')
             ->addCss('order/admin/list.css');
         $child = $layout->getChild('content');
 
@@ -18,6 +19,7 @@ class Admin_Controller_Order extends Core_Controller_Admin_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
+            ->addJs('customer/order/view.js')
             ->addCss('order/admin/view.css');
         $child = $layout->getChild('content');
 

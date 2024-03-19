@@ -7,7 +7,8 @@ class Customer_Controller_Order extends Core_Controller_Front_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('customer/order/list.css');
+            ->addCss('customer/order/list.css')
+            ->addJs('customer/order/list.js');
         $child = $layout->getChild('content');
 
         $orderList = $layout->createBlock('customer/order_list');
@@ -19,7 +20,8 @@ class Customer_Controller_Order extends Core_Controller_Front_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('customer/order/view.css');
+            ->addCss('customer/order/view.css')
+            ->addJs('customer/order/view.js');
         $child = $layout->getChild('content');
 
         $orderView = $layout->createBlock('customer/order_view');

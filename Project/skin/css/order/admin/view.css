@@ -69,3 +69,24 @@
     display: flex;
     gap: 20px;
 }
+
+.not-completed {
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    background-color: red;
+}
+
+.completed {
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    background-color: green;
+}
+
+.half-completed {
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    background-color: lightseagreen;
+}

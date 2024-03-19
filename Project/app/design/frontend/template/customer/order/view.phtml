@@ -6,6 +6,9 @@
             </h2>
             <p>
                 <?php echo "Total: &#8377;{$this->getOrder()->getGrandTotal()}" ?>
+                <span id="order-status" status="<?php echo $this->getOrder()->getStatus() ?>">
+                    <?php echo ucfirst($this->getOrder()->getStatus()) ?>
+                </span>
             </p>
         </div>
         <div class="order-details">
