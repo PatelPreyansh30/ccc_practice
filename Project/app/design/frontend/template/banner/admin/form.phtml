@@ -12,7 +12,7 @@ $bannerData = $this->getBanner();
             <div>
                 <label for="name">Banner Image:</label>
                 <input type="file" value="<?php echo $bannerData->getBannerPath() ?>" name="banner[banner_path]"
-                    id="name">
+                    id="name" required accept="image/png, image/jpeg, image/jpg" />
             </div>
             <?php if ($bannerData->getBannerPath()): ?>
                 <div>
@@ -22,7 +22,8 @@ $bannerData = $this->getBanner();
             <?php endif; ?>
             <div>
                 <label for="status">Banner Status:</label>
-                <select name="banner[status]" id="status">
+                <select name="banner[status]" id="status" required>
+                    <option value="">Please select status</option>
                     <option value='1' <?php echo $bannerData->getStatus() == 'Enabled' ? 'selected' : '' ?>>Enabled
                     </option>;
                     <option value='0' <?php echo $bannerData->getStatus() == 'Disabled' ? 'selected' : '' ?>>

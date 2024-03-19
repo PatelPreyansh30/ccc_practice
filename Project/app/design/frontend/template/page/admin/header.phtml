@@ -1,12 +1,33 @@
 <header class="header">
     <div class="logo">Admin Panel</div>
     <nav class="nav">
-        <a href="<?php echo $this->getUrl('admin/order/list') ?>">Order List</a>
-        <a href="<?php echo $this->getUrl('admin/catalog_product/list') ?>">Product List</a>
-        <a href="<?php echo $this->getUrl('admin/catalog_product/form') ?>">Add Product</a>
-        <a href="<?php echo $this->getUrl('admin/catalog_category/list') ?>">Category List</a>
-        <a href="<?php echo $this->getUrl('admin/catalog_category/form') ?>">Add Category</a>
-        <a href="<?php echo $this->getUrl('admin/banner/form') ?>">Add Banner</a>
-        <a href="<?php echo $this->getUrl('admin/banner/list') ?>">Banner List</a>
+        <div class="dropdown">
+            <button class="dropbtn">Product</button>
+            <div class="dropdown-content">
+                <a href="<?php echo $this->getUrl('admin/catalog_product/form') ?>">Add Product</a>
+                <a href="<?php echo $this->getUrl('admin/catalog_product/list') ?>">View Product</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Category</button>
+            <div class="dropdown-content">
+                <a href="<?php echo $this->getUrl('admin/catalog_category/form') ?>">Add Category</a>
+                <a href="<?php echo $this->getUrl('admin/catalog_category/list') ?>">View Category</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Banner</button>
+            <div class="dropdown-content">
+                <a href="<?php echo $this->getUrl('admin/banner/form') ?>">Add Banner</a>
+                <a href="<?php echo $this->getUrl('admin/banner/list') ?>">View Banner</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Order</button>
+            <div class="dropdown-content">
+                <a href="<?php echo $this->getUrl('admin/order/list') ?>">View Order</a>
+            </div>
+        </div>
+        <a href="<?php echo $this->getUrl('admin/user/logout') ?>">Logout</a>
     </nav>
 </header>

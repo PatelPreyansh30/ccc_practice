@@ -5,30 +5,31 @@
             <input type="hidden" value="<?php echo $this->getCustomerId() ?>" name="customer_address[customer_id]">
             <input type="hidden" value="<?php echo $this->getCustomerEmail() ?>" name="customer_address[email]">
         </div>
-        <p onclick="populateFieldBasedOnBillingAddress()" style="cursor: pointer;">
+        <p id='same-as' style="cursor: pointer;">
             <input type="checkbox" id="checkbox">
             Same as billing address
         </p>
         <div class="row">
             <div>
                 <label for="billing_address">Billing Address:</label>
-                <input type="text" value="" name="customer_address[billing_address]" id="billing_address">
+                <input type="text" required value="" name="customer_address[billing_address]" id="billing_address">
             </div>
             <div>
                 <label for="shipping_address">Shipping Address:</label>
-                <input type="text" value="" name="customer_address[shipping_address]" id="shipping_address">
+                <input type="text" required value="" name="customer_address[shipping_address]" id="shipping_address">
             </div>
             <div>
                 <label for="billing_city">Billing City:</label>
-                <input type="text" value="" name="customer_address[billing_city]" id="billing_city">
+                <input type="text" required value="" name="customer_address[billing_city]" id="billing_city">
             </div>
             <div>
                 <label for="shipping_city">Shipping City:</label>
-                <input type="text" value="" name="customer_address[shipping_city]" id="shipping_city">
+                <input type="text" required value="" name="customer_address[shipping_city]" id="shipping_city">
             </div>
             <div>
                 <label for="billing_region">Billing Region:</label>
-                <select name="customer_address[billing_region]" id="billing_region">
+                <select required name="customer_address[billing_region]" id="billing_region">
+                    <option value="">Please select region</option>
                     <?php foreach ($this->getRegions() as $key => $val): ?>
                         <option value='<?php echo $key ?>' class="billing_region">
                             <?php echo $val ?>
@@ -38,7 +39,8 @@
             </div>
             <div>
                 <label for="shipping_region">Shipping Region:</label>
-                <select name="customer_address[shipping_region]" id="shipping_region">
+                <select required name="customer_address[shipping_region]" id="shipping_region">
+                    <option value="">Please select region</option>
                     <?php foreach ($this->getRegions() as $key => $val): ?>
                         <option value='<?php echo $key ?>' class="shipping_region">
                             <?php echo $val ?>
@@ -48,23 +50,23 @@
             </div>
             <div>
                 <label for="billing_country">Billing Country:</label>
-                <select name="customer_address[billing_country]" id="billing_country"
+                <select required name="customer_address[billing_country]" id="billing_country"
                     country='<?php echo $this->getCountry() ?>'>
                 </select>
             </div>
             <div>
                 <label for="shipping_country">Shipping Country:</label>
-                <select name="customer_address[shipping_country]" id="shipping_country"
+                <select required name="customer_address[shipping_country]" id="shipping_country"
                     country='<?php echo $this->getCountry() ?>'>
                 </select>
             </div>
             <div>
                 <label for="billing_phone">Billing Phone:</label>
-                <input type="text" value="" name="customer_address[billing_phone]" id="billing_phone">
+                <input required type="text" value="" name="customer_address[billing_phone]" id="billing_phone">
             </div>
             <div>
                 <label for="shipping_phone">Shipping Phone:</label>
-                <input type="text" value="" name="customer_address[shipping_phone]" id="shipping_phone">
+                <input required type="text" value="" name="customer_address[shipping_phone]" id="shipping_phone">
             </div>
         </div>
         <div class="buttons">

@@ -5,7 +5,8 @@
             <input type="hidden" name="quote_payment_method[quote_id]" value="<?php echo $this->getQuoteId() ?>">
             <div class="row">
                 <label for="payment_method">Payment Method:</label>
-                <select name="quote_payment_method[payment_method]" id="payment_method">
+                <select name="quote_payment_method[payment_method]" id="payment_method" required>
+                    <option value="">Please select payment method</option>
                     <?php foreach ($this->getPaymentMethods() as $key => $val): ?>
                         <option value='<?php echo $key ?>' class="payment_method">
                             <?php echo $val ?>
@@ -19,7 +20,8 @@
             <input type="hidden" name="quote_shipping_method[quote_id]" value="<?php echo $this->getQuoteId() ?>">
             <div class="row">
                 <label for="shipping_method">Shipping Method:</label>
-                <select name="quote_shipping_method[shipping_method]" id="shipping_method">
+                <select name="quote_shipping_method[shipping_method]" id="shipping_method" required>
+                    <option value="">Please select payment method</option>
                     <?php foreach ($this->getShippingMethods() as $key => $val): ?>
                         <option value='<?php echo $key ?>' class="shipping_method">
                             <?php echo $val ?>

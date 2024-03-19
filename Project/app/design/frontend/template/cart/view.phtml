@@ -23,7 +23,7 @@
                                 <div>
                                     <label for="qty">Quantity:</label>
                                     <input type="number" name="sales_quote[qty]" value="<?php echo $quoteItem->getQty() ?>"
-                                        id="qty">
+                                        id="qty" required min="1" max="<?php echo $quoteItem->getProduct()->getInventory() ?>">
                                 </div>
                             </div>
                         </div>
