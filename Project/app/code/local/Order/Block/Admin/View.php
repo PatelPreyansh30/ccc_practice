@@ -45,4 +45,15 @@ class Order_Block_Admin_View extends Core_Block_Template
             ->getFirstItem()
             ->getShippingMethod();
     }
+    public function getStatus()
+    {
+        return [
+            'pending'=>'Pending', 
+            'shipped'=>'Shipped', 
+            'cancelled'=>'Cancelled', 
+            'declined'=>'Declined', 
+            'refunded'=>'Refunded', 
+            'completed'=>'Completed'
+        ];
+    }
 }

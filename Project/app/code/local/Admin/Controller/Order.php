@@ -29,4 +29,22 @@ class Admin_Controller_Order extends Core_Controller_Admin_Action
         $layout->toHtml();
 
     }
+    public function updateStatusAction()
+    {
+        $statusData = $this->getRequest()->getParams('status_history');
+        $statusData['date'] = date('Y-m-d');
+        $statusData['action_by'] = $this->getRequest()->getModuleName();
+
+        $order = Mage::getModel('sales/order')
+            ->load($statusData['order_id']);
+        $statusData['from_status'] = $order->getStatus();
+        $order->addData('status', $statusData['to_status']);
+
+        Mage::getModel('sales/order_status_history')
+            ->setData($statusData)
+            ->save();
+
+        $order->save();
+        $this->setRedirect('admin/order/list');
+    }
 }

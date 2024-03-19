@@ -86,5 +86,22 @@
                 </div>
             </div>
         </div>
+        <form action="<?php echo $this->getUrl('admin/order/updateStatus') ?>" method="post">
+            <div class="row">
+                <div>
+                    <input type="hidden" name="status_history[order_id]"
+                        value="<?php echo $this->getOrder()->getId() ?>">
+                    <label for="status">Status:</label>
+                    <select name="status_history[to_status]" id="status">
+                        <?php foreach ($this->getStatus() as $key => $val): ?>
+                            <option value='<?php echo $key ?>' <?php echo $key == $this->getOrder()->getStatus() ? 'selected' : '' ?> class="status">
+                                <?php echo $val ?>
+                            </option>;
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <button type="submit">Update Status</button>
+            </div>
+        </form>
     </div>
 </div>
