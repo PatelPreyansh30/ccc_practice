@@ -1,0 +1,49 @@
+<div class="list">
+    <h2>Cancel Order Request</h2>
+    <?php if ($this->getCancelRequestedOrder()): ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Total (in Rs.)</th>
+                    <th>Status</th>
+                    <th>Customer</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->getCancelRequestedOrder() as $order): ?>
+                    <tr>
+                        <td>
+                            <?php echo $this->getOrder($order->getOrderId())->getOrderNumber() ?>
+                        </td>
+                        <td>
+                            <?php echo "&#8377;" . $this->getOrder($order->getOrderId())->getGrandTotal() ?>
+                        </td>
+                        <td class="order-status" status="<?php echo $order->getFromStatus() ?>">
+                            <b>
+                                <?php echo ucfirst($order->getFromStatus()) ?>
+                            </b>
+                        </td>
+                        <td>
+                            <?php echo $this->getCustomerName($this->getOrder($order->getOrderId())->getCustomerId()) ?>
+                        </td>
+                        <td>
+                            <form>
+                                <input type="hidden" name="status_history[history_id]" value="<?php echo $order->getId() ?>">
+                                <button name="status_history[action]" value="confirm"
+                                    formaction="<?php echo $this->getUrl('admin/order/cancel') ?>"
+                                    formmethod="post">Confirm</button>
+                                <button name="status_history[action]" value="cancel"
+                                    formaction="<?php echo $this->getUrl('admin/order/cancel') ?>"
+                                    formmethod="post">Cancel</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p class="warning-p">No cancel request pending</p>
+    <?php endif; ?>
+</div>

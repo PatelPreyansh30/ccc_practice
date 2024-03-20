@@ -86,5 +86,13 @@
                 </div>
             </div>
         </div>
+        <div>
+            <?php if ($this->getOrder()->getStatus() == 'pending'): ?>
+                <form action="<?php echo $this->getUrl('sales/order/cancel') ?>" method="post">
+                    <input type="hidden" name="status_history[order_id]" value="<?php echo $this->getOrder()->getId() ?>">
+                    <button class="cancel-order" type="submit">Cancel Order</button>
+                </form>
+            <?php endif; ?>
+        </div>
     </div>
 </div>

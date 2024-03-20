@@ -70,6 +70,17 @@
     gap: 20px;
 }
 
+.cancel-order {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    background-color: red;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 .not-completed {
     padding: 10px;
     color: white;
