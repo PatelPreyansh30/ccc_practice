@@ -2,11 +2,12 @@
     <a class="logo" href="<?php echo $this->getUrl('') ?>">Ecommerce</a>
     <nav class="nav">
         <a href="<?php echo $this->getUrl('cart') ?>" class="cart-icon">
-            <i class="fa fa-shopping-cart"></i>
+            <img src="<?php echo $this->getCartSvg() ?>" alt="Cart">
             <span class="cart-count">
                 <?php echo $this->getCartCount() ?>
             </span>
         </a>
+        <a href='<?php echo $this->getUrl('customer/order/track') ?>'>Track Order</a>
         <?php if ($this->getUser()): ?>
             <a href='<?php echo $this->getUrl('customer/order/list') ?>'>Order</a>
             <a href='<?php echo $this->getUrl('customer/address/list') ?>'>Address</a>
@@ -18,5 +19,4 @@
             <a href='<?php echo $this->getUrl('customer/account/login') ?>'>Login</a>
         <?php endif; ?>
     </nav>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </header>

@@ -18,7 +18,6 @@ class Admin_Controller_Order extends Core_Controller_Admin_Action
     public function cancelAction()
     {
         if ($this->getRequest()->isPost()) {
-            echo "<pre>";
             $statusData = $this->getRequest()->getParams('status_history');
 
             $statusModel = Mage::getModel('sales/order_status_history')

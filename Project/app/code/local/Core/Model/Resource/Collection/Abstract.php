@@ -28,7 +28,12 @@ class Core_Model_Resource_Collection_Abstract
     }
     public function addLimit($limit)
     {
-        $this->_select['LIMIT'][] = $limit;
+        $this->_select['LIMIT'] = $limit;
+        return $this;
+    }
+    public function addOffset($offset)
+    {
+        $this->_select['OFFSET'] = $offset;
         return $this;
     }
     public function addOrderBy($column, $type = 'ASC')
@@ -79,8 +84,11 @@ class Core_Model_Resource_Collection_Abstract
         }
 
         if (isset ($this->_select['LIMIT'])) {
-            $limit = implode(', ', array_values($this->_select['LIMIT']));
-            $sql .= " LIMIT {$limit}";
+            $sql .= " LIMIT {$this->_select['LIMIT']}";
+        }
+
+        if (isset ($this->_select['OFFSET'])) {
+            $sql .= " OFFSET {$this->_select['OFFSET']}";
         }
         $result = $this->_resource->getAdapter()->fetchAll($sql);
         foreach ($result as $row) {

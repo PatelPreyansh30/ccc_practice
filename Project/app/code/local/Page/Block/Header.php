@@ -18,6 +18,10 @@ class Page_Block_Header extends Core_Block_Template
         }
         return null;
     }
+    public function getCartSvg()
+    {
+        return $this->getUrl('skin/images/cart.svg');
+    }
     public function getCartCount()
     {
         $item = Mage::getModel('sales/quote')

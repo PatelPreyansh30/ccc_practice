@@ -23,9 +23,8 @@
     cursor: pointer;
 }
 
-.cart-icon i {
-    font-size: 22px;
-    font-weight: 700 !important;
+.cart-icon img {
+    width: 26px;
     color: white;
 }
 

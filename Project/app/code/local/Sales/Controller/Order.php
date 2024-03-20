@@ -4,7 +4,6 @@ class Sales_Controller_Order extends Core_Controller_Front_Action
 {
     public function cancelAction()
     {
-        echo "<pre>";
         $cancelData = $this->getRequest()->getParams('status_history');
 
         $status = Mage::getModel('sales/order')
