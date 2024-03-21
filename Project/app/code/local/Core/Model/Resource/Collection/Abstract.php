@@ -36,6 +36,22 @@ class Core_Model_Resource_Collection_Abstract
         $this->_select['OFFSET'] = $offset;
         return $this;
     }
+    public function addCount($column, $newColumnName)
+    {
+        $this->_select["COUNT"] = "Count($column) AS " . $newColumnName;
+        return $this;
+    }
+    public function addSum($column, $newColumnName)
+    {
+        $this->_select["SUM"] = "SUM($column) AS " . $newColumnName;
+        return $this;
+    }
+
+    public function addGroupBy($column)
+    {
+        $this->_select['GROUP_BY'][] = $column;
+        return $this;
+    }
     public function addOrderBy($column, $type = 'ASC')
     {
         $this->_select['ORDER_BY'][] = "{$column} {$type}";
@@ -43,7 +59,17 @@ class Core_Model_Resource_Collection_Abstract
     }
     public function load()
     {
-        $sql = "SELECT * FROM {$this->_select['FROM']}";
+        $sql = "SELECT *";
+
+        if (isset ($this->_select["SUM"])) {
+            $sql .= ",{$this->_select['SUM']}";
+        }
+        if (isset ($this->_select["COUNT"])) {
+            $sql .= ",{$this->_select['COUNT']}";
+        }
+
+        $sql .= " FROM {$this->_select['FROM']}";
+
         if (isset ($this->_select["WHERE"])) {
             $whereCondition = [];
             foreach ($this->_select["WHERE"] as $column => $value) {
@@ -76,6 +102,11 @@ class Core_Model_Resource_Collection_Abstract
                 }
             }
             $sql .= " WHERE " . implode(" AND ", $whereCondition);
+        }
+
+        if (isset ($this->_select['GROUP_BY'])) {
+            $groupBy = implode(", ", array_values($this->_select['GROUP_BY']));
+            $sql .= " GROUP BY '{$groupBy}'";
         }
 
         if (isset ($this->_select['ORDER_BY'])) {

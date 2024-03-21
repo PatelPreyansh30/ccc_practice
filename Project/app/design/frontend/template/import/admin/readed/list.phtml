@@ -1,0 +1,29 @@
+<div class="list">
+    <h2>Import Files</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Pending Import</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->getPendingImportList() as $data): ?>
+                <tr>
+                    <td id="import-type" type="<?php echo $data->getType() ?>"
+                        pending="<?php echo $data->getPendingImport() ?>">
+                        <?php echo ucfirst($data->getType()) ?>
+                    </td>
+                    <td id="pending-data">
+                        <?php echo $data->getPendingImport() ?>
+                    </td>
+                    <td>
+                        <button onclick="importData()" id="import-button">Import</button>
+                        <span id="progressbar"></span>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

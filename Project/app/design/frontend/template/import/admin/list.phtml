@@ -1,0 +1,26 @@
+<div class="list">
+    <h2>Import Files</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->getFileList() as $file): ?>
+                <tr>
+                    <td>
+                        <?php echo $file ?>
+                    </td>
+                    <td>
+                        <form action="<?php echo $this->getUrl("admin/import/read") ?>" method="post">
+                            <input type="hidden" name="file" value="<?php echo $file ?>">
+                            <button>Read</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

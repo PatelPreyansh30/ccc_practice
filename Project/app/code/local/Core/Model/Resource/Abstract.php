@@ -78,6 +78,7 @@ class Core_Model_Resource_Abstract
     {
         $columns = [];
         foreach ($data as $col => $val) {
+            $val = addslashes($val);
             $columns[] = "`$col` = '$val'";
         }
         $columns = implode(", ", $columns);

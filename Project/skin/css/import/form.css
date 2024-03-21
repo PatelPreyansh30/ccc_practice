@@ -1,0 +1,19 @@
+.form {
+    padding: 20px 8rem;
+}
+
+.form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form .row {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 15px;
+}
+
+.form img {
+    width: 500px;
+}

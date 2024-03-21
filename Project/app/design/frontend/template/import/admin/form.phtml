@@ -1,0 +1,14 @@
+<div class="form">
+    <h2>Import Form</h2>
+    <form method="POST" action="<?php echo $this->getUrl('admin/import/save') ?>" enctype="multipart/form-data">
+        <div class="row">
+            <div>
+                <label for="name">Upload CSV:</label>
+                <input type="file" name="import_file" id="name" required accept="text/csv" />
+            </div>
+        </div>
+        <div>
+            <input type="submit" name="submit" value="Submit">
+        </div>
+    </form>
+</div>
