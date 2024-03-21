@@ -25,7 +25,10 @@ class Admin_Controller_Order extends Core_Controller_Admin_Action
 
             if ($statusData['action'] == 'confirm') {
                 $statusModel->addData('is_approved', 1)
-                    ->addData('is_requested', 0)
+                    ->addData(
+                        'is_requested',
+                        Sales_Model_Order_Status_History::DEFAULT_IS_REQUESTED
+                    )
                     ->addData('date', date('Y-m-d'))
                     ->addData('action_by', 'admin')
                     ->save();
@@ -35,7 +38,10 @@ class Admin_Controller_Order extends Core_Controller_Admin_Action
                     ->addData('status', $statusModel->getToStatus())
                     ->save();
             } elseif ($statusData['action'] == 'cancel') {
-                $statusModel->addData('is_requested', 0)
+                $statusModel->addData(
+                    'is_requested',
+                    Sales_Model_Order_Status_History::DEFAULT_IS_REQUESTED
+                )
                     ->save();
             }
             $this->setRedirect('admin/order/cancel');
