@@ -23,6 +23,14 @@
             </div>
         </div>
         <div class="dropdown">
+            <button class="dropbtn">Import</button>
+            <div class="dropdown-content">
+                <a href="<?php echo $this->getUrl('admin/import/form') ?>">Add CSV</a>
+                <a href="<?php echo $this->getUrl('admin/import/list') ?>">Read CSV</a>
+                <a href="<?php echo $this->getUrl('admin/import/readedList') ?>">Import CSV</a>
+            </div>
+        </div>
+        <div class="dropdown">
             <button class="dropbtn">Order</button>
             <div class="dropdown-content">
                 <a href="<?php echo $this->getUrl('admin/order/list') ?>">View Order</a>
