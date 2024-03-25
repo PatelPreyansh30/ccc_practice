@@ -1,6 +1,6 @@
 <?php
 
-class Core_Block_Form_Text extends Core_Block_Form_Abstract
+class Core_Block_Form_Password extends Core_Block_Form_Abstract
 {
     public function toHtml()
     {
@@ -8,7 +8,7 @@ class Core_Block_Form_Text extends Core_Block_Form_Abstract
         if ($this->getLabel() && $this->getId()) {
             $input = '<label for="' . $this->getId() . '">' . $this->getLabel() . '</label>';
         }
-        $input .= '<input type="text"';
+        $input .= '<input type="password"';
         foreach ($this->getAttribute() as $key => $value) {
             $input .= ' ' . $key . '="' . $value . '"';
         }
